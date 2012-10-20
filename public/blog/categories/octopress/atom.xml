@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Dingmaotu Blog]]></title>
   <link href="http://dingblog.heroku.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://dingblog.heroku.com/"/>
-  <updated>2012-10-20T17:01:55+08:00</updated>
+  <updated>2012-10-20T17:36:25+08:00</updated>
   <id>http://dingblog.heroku.com/</id>
   <author>
     <name><![CDATA[Li Ding]]></name>
@@ -46,9 +46,34 @@
 
 <p>The following is a C code snippet:</p>
 
-<p>Liquid error: undefined method `Py_IsInitialized' for RubyPython::Python:Module</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>A Test For Code Snippet Support  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello Octopress!&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>However, the above test did not work for the first time because of the 'lib.so' error ( python-dev for apt-get or python-devel for yum must be installed to solve the problem ). Ah, how obscured!</p>
+<p>However, the above test did not work for the first time because of the
+'lib.so' error ( python-dev for apt-get or python-devel for yum must be
+installed to solve the problem ). Ah, how obscured!</p>
+
+<p>(Update in 2012-10-20: what is actually needed is a libpython2.7.so in
+/usr/lib. On 64bit machines, pygments find this shared library only in
+/usr/lib and not /usr/lib64. python-devel seems to provide that so, however,
+on 64bit machines, you have to manually create a symbol link of
+libpython2.7.so in /usr/lib.)</p>
 
 <p>Finnally let's test some Chinese Characters: 嘿, 可以了.</p>
 

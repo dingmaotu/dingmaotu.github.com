@@ -38,7 +38,15 @@ int main(void)
 }
 {% endcodeblock %}
 
-However, the above test did not work for the first time because of the 'lib.so' error ( python-dev for apt-get or python-devel for yum must be installed to solve the problem ). Ah, how obscured!
+However, the above test did not work for the first time because of the
+'lib.so' error ( python-dev for apt-get or python-devel for yum must be
+installed to solve the problem ). Ah, how obscured!
+
+(Update in 2012-10-20: what is actually needed is a libpython2.7.so in
+/usr/lib. On 64bit machines, pygments find this shared library only in
+/usr/lib and not /usr/lib64. python-devel seems to provide that so, however,
+on 64bit machines, you have to manually create a symbol link of
+libpython2.7.so in /usr/lib.)
 
 Finnally let's test some Chinese Characters: 嘿, 可以了.
 
