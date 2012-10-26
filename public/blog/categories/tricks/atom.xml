@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tricks | Dingmaotu Blog]]></title>
   <link href="http://dingblog.heroku.com/blog/categories/tricks/atom.xml" rel="self"/>
   <link href="http://dingblog.heroku.com/"/>
-  <updated>2012-10-27T00:12:02+08:00</updated>
+  <updated>2012-10-27T02:09:07+08:00</updated>
   <id>http://dingblog.heroku.com/</id>
   <author>
     <name><![CDATA[Li Ding]]></name>
@@ -35,7 +35,7 @@ select <code>Keyboard</code> in the popup dialog:</li>
 </ol>
 
 
-<p><img src="systemsettings.png" alt="System Settings and choose Keyboard" /></p>
+<p><img src="/images/2012-10-26/systemsettings.png" alt="System Settings and choose Keyboard" /></p>
 
 <pre><code>Sorry for the Chinese ... but you should be able to recognize where to click,
 after all its a picture
@@ -46,21 +46,21 @@ after all its a picture
 </ol>
 
 
-<p><img src="layout.png" alt="Click Layout in the lower left corner" /></p>
+<p><img src="/images/2012-10-26/slayout.png" alt="Click Layout in the lower left corner" /></p>
 
 <ol>
 <li>You will see <code>Options</code> in the lower right corner:</li>
 </ol>
 
 
-<p><img src="options.png" alt="Options in the lower right corner" /></p>
+<p><img src="/images/2012-10-26/soptions.png" alt="Options in the lower right corner" /></p>
 
 <ol>
 <li>Here you will find various options concerning the behaviors of special keys:</li>
 </ol>
 
 
-<p><img src="capslock.png" alt="Various options" /></p>
+<p><img src="/images/2012-10-26/scapslock.png" alt="Various options" /></p>
 
 <ol>
 <li>Now you should find your way of configuring what you want, I simply exchanged
@@ -69,7 +69,7 @@ both Emacs and Vim are heavy ESC key users.</li>
 </ol>
 
 
-<p><img src="esc-exchg.png" alt="Exchange ESC with CAPSLOCK" /></p>
+<p><img src="/images/2012-10-26/sesc-exchg.png" alt="Exchange ESC with CAPSLOCK" /></p>
 
 <p>Good luck using Emacs!</p>
 ]]></content>
