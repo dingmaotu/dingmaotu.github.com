@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tricks | Dingmaotu Blog]]></title>
+  <link href="http://dingblog.heroku.com/blog/categories/tricks/atom.xml" rel="self"/>
+  <link href="http://dingblog.heroku.com/"/>
+  <updated>2012-10-27T00:12:02+08:00</updated>
+  <id>http://dingblog.heroku.com/</id>
+  <author>
+    <name><![CDATA[Li Ding]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to modify keyboard layouts easily in Ubuntu]]></title>
+    <link href="http://dingblog.heroku.com/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu/"/>
+    <updated>2012-10-26T23:20:00+08:00</updated>
+    <id>http://dingblog.heroku.com/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu</id>
+    <content type="html"><![CDATA[<p>If you want to remap the CAPSLOCK key to the Control key or something else,
+you will find many tutorials on the internet (most of them are of course for
+Emacs learners). However, quite a few of them are outdated and unnecessarily
+complicated (for me). In a modern version of Ubuntu, you can accomplish this
+easily in the system settings dialog. I believe Ubuntu learned this from Mac.</p>
+
+<p>Here is how (12.04 LTS):</p>
+
+<!-- more -->
+
+
+<ol>
+<li>Locate <code>System Settings</code> in the upper right corner of your desktop, and
+select <code>Keyboard</code> in the popup dialog:</li>
+</ol>
+
+
+<p><img src="systemsettings.png" alt="System Settings and choose Keyboard" /></p>
+
+<pre><code>Sorry for the Chinese ... but you should be able to recognize where to click,
+after all its a picture
+</code></pre>
+
+<ol>
+<li>Then goto the <code>Layout Settings</code> in the lower left corner:</li>
+</ol>
+
+
+<p><img src="layout.png" alt="Click Layout in the lower left corner" /></p>
+
+<ol>
+<li>You will see <code>Options</code> in the lower right corner:</li>
+</ol>
+
+
+<p><img src="options.png" alt="Options in the lower right corner" /></p>
+
+<ol>
+<li>Here you will find various options concerning the behaviors of special keys:</li>
+</ol>
+
+
+<p><img src="capslock.png" alt="Various options" /></p>
+
+<ol>
+<li>Now you should find your way of configuring what you want, I simply exchanged
+ESC and CAPSLOCK. It is really convenient to have this modification, since
+both Emacs and Vim are heavy ESC key users.</li>
+</ol>
+
+
+<p><img src="esc-exchg.png" alt="Exchange ESC with CAPSLOCK" /></p>
+
+<p>Good luck using Emacs!</p>
+]]></content>
+  </entry>
+  
+</feed>
