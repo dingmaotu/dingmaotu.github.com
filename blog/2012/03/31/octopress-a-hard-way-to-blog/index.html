@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Octopress: A HARD Way to Blog - Dingmaotu Blog</title>
+  <meta name="author" content="Li Ding">
+
+  
+  <meta name="description" content="From Ruby Installation to AN Octopress Blog It needs quite a lot effort to setup an octopress blog. First of all, trying to use ruby under Windows is &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://dingmaotu.github.com/blog/2012/03/31/octopress-a-hard-way-to-blog">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Dingmaotu Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Dingmaotu Blog</a></h1>
+  
+    <h2>Programming For Fun</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:dingmaotu.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Octopress: A HARD Way to Blog</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-31T19:33:00+08:00" pubdate data-updated="true">Mar 31<span>st</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>From Ruby Installation to AN Octopress Blog</h2>
+
+<p>It needs quite a lot effort to setup an octopress blog. First of all, trying to use ruby under Windows is just painful, so I use CentOS to do all these (in a VMWare Player Virtual Machine). I downloaded RVM, following the RVM homepage guides, and did not succeed for several times. That was because I omitted the &#8220;requirement&#8221; step (I thought RVM will install requirements for me). However, I did build ruby successfully and was happy, until I had found that gem, heroku were not functional. I had to install zlib, openssl etc. with RVM. But in China you cannot even access zlib homepage (similarly ruby-installer, vimeo, facebook, you name it). I then remembered the &#8220;requirements&#8221; step, and just yum-ed them all.</p>
+
+<p>I have learned a bit Ruby, so octopress setup guide is relatively easy to understand. The setup is OK now, this blog being the first to test Octopress functionality, markdown syntax, and code rendering.</p>
+
+<!-- more -->
+
+
+<h2>Markdown</h2>
+
+<p>First is a link to my old <a href="dingmaotu.com">homepage</a>. And a line:</p>
+
+<hr />
+
+<p>The following is an unordered list:</p>
+
+<ul>
+<li>First</li>
+<li>Second</li>
+<li>Third</li>
+</ul>
+
+
+<p>And this is a piece of inline code <code>int main(void){}</code>.</p>
+
+<p>The following is a C code snippet:</p>
+
+<figure class='code'><figcaption><span>A Test For Code Snippet Support  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello Octopress!&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>However, the above test did not work for the first time because of the
+&#8216;lib.so&#8217; error ( python-dev for apt-get or python-devel for yum must be
+installed to solve the problem ). Ah, how obscured!</p>
+
+<p>(Update in 2012-10-20: what is actually needed is a libpython2.7.so in
+/usr/lib. On 64bit machines, pygments find this shared library only in
+/usr/lib and not /usr/lib64. python-devel seems to provide that so, however,
+on 64bit machines, you have to manually create a symbol link of
+libpython2.7.so in /usr/lib.)</p>
+
+<p>Finnally let&#8217;s test some Chinese Characters: 嘿, 可以了.</p>
+
+<h2>Feelings</h2>
+
+<p>With Octopress, inserting (syntax-colored) code in your blog is super easy, which is extremely convenient for hackers alike. But writing plain blog is far from pleasant, so it is basically for programmers, not ordinary bloggers.</p>
+
+<p>This the end of my first octopress blog.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Li Ding</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-31T19:33:00+08:00" pubdate data-updated="true">Mar 31<span>st</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/octopress/'>octopress</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu/" title="Next Post: How to modify keyboard layouts easily in Ubuntu">How to modify keyboard layouts easily in Ubuntu &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu/">How to modify keyboard layouts easily in Ubuntu</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/03/31/octopress-a-hard-way-to-blog/">Octopress: A HARD Way to Blog</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Li Ding -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'dingblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://dingmaotu.github.com/blog/2012/03/31/octopress-a-hard-way-to-blog/';
+        var disqus_url = 'http://dingmaotu.github.com/blog/2012/03/31/octopress-a-hard-way-to-blog/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
