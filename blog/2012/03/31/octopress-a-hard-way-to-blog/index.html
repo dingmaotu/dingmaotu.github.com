@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <title>Octopress: A HARD Way to Blog - Dingmaotu Blog</title>
-  <meta name="author" content="Li Ding">
+  <meta name="author" content="Derek Li">
 
   
   <meta name="description" content="From Ruby Installation to AN Octopress Blog It needs quite a lot effort to setup an octopress blog. First of all, trying to use ruby under Windows is &hellip;">
@@ -159,7 +159,7 @@ libpython2.7.so in /usr/lib.)</p>
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Li Ding</span></span>
+<span class="byline author vcard">Posted by <span class="fn">Derek Li</span></span>
 
       
 
@@ -216,6 +216,10 @@ libpython2.7.so in /usr/lib.)</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/06/tcl-the-misunderstood-chinese-version/">被误解的Tcl</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu/">How to modify keyboard layouts easily in Ubuntu</a>
       </li>
     
@@ -226,6 +230,35 @@ libpython2.7.so in /usr/lib.)</p>
   </ul>
 </section>
 
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/dingmaotu">@dingmaotu</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'dingmaotu',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
 
   
 </aside>
@@ -234,7 +267,7 @@ libpython2.7.so in /usr/lib.)</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Li Ding -
+  Copyright &copy; 2012 - Derek Li -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

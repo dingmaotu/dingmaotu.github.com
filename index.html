@@ -6,11 +6,12 @@
 <head>
   <meta charset="utf-8">
   <title>Dingmaotu Blog</title>
-  <meta name="author" content="Li Ding">
+  <meta name="author" content="Derek Li">
 
   
-  <meta name="description" content="If you want to remap the CAPSLOCK key to the Control key or something else,
-you will find many tutorials on the internet (most of them are of course &hellip;">
+  <meta name="description" content="原文见http://oldblog.antirez.com/articoli/tclmisunderstood.html，版
+权归原文作者所有；译文 &copy; 2012 Derek Li。本文原始翻译时间是
+2012-2-12日，后来我的空间到期，不打算更新，所以转到现在的博客上。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +66,86 @@ you will find many tutorials on the internet (most of them are of course &hellip
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/06/tcl-the-misunderstood-chinese-version/">被误解的Tcl</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-06T14:45:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/06/tcl-the-misunderstood-chinese-version/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>原文见<a href="http://oldblog.antirez.com/articoli/tclmisunderstood.html">http://oldblog.antirez.com/articoli/tclmisunderstood.html</a>，版
+权归原文作者所有；译文 &copy; 2012 Derek Li。本文原始翻译时间是
+2012-2-12日，后来我的空间到期，不打算更新，所以转到现在的博客上。</p></blockquote>
+
+<p>最近有一篇链接自reddit的题为
+<a href="http://www.cabochon.com/~stevey/blog-rants/tour-de-babel.html">Tour de Babel</a>
+的文章，如果你读的话就会发现这篇文章说（除了一堆其他的胡言乱语）：靠，
+Python在能想象到的各方面都比Tcl好得多了，但人们还用Tcl来当作嵌入式解释
+器。</p>
+
+<p>好吧，整篇文章是有点……不是那么回事。但是不幸的是，虽然很多错误观念很
+快被知情的读者发觉了，但是这个反对Tcl的观念却被认为是理所当然的。我希望
+这篇文章能说服人们，Tcl还没有那么不堪。</p>
+
+<h2>开场白</h2>
+
+<p>在我的编程生涯里，我使用了很多语言去写不同的应用：用C语言写了很多免费/
+付费的程序，用Scheme写了一个Web CMS（内容管理系统），用Tcl写了几个网络
+/Web应用，用Python写了一个商店管理程序，等等。我也玩过不少其他的编程语
+言，例如Smalltalk，Self，FORTH，Ruby，Joy……然而，我从不怀疑，<em>没有哪
+门语言像Tcl一样被误解得如此之深</em>。</p>
+
+<p>Tcl不是完美无瑕，但大多数的不足并不是在语言设计本身，而是Tcl“之
+父”（John Ousterhout）几年前去世了，连同他那种可以做出强势决定的专一的
+领导力。只要做出正确的改变，克服Tcl的大多数不足并保留其强大功能是可以的。
+如果你不相信Tcl异常强大，请先<em>花点时间</em>来阅读这篇文章。可能你读完之后还
+是不喜欢它，但希望你尊敬它，同时你将有足够强大的论据来反对这种“Tcl是玩
+具语言”的误解。这种误解如此小气，比“Lisp括号太多”更甚。</p>
+
+<p>在我们开始之前，我先花点时间解释一下Tcl的工作原理。Tcl像世界上其他优秀
+的语言一样，拥有一些概念，这些概念组合起来，能够实现编程自由和充分的表
+达力。</p>
+
+<p>在这个简短的介绍之后，你会了解在Tcl中，怎样使用普通过程（procedure）实
+现像Lisp一样的宏（macro）（比Ruby的Block强大得多），怎样重定义语言本身
+的几乎所有方面，怎样在编程时忽略类型。Tcl社区开发了数个OOP系统，大规模
+的语言重定义，宏系统，和很多其他有趣的东西，仅仅使用Tcl本身。如果你喜欢
+可编程的编程语言，我打赌，你肯定至少饶有兴趣地看一眼Tcl。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/11/06/tcl-the-misunderstood-chinese-version/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -175,6 +256,10 @@ easily in the system settings dialog. I believe Ubuntu learned this from Mac.</p
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/11/06/tcl-the-misunderstood-chinese-version/">被误解的Tcl</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu/">How to modify keyboard layouts easily in Ubuntu</a>
       </li>
     
@@ -185,6 +270,35 @@ easily in the system settings dialog. I believe Ubuntu learned this from Mac.</p
   </ul>
 </section>
 
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/dingmaotu">@dingmaotu</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'dingmaotu',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
 
   
 </aside>
@@ -192,7 +306,7 @@ easily in the system settings dialog. I believe Ubuntu learned this from Mac.</p
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Li Ding -
+  Copyright &copy; 2012 - Derek Li -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
