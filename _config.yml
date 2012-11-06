@@ -5,7 +5,7 @@
 url: http://dingmaotu.github.com
 title: Dingmaotu Blog
 subtitle: Programming For Fun
-author: Li Ding
+author: Derek Li
 simple_search: http://google.com/search
 description:
 
@@ -19,7 +19,7 @@ date_format: "ordinal"
 subscribe_rss: /atom.xml
 subscribe_email:
 # RSS feeds can list your email address if you like
-email:
+email: iamliding@gmail.com
 
 # ----------------------- #
 #    Jekyll & Plugins     #
@@ -58,7 +58,7 @@ default_asides: [asides/recent_posts.html, asides/github.html]
 # ----------------------- #
 
 # Github repositories
-github_user:
+github_user: dingmaotu
 github_repo_count: 0
 github_show_profile_link: true
 github_skip_forks: true
