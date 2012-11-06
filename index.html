@@ -9,9 +9,9 @@
   <meta name="author" content="Derek Li">
 
   
-  <meta name="description" content="原文见http://oldblog.antirez.com/articoli/tclmisunderstood.html，版
-权归原文作者所有；译文 &copy; 2012 Derek Li。本文原始翻译时间是
-2012-2-12日，后来我的空间到期，不打算更新，所以转到现在的博客上。 &hellip;">
+  <meta name="description" content="什么是反射？ 反射（reflection）在英语里有自我内省的意思，即是查看自己的内在。 在编程语言中，反射是指程序可以动态获得自己本身信息。我说的程序本身的信
+息，是指诸如一个函数的字符串名字和参数、返回值类型，一个类的名字，类的
+方法、字段、属性、事件等等。这些在程序设计时都是容易知道的， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,83 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/06/csharp-reflection-tutorial/">C#反射教程</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-06T17:14:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/06/csharp-reflection-tutorial/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>什么是反射？</h2>
+
+<p>反射（reflection）在英语里有自我内省的意思，即是查看自己的内在。</p>
+
+<p>在编程语言中，反射是指程序可以动态获得自己本身信息。我说的程序本身的信
+息，是指诸如一个函数的字符串名字和参数、返回值类型，一个类的名字，类的
+方法、字段、属性、事件等等。这些在程序设计时都是容易知道的，但是程序在
+编译完成并执行时，这些信息都不同程度地丢失了。例如C语言，函数的编译通常
+只保留一个函数的名字在最后的binary的符号表中，想要获得这个函数除了名字
+以外的信息是很困难的（有时候甚至可以strip掉所有的符号信息，只保留函数的
+入口地址，这样什么都没有了）。</p>
+
+<p>这些信息被称为Metadata（元数据），有些人称作数据的数据。听起来有些装B，
+其实就是编译型语言把源码中有关程序自身的信息存储到目标文件里，而不是抛
+弃掉，就叫做元数据了。</p>
+
+<p>但是实际上，反射这种东西很早就存在了。例如：</p>
+
+<ul>
+<li><p>Windows编程中，GetProcAddress可以根据一个DLL中函数的名字来获得其实际
+地址，从而动态调用这个函数，而不用事先就在程序中显式调用。这提供了很大
+的灵活性，COM的一个重要基础就是能够动态加载DLL并通过这种方式调用函数。
+Linux系统动态链接库也有类似的功能（dlopen，dlsym）。</p></li>
+<li><p>解释语言一般都有很强的反射能力，因为解释语言直接从源码执行，也不会丢
+失任何有关源码的信息。Lisp中，程序的代码和数据没有区别，因此本质上可以
+获得所有代码的信息，也可以动态执行任何一段在运行时构建的代码。
+JavaScript的对象即是关联数组，所有的Field都可以用字符串来存取，Python有
+getattr和setattr函数。</p></li>
+<li><p>一般使用反射对程序效率有较大的负面影响，解释型语言在机器的计算能力还
+不强的时候根本得不到流行，这是很大的一个原因。但是现在计算能力空前强大，
+所以即使有些影响，对于一般的应用都问题不大，但是反射的灵活性和对很多问
+题的优雅解决（使得程序的设计更加模块化，可以动态加载可执行代码等），促
+使这类技术逐渐流行起来。</p></li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/11/06/csharp-reflection-tutorial/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -266,6 +343,10 @@ easily in the system settings dialog. I believe Ubuntu learned this from Mac.</p
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/11/06/csharp-reflection-tutorial/">C#反射教程</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/11/06/tcl-the-misunderstood-chinese-version/">被误解的Tcl</a>
