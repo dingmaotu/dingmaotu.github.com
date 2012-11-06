@@ -9,9 +9,7 @@
   <meta name="author" content="Derek Li">
 
   
-  <meta name="description" content="什么是反射？ 反射（reflection）在英语里有自我内省的意思，即是查看自己的内在。 在编程语言中，反射是指程序可以动态获得自己本身信息。我说的程序本身的信
-息，是指诸如一个函数的字符串名字和参数、返回值类型，一个类的名字，类的
-方法、字段、属性、事件等等。这些在程序设计时都是容易知道的， &hellip;">
+  <meta name="description" content="什么是反射？ 反射（reflection）在英语里有自我内省的意思，即是查看自己的内在。 在编程语言中，反射是指程序可以动态获得自己本身信息。我说的程序本身的信息，是指诸如一个函数的字符串名字和参数、返回值类型，一个类的名字，类的方法、字段、属性、事件等等。这些在程序设计时都是容易知道的， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,11 +76,7 @@
   <div id="main">
     <div id="content">
       <div class="blog-index">
-  
-  
-  
     <article>
-      
   <header>
     
       <h1 class="entry-title"><a href="/blog/2012/11/06/csharp-reflection-tutorial/">C#反射教程</a></h1>
@@ -114,35 +108,19 @@
 
 <p>反射（reflection）在英语里有自我内省的意思，即是查看自己的内在。</p>
 
-<p>在编程语言中，反射是指程序可以动态获得自己本身信息。我说的程序本身的信
-息，是指诸如一个函数的字符串名字和参数、返回值类型，一个类的名字，类的
-方法、字段、属性、事件等等。这些在程序设计时都是容易知道的，但是程序在
-编译完成并执行时，这些信息都不同程度地丢失了。例如C语言，函数的编译通常
-只保留一个函数的名字在最后的binary的符号表中，想要获得这个函数除了名字
-以外的信息是很困难的（有时候甚至可以strip掉所有的符号信息，只保留函数的
-入口地址，这样什么都没有了）。</p>
+<p>在编程语言中，反射是指程序可以动态获得自己本身信息。我说的程序本身的信息，是指诸如一个函数的字符串名字和参数、返回值类型，一个类的名字，类的方法、字段、属性、事件等等。这些在程序设计时都是容易知道的，但是程序在编译完成并执行时，这些信息都不同程度地丢失了。例如C语言，函数的编译通常只保留一个函数的名字在最后的binary的符号表中，想要获得这个函数除了名字以外的信息是很困难的（有时候甚至可以strip掉所有的符号信息，只保留函数的入口地址，这样什么都没有了）。</p>
 
-<p>这些信息被称为Metadata（元数据），有些人称作数据的数据。听起来有些装B，
-其实就是编译型语言把源码中有关程序自身的信息存储到目标文件里，而不是抛
-弃掉，就叫做元数据了。</p>
+<p>这些信息被称为Metadata（元数据），有些人称作数据的数据。听起来有些装B，其实就是编译型语言把源码中有关程序自身的信息存储到目标文件里，而不是抛弃掉，就叫做元数据了。</p>
 
 <p>但是实际上，反射这种东西很早就存在了。例如：</p>
 
 <ul>
-<li><p>Windows编程中，GetProcAddress可以根据一个DLL中函数的名字来获得其实际
-地址，从而动态调用这个函数，而不用事先就在程序中显式调用。这提供了很大
-的灵活性，COM的一个重要基础就是能够动态加载DLL并通过这种方式调用函数。
+<li><p>Windows编程中，GetProcAddress可以根据一个DLL中函数的名字来获得其实际地址，从而动态调用这个函数，而不用事先就在程序中显式调用。这提供了很大的灵活性，COM的一个重要基础就是能够动态加载DLL并通过这种方式调用函数。
 Linux系统动态链接库也有类似的功能（dlopen，dlsym）。</p></li>
-<li><p>解释语言一般都有很强的反射能力，因为解释语言直接从源码执行，也不会丢
-失任何有关源码的信息。Lisp中，程序的代码和数据没有区别，因此本质上可以
-获得所有代码的信息，也可以动态执行任何一段在运行时构建的代码。
+<li><p>解释语言一般都有很强的反射能力，因为解释语言直接从源码执行，也不会丢失任何有关源码的信息。Lisp中，程序的代码和数据没有区别，因此本质上可以获得所有代码的信息，也可以动态执行任何一段在运行时构建的代码。
 JavaScript的对象即是关联数组，所有的Field都可以用字符串来存取，Python有
 getattr和setattr函数。</p></li>
-<li><p>一般使用反射对程序效率有较大的负面影响，解释型语言在机器的计算能力还
-不强的时候根本得不到流行，这是很大的一个原因。但是现在计算能力空前强大，
-所以即使有些影响，对于一般的应用都问题不大，但是反射的灵活性和对很多问
-题的优雅解决（使得程序的设计更加模块化，可以动态加载可执行代码等），促
-使这类技术逐渐流行起来。</p></li>
+<li><p>一般使用反射对程序效率有较大的负面影响，解释型语言在机器的计算能力还不强的时候根本得不到流行，这是很大的一个原因。但是现在计算能力空前强大，所以即使有些影响，对于一般的应用都问题不大，但是反射的灵活性和对很多问题的优雅解决（使得程序的设计更加模块化，可以动态加载可执行代码等），促使这类技术逐渐流行起来。</p></li>
 </ul>
 
 
@@ -156,10 +134,7 @@ getattr和setattr函数。</p></li>
 
 
     </article>
-  
-  
     <article>
-      
   <header>
     
       <h1 class="entry-title"><a href="/blog/2012/11/06/tcl-the-misunderstood-chinese-version/">被误解的Tcl</a></h1>
@@ -187,44 +162,24 @@ getattr和setattr函数。</p></li>
   </header>
 
 
-  <div class="entry-content"><blockquote><p>原文见<a href="http://oldblog.antirez.com/articoli/tclmisunderstood.html">http://oldblog.antirez.com/articoli/tclmisunderstood.html</a>，版
-权归原文作者所有；译文 &copy; 2012 Derek Li。本文原始翻译时间是
+  <div class="entry-content"><blockquote><p>原文见<a href="http://oldblog.antirez.com/articoli/tclmisunderstood.html">http://oldblog.antirez.com/articoli/tclmisunderstood.html</a>，版权归原文作者所有；译文 &copy; 2012 Derek Li。本文原始翻译时间是
 2012-2-12日，后来我的空间到期，不打算更新，所以转到现在的博客上。</p></blockquote>
 
-<p>最近有一篇链接自reddit的题为
-<a href="http://www.cabochon.com/~stevey/blog-rants/tour-de-babel.html">Tour de Babel</a>
-的文章，如果你读的话就会发现这篇文章说（除了一堆其他的胡言乱语）：靠，
-Python在能想象到的各方面都比Tcl好得多了，但人们还用Tcl来当作嵌入式解释
-器。</p>
+<p>最近有一篇链接自reddit的题为<a href="http://www.cabochon.com/~stevey/blog-rants/tour-de-babel.html">Tour de Babel</a>的文章，如果你读的话就会发现这篇文章说（除了一堆其他的胡言乱语）：靠，
+Python在能想象到的各方面都比Tcl好得多了，但人们还用Tcl来当作嵌入式解释器。</p>
 
-<p>好吧，整篇文章是有点……不是那么回事。但是不幸的是，虽然很多错误观念很
-快被知情的读者发觉了，但是这个反对Tcl的观念却被认为是理所当然的。我希望
-这篇文章能说服人们，Tcl还没有那么不堪。</p>
+<p>好吧，整篇文章是有点……不是那么回事。但是不幸的是，虽然很多错误观念很快被知情的读者发觉了，但是这个反对Tcl的观念却被认为是理所当然的。我希望这篇文章能说服人们，Tcl还没有那么不堪。</p>
 
 <h2>开场白</h2>
 
-<p>在我的编程生涯里，我使用了很多语言去写不同的应用：用C语言写了很多免费/
-付费的程序，用Scheme写了一个Web CMS（内容管理系统），用Tcl写了几个网络
-/Web应用，用Python写了一个商店管理程序，等等。我也玩过不少其他的编程语
-言，例如Smalltalk，Self，FORTH，Ruby，Joy……然而，我从不怀疑，<em>没有哪
-门语言像Tcl一样被误解得如此之深</em>。</p>
+<p>在我的编程生涯里，我使用了很多语言去写不同的应用：用C语言写了很多免费/付费的程序，用Scheme写了一个Web CMS（内容管理系统），用Tcl写了几个网络
+/Web应用，用Python写了一个商店管理程序，等等。我也玩过不少其他的编程语言，例如Smalltalk，Self，FORTH，Ruby，Joy……然而，我从不怀疑，<em>没有哪门语言像Tcl一样被误解得如此之深</em>。</p>
 
-<p>Tcl不是完美无瑕，但大多数的不足并不是在语言设计本身，而是Tcl“之
-父”（John Ousterhout）几年前去世了，连同他那种可以做出强势决定的专一的
-领导力。只要做出正确的改变，克服Tcl的大多数不足并保留其强大功能是可以的。
-如果你不相信Tcl异常强大，请先<em>花点时间</em>来阅读这篇文章。可能你读完之后还
-是不喜欢它，但希望你尊敬它，同时你将有足够强大的论据来反对这种“Tcl是玩
-具语言”的误解。这种误解如此小气，比“Lisp括号太多”更甚。</p>
+<p>Tcl不是完美无瑕，但大多数的不足并不是在语言设计本身，而是Tcl“之父”（John Ousterhout）几年前去世了，连同他那种可以做出强势决定的专一的领导力。只要做出正确的改变，克服Tcl的大多数不足并保留其强大功能是可以的。如果你不相信Tcl异常强大，请先<em>花点时间</em>来阅读这篇文章。可能你读完之后还是不喜欢它，但希望你尊敬它，同时你将有足够强大的论据来反对这种“Tcl是玩具语言”的误解。这种误解如此小气，比“Lisp括号太多”更甚。</p>
 
-<p>在我们开始之前，我先花点时间解释一下Tcl的工作原理。Tcl像世界上其他优秀
-的语言一样，拥有一些概念，这些概念组合起来，能够实现编程自由和充分的表
-达力。</p>
+<p>在我们开始之前，我先花点时间解释一下Tcl的工作原理。Tcl像世界上其他优秀的语言一样，拥有一些概念，这些概念组合起来，能够实现编程自由和充分的表达力。</p>
 
-<p>在这个简短的介绍之后，你会了解在Tcl中，怎样使用普通过程（procedure）实
-现像Lisp一样的宏（macro）（比Ruby的Block强大得多），怎样重定义语言本身
-的几乎所有方面，怎样在编程时忽略类型。Tcl社区开发了数个OOP系统，大规模
-的语言重定义，宏系统，和很多其他有趣的东西，仅仅使用Tcl本身。如果你喜欢
-可编程的编程语言，我打赌，你肯定至少饶有兴趣地看一眼Tcl。</p>
+<p>在这个简短的介绍之后，你会了解在Tcl中，怎样使用普通过程（procedure）实现像Lisp一样的宏（macro）（比Ruby的Block强大得多），怎样重定义语言本身的几乎所有方面，怎样在编程时忽略类型。Tcl社区开发了数个OOP系统，大规模的语言重定义，宏系统，和很多其他有趣的东西，仅仅使用Tcl本身。如果你喜欢可编程的编程语言，我打赌，你肯定至少饶有兴趣地看一眼Tcl。</p>
 
 </div>
   
@@ -236,10 +191,7 @@ Python在能想象到的各方面都比Tcl好得多了，但人们还用Tcl来�
 
 
     </article>
-  
-  
     <article>
-      
   <header>
     
       <h1 class="entry-title"><a href="/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu/">How to Modify Keyboard Layouts Easily in Ubuntu</a></h1>
@@ -285,10 +237,7 @@ easily in the system settings dialog. I believe Ubuntu learned this from Mac.</p
 
 
     </article>
-  
-  
     <article>
-      
   <header>
     
       <h1 class="entry-title"><a href="/blog/2012/03/31/octopress-a-hard-way-to-blog/">Octopress: A HARD Way to Blog</a></h1>
@@ -332,16 +281,11 @@ easily in the system settings dialog. I believe Ubuntu learned this from Mac.</p
 
 
     </article>
-  
   <div class="pagination">
-    
     <a href="/blog/archives">Blog Archives</a>
-    
   </div>
 </div>
-<aside class="sidebar">
-  
-    <section>
+<aside class="sidebar"><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
     
@@ -394,7 +338,6 @@ easily in the system settings dialog. I believe Ubuntu learned this from Mac.</p
 </section>
 
 
-  
 </aside>
 
     </div>
