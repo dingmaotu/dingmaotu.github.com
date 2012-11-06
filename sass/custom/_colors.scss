@@ -36,3 +36,5 @@ $link-color-active: lighten($link-color-hover,10);
 //I normally do not touch this. Most colors I have tried just work with this setting. 
 $footer-bg: #ccc !default;
 $footer-bg-back: linear-gradient(lighten($footer-bg, 8), $footer-bg, darken($footer-bg, 11));
+
+$solarized: light
