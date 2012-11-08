@@ -9,7 +9,8 @@
   <meta name="author" content="Derek Li">
 
   
-  <meta name="description" content="什么是反射？ 反射（reflection）在英语里有自我内省的意思，即是查看自己的内在。 在编程语言中，反射是指程序可以动态获得自己本身信息。我说的程序本身的信息，是指诸如一个函数的字符串名字和参数、返回值类型，一个类的名字，类的方法、字段、属性、事件等等。这些在程序设计时都是容易知道的， &hellip;">
+  <meta name="description" content="Quantum Espresso（以下简称QE）和PLUMED结合，能做很多有用的模拟，尤其是
+Metadynamics这种高级动力学。但是Quantum Espresso的安装程序有一些问题，在我们模拟实验室的Earth和Venus上安装，不能正确识别LAPACK、ScaLAPACK和 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +77,61 @@
   <div id="main">
     <div id="content">
       <div class="blog-index">
+    <article>
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/">Quantum Espresso及PLUMED安装指南</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-08T21:23:00+08:00" pubdate data-updated="true">Nov 8<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Quantum Espresso（以下简称QE）和PLUMED结合，能做很多有用的模拟，尤其是
+Metadynamics这种高级动力学。但是Quantum Espresso的安装程序有一些问题，在我们模拟实验室的Earth和Venus上安装，不能正确识别LAPACK、ScaLAPACK和
+FFTW库，需要手工更改make.sys，才能产生比较高效的程序。PLUMED的安装比较容易，但是各种材料上说法不一，这里我讲最直接和简单的办法，希望对各位有帮助。</p>
+
+<h2>1. 获得安装包</h2>
+
+<p>目前PLUMED最新版是1.3，支持QE的4.3.2版本，是4系列的最新版。但QE目前的最新版是5.0.1，还没有广泛使用。我们可以同时安装这两个版本。请各位到官网上下载具体的源码包。</p>
+
+<h2>2. 解压到目录</h2>
+
+<p>QE的安装没有Install的环节，也就是源码和程序都在一个目录里面，因此我们直接把源码包解压到安装的位置。PLUMED只是作为插件存在，不需要单独安装，但是为了方便，我也把它解压到一个安装目录。例如Earth上安装目录分别为：</p>
+
+<pre><code>/public/software/QE/espresso-5.0.1/
+/public/software/QE/espresso-4.3.2/
+/public/software/PLUMED/plumed-1.3/
+</code></pre>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
     <article>
   <header>
     
@@ -288,6 +344,10 @@ easily in the system settings dialog. I believe Ubuntu learned this from Mac.</p
 <aside class="sidebar"><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/">Quantum Espresso及PLUMED安装指南</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/11/06/csharp-reflection-tutorial/">C#反射教程</a>

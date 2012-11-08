@@ -1,0 +1,443 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Quantum Espresso及PLUMED安装指南 - Dingmaotu Blog</title>
+  <meta name="author" content="Derek Li">
+
+  
+  <meta name="description" content="Quantum Espresso（以下简称QE）和PLUMED结合，能做很多有用的模拟，尤其是
+Metadynamics这种高级动力学。但是Quantum Espresso的安装程序有一些问题，在我们模拟实验室的Earth和Venus上安装，不能正确识别LAPACK、ScaLAPACK和 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://dingmaotu.github.com/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Dingmaotu Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Montserrat+Alternates:700' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27225299-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Dingmaotu Blog</a></h1>
+  
+    <h2>Programming For Fun</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:dingmaotu.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Quantum Espresso及PLUMED安装指南</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-08T21:23:00+08:00" pubdate data-updated="true">Nov 8<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Quantum Espresso（以下简称QE）和PLUMED结合，能做很多有用的模拟，尤其是
+Metadynamics这种高级动力学。但是Quantum Espresso的安装程序有一些问题，在我们模拟实验室的Earth和Venus上安装，不能正确识别LAPACK、ScaLAPACK和
+FFTW库，需要手工更改make.sys，才能产生比较高效的程序。PLUMED的安装比较容易，但是各种材料上说法不一，这里我讲最直接和简单的办法，希望对各位有帮助。</p>
+
+<h2>1. 获得安装包</h2>
+
+<p>目前PLUMED最新版是1.3，支持QE的4.3.2版本，是4系列的最新版。但QE目前的最新版是5.0.1，还没有广泛使用。我们可以同时安装这两个版本。请各位到官网上下载具体的源码包。</p>
+
+<h2>2. 解压到目录</h2>
+
+<p>QE的安装没有Install的环节，也就是源码和程序都在一个目录里面，因此我们直接把源码包解压到安装的位置。PLUMED只是作为插件存在，不需要单独安装，但是为了方便，我也把它解压到一个安装目录。例如Earth上安装目录分别为：</p>
+
+<pre><code>/public/software/QE/espresso-5.0.1/
+/public/software/QE/espresso-4.3.2/
+/public/software/PLUMED/plumed-1.3/
+</code></pre>
+
+<!-- more -->
+
+
+<h2>3. 配置QE</h2>
+
+<p>QE的源码包目录底下有configure文件，执行之，不用任何参数：</p>
+
+<pre><code>./configure
+</code></pre>
+
+<p>执行后，可以看到有总结，4.3.2版本没有发现LAPACK、ScaLAPACK、FFTW。而我们的集群随Intel编译器装有MKL，以及OpenMPI，完全可以提供优化的函数库。因此我们需要手工改变编译参数。编译参数可以在make.sys文件中修改。</p>
+
+<p>make.sys文件中有几处要改的地方，首先是<code>DFLAGS</code>参数。在Earth上，QE自动检测出了Intel编译器，OpenMPI环境，并已经定义了<code>_D__MPI</code>、<code>-D__PARA</code>、<code>-D__INTEL</code>等几个参数，如果正确安装了Intel编译器和OpenMPI，一般都不会有问题。</p>
+
+<p>把<code>-D__FFTW</code>（意思是使用QE自带的FFTW库）改为<code>-D__FFTW3</code>，使用外部的
+FFTW3实现，这里是基于MKL的FFTW3接口。另外需要添加<code>-D__SCALAPACK</code>，以使用ScaLAPACK。这样定义就OK了，但是我们还要修改具体怎么链接到这些库函数。</p>
+
+<p>找到<code># External Libraries</code>开头的几行，它们定义了blas、lapack、fft、mpi
+的库。QE4找到了Intel MKL的blas接口，但是其他的都没有找到。QE5可以找到blas、
+scalapack和mpi，但是没有lapack和fft。因此下面我将讲怎么手工设置这几个库。</p>
+
+<p>首先是scalapack和mpi，在Earth上，需要指定这样的库：</p>
+
+<pre><code>SCALAPACK_LIBS = -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64
+</code></pre>
+
+<p>另外还有个单独的<code>MPI_LIBS</code>，可以把上面的<code>-lmkl_blacs_openmpi_lp64</code>移到这里来，也可以留在上面，这里空着。另外我们要指定lapack和fft的库，在
+Earth上（Venus上也可以）如下，</p>
+
+<pre><code>LAPACK_LIBS    = -lmkl_lapack95_lp64
+LAPACK_LIBS_SWITCH = external   
+FFT_LIBS       =  -lfftw3xf_intel
+</code></pre>
+
+<p>这里的两个库都是需要编译的，但是在我们的安装里面，LAPACK已经编译好了，并且放在了MKL主库里面，因此不许要额外动手，但是我还是会讲怎么编译这两个库。</p>
+
+<h2>4. 编译Intel MKL的FFTW3和LAPACK接口</h2>
+
+<p>为什么要使用Intel MKL的接口呢？因为MKL是针对Intel机器优化的，而且它有了大多数数学库的功能。但是有些数学库有很久的历史，他们的调用方式形成了标准，如果想利用Intel MKL的效率，而又保持对代码的兼容，我们就要对MKL的代码做简单的包装，形成接口库。这样我们就不用单独下载FFTW和LAPACK等数学库，又能获得较好的效率，这是一举两得的事。</p>
+
+<p>下面我们看看怎么编译这些接口。这些接口在新版本中是以源码的形式提供的，编译非常简单，先到MKL安装目录下，在Earth上是</p>
+
+<pre><code>/public/software/intelf/Compiler/11.1/072/mkl/
+</code></pre>
+
+<p>然后可以看到有个<code>interfaces</code>文件夹，这就是所有的接口了</p>
+
+<pre><code>blas95  fftw2xc  fftw2x_cdft  fftw2xf  fftw3xc  fftw3xf  lapack95
+</code></pre>
+
+<p>我们需要比较新的fftw3接口，最后<code>c</code>或<code>f</code>分别指的是C语言和Fortran语言的接口。QE使用Fortran，所以我们选择fftw3xf。所有的接口进去以后都有make文件，进入到fftw3xf下，输入：</p>
+
+<pre><code>make help
+</code></pre>
+
+<p>就会出来很多选项，比如：</p>
+
+<pre><code>Usage: make {lib32|lib64|libem64t} [option...]
+Options:
+
+compiler=gnu|pgi|intel
+       Build examples using GNU gcc, PGI pgcc, or
+       Intel(R) C compiler icc. Default value: intel.
+
+MKLROOT=&lt;path&gt;
+       Locate MKL header files relative to &lt;path&gt;.
+       Default value: ../.., unless defined in environment
+
+i8=yes|no
+       Target default INTEGER size 8 bytes.
+       Default value: no, that is assume INTEGER is 4 bytes.
+
+fname=a_name|a_name_|a_name__|A_NAME
+       Select the pattern to decorate wrapper names for
+       Fortran. For example, with no special options
+           g77 uses pattern a_name__
+           ifort and gfortran use pattern a_name_
+           ifort on Windows uses pattern A_NAME
+       Default value: a_name_.
+
+install_to=&lt;path&gt;
+       Install the library to the specified location,
+       which must exist. Default value: .
+
+install_as=&lt;name&gt;
+       Specify the name of the library.
+       Default value depends on compiler used.
+</code></pre>
+
+<p>大多数选项都不需要关心，我们只要关心生成什么样版本的库就行了。Earth需要
+em64t版本（可以从<code>MKL根目录/lib/em64t</code>看出来），所以我只要运行：</p>
+
+<pre><code>make libem64t
+</code></pre>
+
+<p>当前目录下会产生一个库文件<code>libfftw3xf_intel.a</code>，这就是我们需要的接口库。为了和系统保持一致，首先要增加执行权限，然后把它移动到MKL库目录里：</p>
+
+<pre><code>chmod +x libfftw3xf_intel.a
+mv libfftw3xf_intel.a ../../lib/em64t/
+</code></pre>
+
+<p>这样，我们在第3步指定的<code>FFT_LIBS = -lfftw3xf_intel</code>就能正常工作了。</p>
+
+<p>其他库的安装都类似。Earth的<code>MKL根目录/lib/em64t</code>下已经有了<code>libmkl_lapack95_lp64.a</code>，这和我们到<code>lapack95</code>目录下自己编译是一样的，比如在<code>make help</code>后看到的说明是：</p>
+
+<pre><code>Usage: make {lib32|libem64t|lib64} INSTALL_DIR=&lt;path&gt;[interface=interface_name] [FC=compiler_name]
+
+Intel(R) Fortran Compiler as default
+
+INSTALL_DIR    - library and the .mod files will be built and installed
+                 in subdirectories of &lt;path&gt; the same way as if &lt;path&gt;
+                 were the Intel MKL installation directory.
+interface_name - can be lp64 or ilp64 for em64t and ia64. Default value is lp64.
+FC             - can be ifort, gfortran or pgf95. Default value is ifort.
+</code></pre>
+
+<p>然后我们照着说明做就行了。</p>
+
+<h2>5. 应用PLUMED补丁</h2>
+
+<p>现在一切准备就绪，对于5.0.1版，到QE的安装目录下，执行<code>make pw</code>编译pw.x，或者<code>make all</code>编译所有程序。但是不建议都编译，比如你只用cp.x，则只要<code>make cp</code>就行。生成的可执行文件和源码在一块，但是QE会在它的<code>bin</code>目录下生成符号链接，因此，直接从<code>bin</code>目录下调用就可以了。</p>
+
+<p>但是对于4.3.2版，我们希望加上PLUMED补丁，从而给QE增加Metadynamics的能力。首先需要导出一个环境变量，</p>
+
+<pre><code>export plumedir=/public/software/PLUMED/plumed-1.3/
+</code></pre>
+
+<p>这个变量指向你PLUMED的源码根目录。然后<em>到QE的根目录</em>下，执行：</p>
+
+<pre><code>$plumedir/patches/plumedpatch_qespresso_4.3.2.sh -patch
+</code></pre>
+
+<p>这样就修改了当前目录下的QE，从而编译时加入PLUMED的功能。然后和正常地
+make就可以了。</p>
+
+<p>其实PLUMED的<code>patches</code>目录下有针对各个软件版本的补丁脚本，所有安装的过程都差不多，只不过换个脚本而已。</p>
+
+<p>另外如果你使用MPI方式来并行运行，一定要定义<code>OMP_NUM_THREADS</code>这个环境变量，设为1。否则QE的随机数发生器可能会出现错误，我认为最可能的原因就是他们没处理好多线程并发的问题。</p>
+
+<blockquote><p>这个错误是会出现在第一次动力学开始之前，“randy”函数出错，消息是“j out of range”。我查看了源码，如果串行的话无论如何j也不能出界。后来我看了官方文档，要定义一个环境变量，我猜可能是那个问题，定义了以后果然没问题了。</p></blockquote>
+
+<h2>6. 维护和重新编译</h2>
+
+<p>如果你想重新编译QE，则先到QE安装目录下，首先<code>make clean</code>，这样把所有的可执行文件删除。如果安装了PLUMED，则需要这时把PLUMED插件删除，方法是执行（记着导出<code>plumedir</code>环境变量）：</p>
+
+<pre><code>$plumedir/patches/plumedpatch_qespresso_4.3.2.sh -revert
+</code></pre>
+
+<p>安装脚本使用<code>-revert</code>参数，删除补丁，还原QE的原来版本。</p>
+
+<p>如果配置不变，则不需要重新<code>configure</code>，直接运用新补丁，或者修改的代码，然后重新make即可。</p>
+
+<p>如果配置有改变，则需要执行<code>make distclean</code>，这样，所有后期生成的文件都会删除，现在源码包和刚解压时一样了，需要从头开始。</p>
+
+<p>一定要记住这个顺序，安装和卸载的顺序正好相反，错乱了就不好了。</p>
+
+<h1>结语</h1>
+
+<p>我在安装的过程中遇到了很多问题，希望这篇文章能对今后学习使用的人有所帮助。开源软件的文档和支持并不是很好，需要很多精力去探索，但是正是这种自由才使得开源软件如此有魅力。虽然我们组有VASP授权，但是开源的QE得到了更多其他软件的支持（比如PLUMED和CASINO），虽然在某些方面和VASP还有差距，但是我还是偏爱QE。大家模拟愉快！</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Derek Li</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-08T21:23:00+08:00" pubdate data-updated="true">Nov 8<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/plumed/'>PLUMED</a>, <a class='category' href='/blog/categories/qe/'>QE</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/11/06/csharp-reflection-tutorial/" title="Previous Post: C#反射教程">&laquo; C#反射教程</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/">Quantum Espresso及PLUMED安装指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/06/csharp-reflection-tutorial/">C#反射教程</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/06/tcl-the-misunderstood-chinese-version/">被误解的Tcl</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu/">How to modify keyboard layouts easily in Ubuntu</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/03/31/octopress-a-hard-way-to-blog/">Octopress: A HARD Way to Blog</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/dingmaotu">@dingmaotu</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'dingmaotu',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Derek Li -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'dingblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://dingmaotu.github.com/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/';
+        var disqus_url = 'http://dingmaotu.github.com/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
