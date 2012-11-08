@@ -1,0 +1,222 @@
+---
+layout: post
+title: "Quantum Espresso及PLUMED安装指南"
+date: 2012-11-08 21:23
+comments: true
+categories: [QE, PLUMED]
+---
+
+Quantum Espresso（以下简称QE）和PLUMED结合，能做很多有用的模拟，尤其是
+Metadynamics这种高级动力学。但是Quantum Espresso的安装程序有一些问题，
+在我们模拟实验室的Earth和Venus上安装，不能正确识别LAPACK、ScaLAPACK和
+FFTW库，需要手工更改make.sys，才能产生比较高效的程序。PLUMED的安装比较
+容易，但是各种材料上说法不一，这里我讲最直接和简单的办法，希望对各位有
+帮助。
+
+1. 获得安装包
+-------------
+
+目前PLUMED最新版是1.3，支持QE的4.3.2版本，是4系列的最新版。但QE目前的
+最新版是5.0.1，还没有广泛使用。我们可以同时安装这两个版本。请各位到官网
+上下载具体的源码包。
+
+2. 解压到目录
+-------------
+
+QE的安装没有Install的环节，也就是源码和程序都在一个目录里面，因此我们直
+接把源码包解压到安装的位置。PLUMED只是作为插件存在，不需要单独安装，但
+是为了方便，我也把它解压到一个安装目录。例如Earth上安装目录分别为：
+
+    /public/software/QE/espresso-5.0.1/
+    /public/software/QE/espresso-4.3.2/
+    /public/software/PLUMED/plumed-1.3/
+    
+<!-- more -->
+
+3. 配置QE
+---------
+
+QE的源码包目录底下有configure文件，执行之，不用任何参数：
+
+    ./configure
+
+执行后，可以看到有总结，4.3.2版本没有发现LAPACK、ScaLAPACK、FFTW。而我
+们的集群随Intel编译器装有MKL，以及OpenMPI，完全可以提供优化的函数库。因
+此我们需要手工改变编译参数。编译参数可以在make.sys文件中修改。
+
+make.sys文件中有几处要改的地方，首先是`DFLAGS`参数。在Earth上，QE自动检
+测出了Intel编译器，OpenMPI环境，并已经定义了`_D__MPI`、`-D__PARA`、
+`-D__INTEL`等几个参数，如果正确安装了Intel编译器和OpenMPI，一般都不会有
+问题。
+
+把`-D__FFTW`（意思是使用QE自带的FFTW库）改为`-D__FFTW3`，使用外部的
+FFTW3实现，这里是基于MKL的FFTW3接口。另外需要添加`-D__SCALAPACK`，以使
+用ScaLAPACK。这样定义就OK了，但是我们还要修改具体怎么链接到这些库函数。
+
+找到`# External Libraries`开头的几行，它们定义了blas、lapack、fft、mpi
+的库。QE4找到了Intel MKL的blas接口，但是其他的都没有找到。QE5可以找到blas、
+scalapack和mpi，但是没有lapack和fft。因此下面我将讲怎么手工设置这几个库。
+
+首先是scalapack和mpi，在Earth上，需要指定这样的库：
+
+    SCALAPACK_LIBS = -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64
+
+另外还有个单独的`MPI_LIBS`，可以把上面的`-lmkl_blacs_openmpi_lp64`移到
+这里来，也可以留在上面，这里空着。另外我们要指定lapack和fft的库，在
+Earth上（Venus上也可以）如下，
+
+    LAPACK_LIBS    = -lmkl_lapack95_lp64
+    LAPACK_LIBS_SWITCH = external	
+    FFT_LIBS       =  -lfftw3xf_intel
+
+这里的两个库都是需要编译的，但是在我们的安装里面，LAPACK已经编译好了，
+并且放在了MKL主库里面，因此不许要额外动手，但是我还是会讲怎么编译这两个
+库。
+	
+4. 编译Intel MKL的FFTW3和LAPACK接口
+-----------------------------------
+
+为什么要使用Intel MKL的接口呢？因为MKL是针对Intel机器优化的，而且它有了
+大多数数学库的功能。但是有些数学库有很久的历史，他们的调用方式形成了标
+准，如果想利用Intel MKL的效率，而又保持对代码的兼容，我们就要对MKL的代
+码做简单的包装，形成接口库。这样我们就不用单独下载FFTW和LAPACK等数学库，
+又能获得较好的效率，这是一举两得的事。
+
+下面我们看看怎么编译这些接口。这些接口在新版本中是以源码的形式提供的，
+编译非常简单，先到MKL安装目录下，在Earth上是
+
+    /public/software/intelf/Compiler/11.1/072/mkl/
+
+然后可以看到有个`interfaces`文件夹，这就是所有的接口了
+
+    blas95  fftw2xc  fftw2x_cdft  fftw2xf  fftw3xc  fftw3xf  lapack95
+
+我们需要比较新的fftw3接口，最后`c`或`f`分别指的是C语言和Fortran语言的接
+口。QE使用Fortran，所以我们选择fftw3xf。所有的接口进去以后都有make文件，
+进入到fftw3xf下，输入：
+
+    make help
+
+就会出来很多选项，比如：
+
+    Usage: make {lib32|lib64|libem64t} [option...]
+    Options:
+
+    compiler=gnu|pgi|intel
+	       Build examples using GNU gcc, PGI pgcc, or
+	       Intel(R) C compiler icc. Default value: intel.
+
+    MKLROOT=<path>
+           Locate MKL header files relative to <path>.
+           Default value: ../.., unless defined in environment
+
+    i8=yes|no
+           Target default INTEGER size 8 bytes.
+           Default value: no, that is assume INTEGER is 4 bytes.
+
+    fname=a_name|a_name_|a_name__|A_NAME
+           Select the pattern to decorate wrapper names for
+           Fortran. For example, with no special options
+               g77 uses pattern a_name__
+               ifort and gfortran use pattern a_name_
+               ifort on Windows uses pattern A_NAME
+           Default value: a_name_.
+
+    install_to=<path>
+           Install the library to the specified location,
+           which must exist. Default value: .
+
+    install_as=<name>
+           Specify the name of the library.
+           Default value depends on compiler used.
+
+大多数选项都不需要关心，我们只要关心生成什么样版本的库就行了。Earth需要
+em64t版本（可以从`MKL根目录/lib/em64t`看出来），所以我只要运行：
+
+	make libem64t
+
+当前目录下会产生一个库文件`libfftw3xf_intel.a`，这就是我们需要的接口库。
+为了和系统保持一致，首先要增加执行权限，然后把它移动到MKL库目录里：
+
+    chmod +x libfftw3xf_intel.a
+    mv libfftw3xf_intel.a ../../lib/em64t/
+
+这样，我们在第3步指定的`FFT_LIBS = -lfftw3xf_intel`就能正常工作了。
+
+其他库的安装都类似。Earth的`MKL根目录/lib/em64t`下已经有了
+`libmkl_lapack95_lp64.a`，这和我们到`lapack95`目录下自己编译是一样的，
+比如在`make help`后看到的说明是：
+
+    Usage: make {lib32|libem64t|lib64} INSTALL_DIR=<path>
+                [interface=interface_name] [FC=compiler_name]
+
+    Intel(R) Fortran Compiler as default
+
+    INSTALL_DIR    - library and the .mod files will be built and installed
+                     in subdirectories of <path> the same way as if <path>
+                     were the Intel MKL installation directory.
+    interface_name - can be lp64 or ilp64 for em64t and ia64. Default value is lp64.
+    FC             - can be ifort, gfortran or pgf95. Default value is ifort.
+
+然后我们照着说明做就行了。
+
+5. 应用PLUMED补丁
+-----------------
+
+现在一切准备就绪，对于5.0.1版，到QE的安装目录下，执行`make pw`编译pw.x，
+或者`make all`编译所有程序。但是不建议都编译，比如你只用cp.x，则只要
+`make cp`就行。生成的可执行文件和源码在一块，但是QE会在它的`bin`目录下
+生成符号链接，因此，直接从`bin`目录下调用就可以了。
+
+但是对于4.3.2版，我们希望加上PLUMED补丁，从而给QE增加Metadynamics的能力。
+首先需要导出一个环境变量，
+
+    export plumedir=/public/software/PLUMED/plumed-1.3/
+
+这个变量指向你PLUMED的源码根目录。然后*到QE的根目录*下，执行：
+
+    $plumedir/patches/plumedpatch_qespresso_4.3.2.sh -patch
+
+这样就修改了当前目录下的QE，从而编译时加入PLUMED的功能。然后和正常地
+make就可以了。
+
+其实PLUMED的`patches`目录下有针对各个软件版本的补丁脚本，所有安装的过程
+都差不多，只不过换个脚本而已。
+
+另外如果你使用MPI方式来并行运行，一定要定义`OMP_NUM_THREADS`这个环境变
+量，设为1。否则QE的随机数发生器可能会出现错误，我认为最可能的原因就是他
+们没处理好多线程并发的问题。
+
+> 这个错误是会出现在第一次动力学开始之前，“randy”函数出错，消息是
+“j out of range”。我查看了源码，如果串行的话无论如何j也不能出界。
+后来我看了官方文档，要定义一个环境变量，我猜可能是那个问题，定义了
+以后果然没问题了。
+
+
+6. 维护和重新编译
+-----------------
+
+如果你想重新编译QE，则先到QE安装目录下，首先`make clean`，这样把所有的
+可执行文件删除。如果安装了PLUMED，则需要这时把PLUMED插件删除，方法是执
+行（记着导出`plumedir`环境变量）：
+
+    $plumedir/patches/plumedpatch_qespresso_4.3.2.sh -revert
+
+安装脚本使用`-revert`参数，删除补丁，还原QE的原来版本。
+
+如果配置不变，则不需要重新`configure`，直接运用新补丁，或者修改的代码，
+然后重新make即可。
+
+如果配置有改变，则需要执行`make distclean`，这样，所有后期生成的文件都
+会删除，现在源码包和刚解压时一样了，需要从头开始。
+
+一定要记住这个顺序，安装和卸载的顺序正好相反，错乱了就不好了。
+
+结语
+====
+
+我在安装的过程中遇到了很多问题，希望这篇文章能对今后学习使用的人有所帮
+助。开源软件的文档和支持并不是很好，需要很多精力去探索，但是正是这种自
+由才使得开源软件如此有魅力。虽然我们组有VASP授权，但是开源的QE得到了更
+多其他软件的支持（比如PLUMED和CASINO），虽然在某些方面和VASP还有差距，
+但是我还是偏爱QE。大家模拟愉快！
