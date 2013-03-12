@@ -4,7 +4,7 @@
   <title><![CDATA[Category: QE | Dingmaotu Blog]]></title>
   <link href="http://dingmaotu.github.com/blog/categories/qe/atom.xml" rel="self"/>
   <link href="http://dingmaotu.github.com/"/>
-  <updated>2013-03-12T14:49:17+08:00</updated>
+  <updated>2013-03-12T15:33:58+08:00</updated>
   <id>http://dingmaotu.github.com/</id>
   <author>
     <name><![CDATA[Derek Li]]></name>
@@ -12,6 +12,80 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A funny bug in Quantum Espresso]]></title>
+    <link href="http://dingmaotu.github.com/blog/2012/12/07/a-funny-bug-in-quantum-espresso/"/>
+    <updated>2012-12-07T22:11:00+08:00</updated>
+    <id>http://dingmaotu.github.com/blog/2012/12/07/a-funny-bug-in-quantum-espresso</id>
+    <content type="html"><![CDATA[<p>Recently I am running metadynamics simulations on MgSiO3 Perovkite with
+Quantum Espresso + PLUMED. However, the MD part of the PWscf code in QE is
+rather unstable (compared to some non-free alternatives, such as VASP). I
+encountered many problems using QE and PLUMED, and the bug discussed in this
+post made me suffer a lot.</p>
+
+<p>I think the this combination (PW + metadynamics with PLUMED) is rarely used by
+people, since I found a bug that appears again and again, and no one complains
+about it. This bug exists in 4.3.2 and the latest 5.0.1 version.</p>
+
+<p>When I start a MD run with the PLUMED plugin enabled, most of the time, the
+code fails, reporting a message:</p>
+
+<blockquote><pre><code>  from randy : error #      1038
+  j out of range
+</code></pre></blockquote>
+
+<p>before entering the MD loop.</p>
+
+<p>I sought through the source code, and found that this error is reported by the
+random number generator of QE. If the random number generator, which is so
+fundamental and frequently used by the code, is buggy, then why does not
+anyone experienced this bug before? Actually, when I first reported this bug
+to the maintainer of the code, he was doubting the possibility of the bug.</p>
+
+<p>After studying the code for a while, I finally figured out why the bug
+happened.</p>
+
+<p>In function <code>randy</code>, it first processes the seed as <code>idum</code> using:</p>
+
+<p><code>fortran random_numbers.f90 line 53
+idum = MOD( ic - idum, m )
+</code></p>
+
+<p>The maintainer does not remember who wrote this code, and the reason why. It
+indeed causes problems if the seed is larger than ic (which is a fixed
+parameter).</p>
+
+<p>I  think this is the source of generating many negetive numbers. The random
+seed must be too large. Where is the seed generated?</p>
+
+<p>I found that <code>set_random_seed</code> uses current time components to generate a
+seed:</p>
+
+<p><code>fortran random_numbers.f90 lines 83-85
+! itime contains: year, month, day, time difference in minutes, hours,
+!                 minutes, seconds and milliseconds.
+iseed = ( itime(8) + itime(6) ) * ( itime(7) + itime(4) )
+</code></p>
+
+<p>Here in China we have <code>itime(4)</code> as 480 (timezone UTC+8), which is a constant
+for any particular region, whereas in Europe <code>itime(4)</code> is much smaller. And
+quite likely <code>iseed</code> will be larger than the <code>ic =150889</code> in China. So
+depending on the value of <code>itime(8)</code> in milliseconds, which changes rapidly
+and may be a large number, in China we got large seed, thus negative random
+numbers.</p>
+
+<p>If I remove the <code>itime(4)</code> in <code>set_random_seed</code>, PWscf never crashes with or
+without <code>-plumed</code>. I believe this correction has no problem since it is what a
+British user (UTC time, with itime(4) = 0) would get.</p>
+
+<p>The maintainer corrected the buggy <code>randy</code> code. The problem seems to be
+solved. However, I still do not understand the problem completely. Why the
+error is always 1038, as the seed should be random? Why without <code>-plumed</code>,
+does this apparent error not show? This is rather confusing, yet I do not have
+the time and knowledge to dig into it.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Quantum Espresso及PLUMED安装指南]]></title>
