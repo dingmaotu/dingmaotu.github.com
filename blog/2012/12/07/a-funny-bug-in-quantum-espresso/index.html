@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: QE - Dingmaotu Blog</title>
+  <title>A funny bug in Quantum Espresso - Dingmaotu Blog</title>
   <meta name="author" content="Derek Li">
 
   
-  <meta name="description" content="Category: QE">
+  <meta name="description" content="Recently I am running metadynamics simulations on MgSiO3 Perovkite
+with Quantum Espresso + PLUMED. However, the MD part of the PWscf code
+in QE is &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dingmaotu.github.comblog/categories/qe">
+  <link rel="canonical" href="http://dingmaotu.github.com/blog/2012/12/07/a-funny-bug-in-quantum-espresso">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -76,36 +78,114 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: QE</h1>
+    
+      <h1 class="entry-title">A Funny Bug in Quantum Espresso</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-07T22:11:00+08:00" pubdate data-updated="true">Dec 7<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>Recently I am running metadynamics simulations on MgSiO3 Perovkite
+with Quantum Espresso + PLUMED. However, the MD part of the PWscf code
+in QE is rather unstable (compared to some non-free alternatives, such
+as VASP). I encountered many problems using QE and PLUMED, and the bug
+discussed in this post made me suffer a lot.</p>
 
-  
-  <h2>2012</h2>
+<p>I think the this combination (PW + metadynamics with
+PLUMED) is rarely used by people, since I found a bug that appears
+again and again, and no one complains about it. This bug exists in
+4.3.2 and the latest 5.0.1 version.</p>
 
-<article>
-  
-<h1><a href="/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/">Quantum Espresso及PLUMED安装指南</a></h1>
-<time datetime="2012-11-08T21:23:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>08</span> <span class='year'>2012</span></time>
+<p>When I start a MD run with the PLUMED plugin enabled, most of the
+time, the code fails, reporting a message:</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/plumed/'>PLUMED</a>, <a class='category' href='/blog/categories/qe/'>QE</a></span>
-</footer>
+<blockquote><pre><code>  from randy : error #      1038&gt;       j out of range
+</code></pre></blockquote>
 
+<p>before entering the MD loop.</p>
 
-</article>
+<p>I sought through the source code, and found that this error is
+reported by the random number generator of QE. If the random number
+generator, which is so fundamental and frequently used by the code, is
+buggy, then why does not anyone experienced this bug before? Actually,
+when I first reported this bug to the maintainer of the code, he was
+doubting the possibility of the bug.</p>
 
+<p>After studying the code for a while, I finally figured out why the bug
+happens.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Derek Li</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-07T22:11:00+08:00" pubdate data-updated="true">Dec 7<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/" title="Previous Post: Quantum Espresso及PLUMED安装指南">&laquo; Quantum Espresso及PLUMED安装指南</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows/" title="Next Post: Compiling Emacs 24.3 on Windows">Compiling Emacs 24.3 on Windows &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -186,7 +266,10 @@
       var disqus_shortname = 'dingblog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://dingmaotu.github.com/blog/2012/12/07/a-funny-bug-in-quantum-espresso/';
+        var disqus_url = 'http://dingmaotu.github.com/blog/2012/12/07/a-funny-bug-in-quantum-espresso/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
