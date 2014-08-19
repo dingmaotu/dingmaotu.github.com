@@ -6,11 +6,13 @@
 <head>
   <meta charset="utf-8">
   <title>Dingmaotu Blog</title>
-  <meta name="author" content="Derek Li">
+  <meta name="author" content="Ding Li">
 
+  <!-- Causes trouble with per-article font implementations under /source/_includes/article.html
   
-  <meta name="description" content="Emacs 24.3, a new release, has come out! The official win32 build however has
-not. So we are gonna do it by ourselves. Building Emacs on windows is &hellip;">
+  <meta name="description" content="Compiling Emacs 24.3 on Windows Mar 12th, 2013 11:42 am | Comments Emacs 24.3, a new release, has come out! The official win32 build however has
+not &hellip;">
+  -->
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,17 +21,27 @@ not. So we are gonna do it by ourselves. Building Emacs on windows is &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dingmaotu.github.com">
+  <link rel="canonical" href="http://dingmaotu.com">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Dingmaotu Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href='http://fonts.googleapis.com/css?family=Montserrat+Alternates:700' rel='stylesheet' type='text/css'>
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Poller+One" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Germania+One" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Fontdiner+Swanky" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Lato&subset=latin-ext" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Cardo&subset=latin-ext" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Sorts+Mill+Goudy" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Della+Respira" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=UnifrakturMaguntia&subset=all" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Arimo|EB+Garamond|PT+Sans+Caption&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
   
   <script type="text/javascript">
@@ -39,48 +51,66 @@ not. So we are gonna do it by ourselves. Building Emacs on windows is &hellip;">
 
     (function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
   </script>
 
 
 </head>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<logo>
 
-<body   >
+<img src="/logo.png" alt="Website Logo. Upload to /source/logo.png ; disable in /source/_includes/logo.html" height="32px" width="32px">
+</logo>
+
+
+
+<body >
   <header role="banner"><hgroup>
   <h1><a href="/">Dingmaotu Blog</a></h1>
   
-    <h2>Programming For Fun</h2>
+    <h2>Thoughts and Knowledge</h2>
   
 </hgroup>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
 </ul>
+
+<br>
   
-<form action="http://google.com/search" method="get">
+<form action="https://www.google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:dingmaotu.github.com" />
+    <input type="hidden" name="q" value="site:dingmaotu.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
   
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+<!--
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
 </ul>
+-->
 
 </nav>
   <div id="main">
     <div id="content">
       <div class="blog-index">
+  
+  
+  
     <article>
+      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows/">Compiling Emacs 24.3 on Windows</a></h1>
+      <h1 class="entry-title" style="font-family: "><a href="/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows/">Compiling Emacs 24.3 on Windows</a></h1>
     
     
       <p class="meta">
@@ -89,23 +119,17 @@ not. So we are gonna do it by ourselves. Building Emacs on windows is &hellip;">
 
 
 
-
-
-
-
-  
-
-
-<time datetime="2013-03-12T11:42:00+08:00" pubdate data-updated="true">Mar 12<span>th</span>, 2013</time>
+<time class='entry-date' datetime='2013-03-12T11:42:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>11:42 am</span></time>
         
-         | <a href="/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows/#disqus_thread">Comments</a>
+           | <a href="/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows/#disqus_thread"
+             data-disqus-identifier="http://dingmaotu.com/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows/">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Emacs 24.3, a new release, has come out! The official win32 build however has
+  <div class="entry-content" style="font-family: ; font-size: "><p>Emacs 24.3, a new release, has come out! The official win32 build however has
 not. So we are gonna do it by ourselves. Building Emacs on windows is not that
 hard, but you must be careful about choosing the correct tools, or your
 building experience will be full of bumps.</p>
@@ -180,7 +204,7 @@ options to <code>configure</code></li>
 <li><code>make</code></li>
 <li><code>make info</code> if you want info manuals</li>
 <li><code>make install</code> if you want related programs to be grouped together, and add
-Emacs to <code>Start Menu</code> and registry (typically I don&#8217;t want this)</li>
+Emacs to <code>Start Menu</code> and registry (typically I don&rsquo;t want this)</li>
 </ol>
 
 
@@ -196,10 +220,13 @@ locations of Emacs intallation, which is not needed. So I usually do not run
 
 
     </article>
+  
+  
     <article>
+      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/12/07/a-funny-bug-in-quantum-espresso/">A Funny Bug in Quantum Espresso</a></h1>
+      <h1 class="entry-title" style="font-family: "><a href="/blog/2012/12/07/a-funny-bug-in-quantum-espresso/">A Funny Bug in Quantum Espresso</a></h1>
     
     
       <p class="meta">
@@ -208,23 +235,17 @@ locations of Emacs intallation, which is not needed. So I usually do not run
 
 
 
-
-
-
-
-  
-
-
-<time datetime="2012-12-07T22:11:00+08:00" pubdate data-updated="true">Dec 7<span>th</span>, 2012</time>
+<time class='entry-date' datetime='2012-12-07T22:11:00+08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>10:11 pm</span></time>
         
-         | <a href="/blog/2012/12/07/a-funny-bug-in-quantum-espresso/#disqus_thread">Comments</a>
+           | <a href="/blog/2012/12/07/a-funny-bug-in-quantum-espresso/#disqus_thread"
+             data-disqus-identifier="http://dingmaotu.com/blog/2012/12/07/a-funny-bug-in-quantum-espresso/">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Recently I am running metadynamics simulations on MgSiO3 Perovkite with
+  <div class="entry-content" style="font-family: ; font-size: "><p>Recently I am running metadynamics simulations on MgSiO3 Perovkite with
 Quantum Espresso + PLUMED. However, the MD part of the PWscf code in QE is
 rather unstable (compared to some non-free alternatives, such as VASP). I
 encountered many problems using QE and PLUMED, and the bug discussed in this
@@ -237,7 +258,8 @@ about it. This bug exists in 4.3.2 and the latest 5.0.1 version.</p>
 <p>When I start a MD run with the PLUMED plugin enabled, most of the time, the
 code fails, reporting a message:</p>
 
-<blockquote><pre><code>  from randy : error #      1038&gt;       j out of range
+<blockquote><pre><code>  from randy : error #      1038
+  j out of range
 </code></pre></blockquote>
 
 <p>before entering the MD loop.</p>
@@ -299,10 +321,13 @@ the time and knowledge to dig into it.</p>
 
 
     </article>
+  
+  
     <article>
+      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/">Quantum Espresso及PLUMED安装指南</a></h1>
+      <h1 class="entry-title" style="font-family: "><a href="/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/">Quantum Espresso及PLUMED安装指南</a></h1>
     
     
       <p class="meta">
@@ -311,33 +336,34 @@ the time and knowledge to dig into it.</p>
 
 
 
-
-
-
-
-  
-
-
-<time datetime="2012-11-08T21:23:00+08:00" pubdate data-updated="true">Nov 8<span>th</span>, 2012</time>
+<time class='entry-date' datetime='2012-11-08T21:23:00+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>9:23 pm</span></time>
         
-         | <a href="/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/#disqus_thread">Comments</a>
+           | <a href="/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/#disqus_thread"
+             data-disqus-identifier="http://dingmaotu.com/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Quantum Espresso（以下简称QE）和PLUMED结合，能做很多有用的模拟，尤其是
-Metadynamics这种高级动力学。但是Quantum Espresso的安装程序有一些问题，在我们模拟实验室的Earth和Venus上安装，不能正确识别LAPACK、ScaLAPACK和
-FFTW库，需要手工更改make.sys，才能产生比较高效的程序。PLUMED的安装比较容易，但是各种材料上说法不一，这里我讲最直接和简单的办法，希望对各位有帮助。</p>
+  <div class="entry-content" style="font-family: ; font-size: "><p>Quantum Espresso（以下简称QE）和PLUMED结合，能做很多有用的模拟，尤其是
+Metadynamics这种高级动力学。但是Quantum Espresso的安装程序有一些问题，
+在我们模拟实验室的Earth和Venus上安装，不能正确识别LAPACK、ScaLAPACK和
+FFTW库，需要手工更改make.sys，才能产生比较高效的程序。PLUMED的安装比较
+容易，但是各种材料上说法不一，这里我讲最直接和简单的办法，希望对各位有
+帮助。</p>
 
 <h2>1. 获得安装包</h2>
 
-<p>目前PLUMED最新版是1.3，支持QE的4.3.2版本，是4系列的最新版。但QE目前的最新版是5.0.1，还没有广泛使用。我们可以同时安装这两个版本。请各位到官网上下载具体的源码包。</p>
+<p>目前PLUMED最新版是1.3，支持QE的4.3.2版本，是4系列的最新版。但QE目前的
+最新版是5.0.1，还没有广泛使用。我们可以同时安装这两个版本。请各位到官网
+上下载具体的源码包。</p>
 
 <h2>2. 解压到目录</h2>
 
-<p>QE的安装没有Install的环节，也就是源码和程序都在一个目录里面，因此我们直接把源码包解压到安装的位置。PLUMED只是作为插件存在，不需要单独安装，但是为了方便，我也把它解压到一个安装目录。例如Earth上安装目录分别为：</p>
+<p>QE的安装没有Install的环节，也就是源码和程序都在一个目录里面，因此我们直
+接把源码包解压到安装的位置。PLUMED只是作为插件存在，不需要单独安装，但
+是为了方便，我也把它解压到一个安装目录。例如Earth上安装目录分别为：</p>
 
 <pre><code>/public/software/QE/espresso-5.0.1/
 /public/software/QE/espresso-4.3.2/
@@ -354,10 +380,13 @@ FFTW库，需要手工更改make.sys，才能产生比较高效的程序。PLUME
 
 
     </article>
+  
+  
     <article>
+      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/11/06/csharp-reflection-tutorial/">C#反射教程</a></h1>
+      <h1 class="entry-title" style="font-family: "><a href="/blog/2012/11/06/csharp-reflection-tutorial/">C#反射教程</a></h1>
     
     
       <p class="meta">
@@ -366,39 +395,49 @@ FFTW库，需要手工更改make.sys，才能产生比较高效的程序。PLUME
 
 
 
-
-
-
-
-  
-
-
-<time datetime="2012-11-06T17:14:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
+<time class='entry-date' datetime='2012-11-06T17:14:00+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>5:14 pm</span></time>
         
-         | <a href="/blog/2012/11/06/csharp-reflection-tutorial/#disqus_thread">Comments</a>
+           | <a href="/blog/2012/11/06/csharp-reflection-tutorial/#disqus_thread"
+             data-disqus-identifier="http://dingmaotu.com/blog/2012/11/06/csharp-reflection-tutorial/">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2>什么是反射？</h2>
+  <div class="entry-content" style="font-family: ; font-size: "><h2>什么是反射？</h2>
 
 <p>反射（reflection）在英语里有自我内省的意思，即是查看自己的内在。</p>
 
-<p>在编程语言中，反射是指程序可以动态获得自己本身信息。我说的程序本身的信息，是指诸如一个函数的字符串名字和参数、返回值类型，一个类的名字，类的方法、字段、属性、事件等等。这些在程序设计时都是容易知道的，但是程序在编译完成并执行时，这些信息都不同程度地丢失了。例如C语言，函数的编译通常只保留一个函数的名字在最后的binary的符号表中，想要获得这个函数除了名字以外的信息是很困难的（有时候甚至可以strip掉所有的符号信息，只保留函数的入口地址，这样什么都没有了）。</p>
+<p>在编程语言中，反射是指程序可以动态获得自己本身信息。我说的程序本身的信
+息，是指诸如一个函数的字符串名字和参数、返回值类型，一个类的名字，类的
+方法、字段、属性、事件等等。这些在程序设计时都是容易知道的，但是程序在
+编译完成并执行时，这些信息都不同程度地丢失了。例如C语言，函数的编译通常
+只保留一个函数的名字在最后的binary的符号表中，想要获得这个函数除了名字
+以外的信息是很困难的（有时候甚至可以strip掉所有的符号信息，只保留函数的
+入口地址，这样什么都没有了）。</p>
 
-<p>这些信息被称为Metadata（元数据），有些人称作数据的数据。听起来有些装B，其实就是编译型语言把源码中有关程序自身的信息存储到目标文件里，而不是抛弃掉，就叫做元数据了。</p>
+<p>这些信息被称为Metadata（元数据），有些人称作数据的数据。听起来有些装B，
+其实就是编译型语言把源码中有关程序自身的信息存储到目标文件里，而不是抛
+弃掉，就叫做元数据了。</p>
 
 <p>但是实际上，反射这种东西很早就存在了。例如：</p>
 
 <ul>
-<li><p>Windows编程中，GetProcAddress可以根据一个DLL中函数的名字来获得其实际地址，从而动态调用这个函数，而不用事先就在程序中显式调用。这提供了很大的灵活性，COM的一个重要基础就是能够动态加载DLL并通过这种方式调用函数。
+<li><p>Windows编程中，GetProcAddress可以根据一个DLL中函数的名字来获得其实际
+地址，从而动态调用这个函数，而不用事先就在程序中显式调用。这提供了很大
+的灵活性，COM的一个重要基础就是能够动态加载DLL并通过这种方式调用函数。
 Linux系统动态链接库也有类似的功能（dlopen，dlsym）。</p></li>
-<li><p>解释语言一般都有很强的反射能力，因为解释语言直接从源码执行，也不会丢失任何有关源码的信息。Lisp中，程序的代码和数据没有区别，因此本质上可以获得所有代码的信息，也可以动态执行任何一段在运行时构建的代码。
+<li><p>解释语言一般都有很强的反射能力，因为解释语言直接从源码执行，也不会丢
+失任何有关源码的信息。Lisp中，程序的代码和数据没有区别，因此本质上可以
+获得所有代码的信息，也可以动态执行任何一段在运行时构建的代码。
 JavaScript的对象即是关联数组，所有的Field都可以用字符串来存取，Python有
 getattr和setattr函数。</p></li>
-<li><p>一般使用反射对程序效率有较大的负面影响，解释型语言在机器的计算能力还不强的时候根本得不到流行，这是很大的一个原因。但是现在计算能力空前强大，所以即使有些影响，对于一般的应用都问题不大，但是反射的灵活性和对很多问题的优雅解决（使得程序的设计更加模块化，可以动态加载可执行代码等），促使这类技术逐渐流行起来。</p></li>
+<li><p>一般使用反射对程序效率有较大的负面影响，解释型语言在机器的计算能力还
+不强的时候根本得不到流行，这是很大的一个原因。但是现在计算能力空前强大，
+所以即使有些影响，对于一般的应用都问题不大，但是反射的灵活性和对很多问
+题的优雅解决（使得程序的设计更加模块化，可以动态加载可执行代码等），促
+使这类技术逐渐流行起来。</p></li>
 </ul>
 
 
@@ -412,10 +451,13 @@ getattr和setattr函数。</p></li>
 
 
     </article>
+  
+  
     <article>
+      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/11/06/tcl-the-misunderstood-chinese-version/">被误解的Tcl</a></h1>
+      <h1 class="entry-title" style="font-family: "><a href="/blog/2012/11/06/tcl-the-misunderstood-chinese-version/">被误解的Tcl</a></h1>
     
     
       <p class="meta">
@@ -424,40 +466,54 @@ getattr和setattr函数。</p></li>
 
 
 
-
-
-
-
-  
-
-
-<time datetime="2012-11-06T14:45:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
+<time class='entry-date' datetime='2012-11-06T14:45:00+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>2:45 pm</span></time>
         
-         | <a href="/blog/2012/11/06/tcl-the-misunderstood-chinese-version/#disqus_thread">Comments</a>
+           | <a href="/blog/2012/11/06/tcl-the-misunderstood-chinese-version/#disqus_thread"
+             data-disqus-identifier="http://dingmaotu.com/blog/2012/11/06/tcl-the-misunderstood-chinese-version/">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><blockquote><p>原文见<a href="http://oldblog.antirez.com/articoli/tclmisunderstood.html">http://oldblog.antirez.com/articoli/tclmisunderstood.html</a>，版权归原文作者所有；译文 &copy; 2012 Derek Li。本文原始翻译时间是
+  <div class="entry-content" style="font-family: ; font-size: "><blockquote><p>原文见<a href="http://oldblog.antirez.com/articoli/tclmisunderstood.html">http://oldblog.antirez.com/articoli/tclmisunderstood.html</a>，版
+权归原文作者所有；译文 &copy; 2012 Derek Li。本文原始翻译时间是
 2012-2-12日，后来我的空间到期，不打算更新，所以转到现在的博客上。</p></blockquote>
 
-<p>最近有一篇链接自reddit的题为<a href="http://www.cabochon.com/~stevey/blog-rants/tour-de-babel.html">Tour de Babel</a>的文章，如果你读的话就会发现这篇文章说（除了一堆其他的胡言乱语）：靠，
-Python在能想象到的各方面都比Tcl好得多了，但人们还用Tcl来当作嵌入式解释器。</p>
+<p>最近有一篇链接自reddit的题为
+<a href="http://www.cabochon.com/~stevey/blog-rants/tour-de-babel.html">Tour de Babel</a>
+的文章，如果你读的话就会发现这篇文章说（除了一堆其他的胡言乱语）：靠，
+Python在能想象到的各方面都比Tcl好得多了，但人们还用Tcl来当作嵌入式解释
+器。</p>
 
-<p>好吧，整篇文章是有点……不是那么回事。但是不幸的是，虽然很多错误观念很快被知情的读者发觉了，但是这个反对Tcl的观念却被认为是理所当然的。我希望这篇文章能说服人们，Tcl还没有那么不堪。</p>
+<p>好吧，整篇文章是有点……不是那么回事。但是不幸的是，虽然很多错误观念很
+快被知情的读者发觉了，但是这个反对Tcl的观念却被认为是理所当然的。我希望
+这篇文章能说服人们，Tcl还没有那么不堪。</p>
 
 <h2>开场白</h2>
 
-<p>在我的编程生涯里，我使用了很多语言去写不同的应用：用C语言写了很多免费/付费的程序，用Scheme写了一个Web CMS（内容管理系统），用Tcl写了几个网络
-/Web应用，用Python写了一个商店管理程序，等等。我也玩过不少其他的编程语言，例如Smalltalk，Self，FORTH，Ruby，Joy……然而，我从不怀疑，<em>没有哪门语言像Tcl一样被误解得如此之深</em>。</p>
+<p>在我的编程生涯里，我使用了很多语言去写不同的应用：用C语言写了很多免费/
+付费的程序，用Scheme写了一个Web CMS（内容管理系统），用Tcl写了几个网络
+/Web应用，用Python写了一个商店管理程序，等等。我也玩过不少其他的编程语
+言，例如Smalltalk，Self，FORTH，Ruby，Joy……然而，我从不怀疑，<em>没有哪
+门语言像Tcl一样被误解得如此之深</em>。</p>
 
-<p>Tcl不是完美无瑕，但大多数的不足并不是在语言设计本身，而是Tcl“之父”（John Ousterhout）几年前去世了，连同他那种可以做出强势决定的专一的领导力。只要做出正确的改变，克服Tcl的大多数不足并保留其强大功能是可以的。如果你不相信Tcl异常强大，请先<em>花点时间</em>来阅读这篇文章。可能你读完之后还是不喜欢它，但希望你尊敬它，同时你将有足够强大的论据来反对这种“Tcl是玩具语言”的误解。这种误解如此小气，比“Lisp括号太多”更甚。</p>
+<p>Tcl不是完美无瑕，但大多数的不足并不是在语言设计本身，而是Tcl“之
+父”（John Ousterhout）几年前去世了，连同他那种可以做出强势决定的专一的
+领导力。只要做出正确的改变，克服Tcl的大多数不足并保留其强大功能是可以的。
+如果你不相信Tcl异常强大，请先<em>花点时间</em>来阅读这篇文章。可能你读完之后还
+是不喜欢它，但希望你尊敬它，同时你将有足够强大的论据来反对这种“Tcl是玩
+具语言”的误解。这种误解如此小气，比“Lisp括号太多”更甚。</p>
 
-<p>在我们开始之前，我先花点时间解释一下Tcl的工作原理。Tcl像世界上其他优秀的语言一样，拥有一些概念，这些概念组合起来，能够实现编程自由和充分的表达力。</p>
+<p>在我们开始之前，我先花点时间解释一下Tcl的工作原理。Tcl像世界上其他优秀
+的语言一样，拥有一些概念，这些概念组合起来，能够实现编程自由和充分的表
+达力。</p>
 
-<p>在这个简短的介绍之后，你会了解在Tcl中，怎样使用普通过程（procedure）实现像Lisp一样的宏（macro）（比Ruby的Block强大得多），怎样重定义语言本身的几乎所有方面，怎样在编程时忽略类型。Tcl社区开发了数个OOP系统，大规模的语言重定义，宏系统，和很多其他有趣的东西，仅仅使用Tcl本身。如果你喜欢可编程的编程语言，我打赌，你肯定至少饶有兴趣地看一眼Tcl。</p>
+<p>在这个简短的介绍之后，你会了解在Tcl中，怎样使用普通过程（procedure）实
+现像Lisp一样的宏（macro）（比Ruby的Block强大得多），怎样重定义语言本身
+的几乎所有方面，怎样在编程时忽略类型。Tcl社区开发了数个OOP系统，大规模
+的语言重定义，宏系统，和很多其他有趣的东西，仅仅使用Tcl本身。如果你喜欢
+可编程的编程语言，我打赌，你肯定至少饶有兴趣地看一眼Tcl。</p>
 
 </div>
   
@@ -469,10 +525,13 @@ Python在能想象到的各方面都比Tcl好得多了，但人们还用Tcl来�
 
 
     </article>
+  
+  
     <article>
+      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu/">How to Modify Keyboard Layouts Easily in Ubuntu</a></h1>
+      <h1 class="entry-title" style="font-family: "><a href="/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu/">How to Modify Keyboard Layouts Easily in Ubuntu</a></h1>
     
     
       <p class="meta">
@@ -481,23 +540,17 @@ Python在能想象到的各方面都比Tcl好得多了，但人们还用Tcl来�
 
 
 
-
-
-
-
-  
-
-
-<time datetime="2012-10-26T23:20:00+08:00" pubdate data-updated="true">Oct 26<span>th</span>, 2012</time>
+<time class='entry-date' datetime='2012-10-26T23:20:00+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>11:20 pm</span></time>
         
-         | <a href="/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu/#disqus_thread">Comments</a>
+           | <a href="/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu/#disqus_thread"
+             data-disqus-identifier="http://dingmaotu.com/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu/">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>If you want to remap the CAPSLOCK key to the Control key or something else,
+  <div class="entry-content" style="font-family: ; font-size: "><p>If you want to remap the CAPSLOCK key to the Control key or something else,
 you will find many tutorials on the internet (most of them are of course for
 Emacs learners). However, quite a few of them are outdated and unnecessarily
 complicated (for me). In a modern version of Ubuntu, you can accomplish this
@@ -515,10 +568,13 @@ easily in the system settings dialog. I believe Ubuntu learned this from Mac.</p
 
 
     </article>
+  
+  
     <article>
+      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/03/31/octopress-a-hard-way-to-blog/">Octopress: A HARD Way to Blog</a></h1>
+      <h1 class="entry-title" style="font-family: "><a href="/blog/2012/03/31/octopress-a-hard-way-to-blog/">Octopress: A HARD Way to Blog</a></h1>
     
     
       <p class="meta">
@@ -527,25 +583,19 @@ easily in the system settings dialog. I believe Ubuntu learned this from Mac.</p
 
 
 
-
-
-
-
-  
-
-
-<time datetime="2012-03-31T19:33:00+08:00" pubdate data-updated="true">Mar 31<span>st</span>, 2012</time>
+<time class='entry-date' datetime='2012-03-31T19:33:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2012</span></span> <span class='time'>7:33 pm</span></time>
         
-         | <a href="/blog/2012/03/31/octopress-a-hard-way-to-blog/#disqus_thread">Comments</a>
+           | <a href="/blog/2012/03/31/octopress-a-hard-way-to-blog/#disqus_thread"
+             data-disqus-identifier="http://dingmaotu.com/blog/2012/03/31/octopress-a-hard-way-to-blog/">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2>From Ruby Installation to AN Octopress Blog</h2>
+  <div class="entry-content" style="font-family: ; font-size: "><h2>From Ruby Installation to AN Octopress Blog</h2>
 
-<p>It needs quite a lot effort to setup an octopress blog. First of all, trying to use ruby under Windows is just painful, so I use CentOS to do all these (in a VMWare Player Virtual Machine). I downloaded RVM, following the RVM homepage guides, and did not succeed for several times. That was because I omitted the &#8220;requirement&#8221; step (I thought RVM will install requirements for me). However, I did build ruby successfully and was happy, until I had found that gem, heroku were not functional. I had to install zlib, openssl etc. with RVM. But in China you cannot even access zlib homepage (similarly ruby-installer, vimeo, facebook, you name it). I then remembered the &#8220;requirements&#8221; step, and just yum-ed them all.</p>
+<p>It needs quite a lot effort to setup an octopress blog. First of all, trying to use ruby under Windows is just painful, so I use CentOS to do all these (in a VMWare Player Virtual Machine). I downloaded RVM, following the RVM homepage guides, and did not succeed for several times. That was because I omitted the &ldquo;requirement&rdquo; step (I thought RVM will install requirements for me). However, I did build ruby successfully and was happy, until I had found that gem, heroku were not functional. I had to install zlib, openssl etc. with RVM. But in China you cannot even access zlib homepage (similarly ruby-installer, vimeo, facebook, you name it). I then remembered the &ldquo;requirements&rdquo; step, and just yum-ed them all.</p>
 
 <p>I have learned a bit Ruby, so octopress setup guide is relatively easy to understand. The setup is OK now, this blog being the first to test Octopress functionality, markdown syntax, and code rendering.</p>
 
@@ -559,74 +609,19 @@ easily in the system settings dialog. I believe Ubuntu learned this from Mac.</p
 
 
     </article>
+  
   <div class="pagination">
+    
     <a href="/blog/archives">Blog Archives</a>
+    
   </div>
 </div>
-<aside class="sidebar"><section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows/">Compiling Emacs 24.3 on Windows</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/12/07/a-funny-bug-in-quantum-espresso/">A funny bug in Quantum Espresso</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/">Quantum Espresso及PLUMED安装指南</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/06/csharp-reflection-tutorial/">C#反射教程</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/06/tcl-the-misunderstood-chinese-version/">被误解的Tcl</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/dingmaotu">@dingmaotu</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'dingmaotu',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-</aside>
 
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Derek Li -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  Website copyright &copy; 2014 - Ding Li |
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/TheChymera/Koenigspress">Königspress</a></span>.
 </p>
 
 </footer>
@@ -640,7 +635,7 @@ easily in the system settings dialog. I believe Ubuntu learned this from Mac.</p
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>

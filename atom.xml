@@ -2,21 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Dingmaotu Blog]]></title>
-  <link href="http://dingmaotu.github.com/atom.xml" rel="self"/>
-  <link href="http://dingmaotu.github.com/"/>
-  <updated>2013-03-12T15:33:58+08:00</updated>
-  <id>http://dingmaotu.github.com/</id>
+  <link href="http://dingmaotu.com/atom.xml" rel="self"/>
+  <link href="http://dingmaotu.com/"/>
+  <updated>2014-08-19T17:42:39+08:00</updated>
+  <id>http://dingmaotu.com/</id>
   <author>
-    <name><![CDATA[Derek Li]]></name><email><![CDATA[iamliding@gmail.com]]></email>
+    <name><![CDATA[Ding Li]]></name>
+    <email><![CDATA[iamliding@gmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
     <title type="html"><![CDATA[Compiling Emacs 24.3 on Windows]]></title>
-    <link href="http://dingmaotu.github.com/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows/"/>
+    <link href="http://dingmaotu.com/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows/"/>
     <updated>2013-03-12T11:42:00+08:00</updated>
-    <id>http://dingmaotu.github.com/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows</id>
+    <id>http://dingmaotu.com/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows</id>
     <content type="html"><![CDATA[<p>Emacs 24.3, a new release, has come out! The official win32 build however has
 not. So we are gonna do it by ourselves. Building Emacs on windows is not that
 hard, but you must be careful about choosing the correct tools, or your
@@ -92,7 +93,7 @@ options to <code>configure</code></li>
 <li><code>make</code></li>
 <li><code>make info</code> if you want info manuals</li>
 <li><code>make install</code> if you want related programs to be grouped together, and add
-Emacs to <code>Start Menu</code> and registry (typically I don&#8217;t want this)</li>
+Emacs to <code>Start Menu</code> and registry (typically I don&rsquo;t want this)</li>
 </ol>
 
 
@@ -104,11 +105,12 @@ locations of Emacs intallation, which is not needed. So I usually do not run
 <code>addpm.exe</code>.</p>
 ]]></content>
   </entry>
+  
   <entry>
-    <title type="html"><![CDATA[A funny bug in Quantum Espresso]]></title>
-    <link href="http://dingmaotu.github.com/blog/2012/12/07/a-funny-bug-in-quantum-espresso/"/>
+    <title type="html"><![CDATA[A Funny Bug in Quantum Espresso]]></title>
+    <link href="http://dingmaotu.com/blog/2012/12/07/a-funny-bug-in-quantum-espresso/"/>
     <updated>2012-12-07T22:11:00+08:00</updated>
-    <id>http://dingmaotu.github.com/blog/2012/12/07/a-funny-bug-in-quantum-espresso</id>
+    <id>http://dingmaotu.com/blog/2012/12/07/a-funny-bug-in-quantum-espresso</id>
     <content type="html"><![CDATA[<p>Recently I am running metadynamics simulations on MgSiO3 Perovkite with
 Quantum Espresso + PLUMED. However, the MD part of the PWscf code in QE is
 rather unstable (compared to some non-free alternatives, such as VASP). I
@@ -122,7 +124,8 @@ about it. This bug exists in 4.3.2 and the latest 5.0.1 version.</p>
 <p>When I start a MD run with the PLUMED plugin enabled, most of the time, the
 code fails, reporting a message:</p>
 
-<blockquote><pre><code>  from randy : error #      1038&gt;       j out of range
+<blockquote><pre><code>  from randy : error #      1038
+  j out of range
 </code></pre></blockquote>
 
 <p>before entering the MD loop.</p>
@@ -180,865 +183,135 @@ does this apparent error not show? This is rather confusing, yet I do not have
 the time and knowledge to dig into it.</p>
 ]]></content>
   </entry>
+  
   <entry>
     <title type="html"><![CDATA[Quantum Espresso及PLUMED安装指南]]></title>
-    <link href="http://dingmaotu.github.com/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/"/>
+    <link href="http://dingmaotu.com/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/"/>
     <updated>2012-11-08T21:23:00+08:00</updated>
-    <id>http://dingmaotu.github.com/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial</id>
+    <id>http://dingmaotu.com/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial</id>
     <content type="html"><![CDATA[<p>Quantum Espresso（以下简称QE）和PLUMED结合，能做很多有用的模拟，尤其是
-Metadynamics这种高级动力学。但是Quantum Espresso的安装程序有一些问题，在我们模拟实验室的Earth和Venus上安装，不能正确识别LAPACK、ScaLAPACK和
-FFTW库，需要手工更改make.sys，才能产生比较高效的程序。PLUMED的安装比较容易，但是各种材料上说法不一，这里我讲最直接和简单的办法，希望对各位有帮助。</p>
+Metadynamics这种高级动力学。但是Quantum Espresso的安装程序有一些问题，
+在我们模拟实验室的Earth和Venus上安装，不能正确识别LAPACK、ScaLAPACK和
+FFTW库，需要手工更改make.sys，才能产生比较高效的程序。PLUMED的安装比较
+容易，但是各种材料上说法不一，这里我讲最直接和简单的办法，希望对各位有
+帮助。</p>
 
 <h2>1. 获得安装包</h2>
 
-<p>目前PLUMED最新版是1.3，支持QE的4.3.2版本，是4系列的最新版。但QE目前的最新版是5.0.1，还没有广泛使用。我们可以同时安装这两个版本。请各位到官网上下载具体的源码包。</p>
+<p>目前PLUMED最新版是1.3，支持QE的4.3.2版本，是4系列的最新版。但QE目前的
+最新版是5.0.1，还没有广泛使用。我们可以同时安装这两个版本。请各位到官网
+上下载具体的源码包。</p>
 
 <h2>2. 解压到目录</h2>
 
-<p>QE的安装没有Install的环节，也就是源码和程序都在一个目录里面，因此我们直接把源码包解压到安装的位置。PLUMED只是作为插件存在，不需要单独安装，但是为了方便，我也把它解压到一个安装目录。例如Earth上安装目录分别为：</p>
+<p>QE的安装没有Install的环节，也就是源码和程序都在一个目录里面，因此我们直
+接把源码包解压到安装的位置。PLUMED只是作为插件存在，不需要单独安装，但
+是为了方便，我也把它解压到一个安装目录。例如Earth上安装目录分别为：</p>
 
 <pre><code>/public/software/QE/espresso-5.0.1/
 /public/software/QE/espresso-4.3.2/
 /public/software/PLUMED/plumed-1.3/
 </code></pre>
 
-<!-- more -->
-
-
-<h2>3. 配置QE</h2>
-
-<p>QE的源码包目录底下有configure文件，执行之，不用任何参数：</p>
-
-<pre><code>./configure
-</code></pre>
-
-<p>执行后，可以看到有总结，4.3.2版本没有发现LAPACK、ScaLAPACK、FFTW。而我们的集群随Intel编译器装有MKL，以及OpenMPI，完全可以提供优化的函数库。因此我们需要手工改变编译参数。编译参数可以在make.sys文件中修改。</p>
-
-<p>make.sys文件中有几处要改的地方，首先是<code>DFLAGS</code>参数。在Earth上，QE自动检测出了Intel编译器，OpenMPI环境，并已经定义了<code>_D__MPI</code>、<code>-D__PARA</code>、<code>-D__INTEL</code>等几个参数，如果正确安装了Intel编译器和OpenMPI，一般都不会有问题。</p>
-
-<p>把<code>-D__FFTW</code>（意思是使用QE自带的FFTW库）改为<code>-D__FFTW3</code>，使用外部的
-FFTW3实现，这里是基于MKL的FFTW3接口。另外需要添加<code>-D__SCALAPACK</code>，以使用ScaLAPACK。这样定义就OK了，但是我们还要修改具体怎么链接到这些库函数。</p>
-
-<p>找到<code># External Libraries</code>开头的几行，它们定义了blas、lapack、fft、mpi
-的库。QE4找到了Intel MKL的blas接口，但是其他的都没有找到。QE5可以找到blas、
-scalapack和mpi，但是没有lapack和fft。因此下面我将讲怎么手工设置这几个库。</p>
-
-<p>首先是scalapack和mpi，在Earth上，需要指定这样的库：</p>
-
-<pre><code>SCALAPACK_LIBS = -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64
-</code></pre>
-
-<p>另外还有个单独的<code>MPI_LIBS</code>，可以把上面的<code>-lmkl_blacs_openmpi_lp64</code>移到这里来，也可以留在上面，这里空着。另外我们要指定lapack和fft的库，在
-Earth上（Venus上也可以）如下，</p>
-
-<pre><code>LAPACK_LIBS    = -lmkl_lapack95_lp64
-LAPACK_LIBS_SWITCH = external   
-FFT_LIBS       =  -lfftw3xf_intel
-</code></pre>
-
-<p>这里的两个库都是需要编译的，但是在我们的安装里面，LAPACK已经编译好了，并且放在了MKL主库里面，因此不许要额外动手，但是我还是会讲怎么编译这两个库。</p>
-
-<h2>4. 编译Intel MKL的FFTW3和LAPACK接口</h2>
-
-<p>为什么要使用Intel MKL的接口呢？因为MKL是针对Intel机器优化的，而且它有了大多数数学库的功能。但是有些数学库有很久的历史，他们的调用方式形成了标准，如果想利用Intel MKL的效率，而又保持对代码的兼容，我们就要对MKL的代码做简单的包装，形成接口库。这样我们就不用单独下载FFTW和LAPACK等数学库，又能获得较好的效率，这是一举两得的事。</p>
-
-<p>下面我们看看怎么编译这些接口。这些接口在新版本中是以源码的形式提供的，编译非常简单，先到MKL安装目录下，在Earth上是</p>
-
-<pre><code>/public/software/intelf/Compiler/11.1/072/mkl/
-</code></pre>
-
-<p>然后可以看到有个<code>interfaces</code>文件夹，这就是所有的接口了</p>
-
-<pre><code>blas95  fftw2xc  fftw2x_cdft  fftw2xf  fftw3xc  fftw3xf  lapack95
-</code></pre>
-
-<p>我们需要比较新的fftw3接口，最后<code>c</code>或<code>f</code>分别指的是C语言和Fortran语言的接口。QE使用Fortran，所以我们选择fftw3xf。所有的接口进去以后都有make文件，进入到fftw3xf下，输入：</p>
-
-<pre><code>make help
-</code></pre>
-
-<p>就会出来很多选项，比如：</p>
-
-<pre><code>Usage: make {lib32|lib64|libem64t} [option...]
-Options:
-
-compiler=gnu|pgi|intel
-       Build examples using GNU gcc, PGI pgcc, or
-       Intel(R) C compiler icc. Default value: intel.
-
-MKLROOT=&lt;path&gt;
-       Locate MKL header files relative to &lt;path&gt;.
-       Default value: ../.., unless defined in environment
-
-i8=yes|no
-       Target default INTEGER size 8 bytes.
-       Default value: no, that is assume INTEGER is 4 bytes.
-
-fname=a_name|a_name_|a_name__|A_NAME
-       Select the pattern to decorate wrapper names for
-       Fortran. For example, with no special options
-           g77 uses pattern a_name__
-           ifort and gfortran use pattern a_name_
-           ifort on Windows uses pattern A_NAME
-       Default value: a_name_.
-
-install_to=&lt;path&gt;
-       Install the library to the specified location,
-       which must exist. Default value: .
-
-install_as=&lt;name&gt;
-       Specify the name of the library.
-       Default value depends on compiler used.
-</code></pre>
-
-<p>大多数选项都不需要关心，我们只要关心生成什么样版本的库就行了。Earth需要
-em64t版本（可以从<code>MKL根目录/lib/em64t</code>看出来），所以我只要运行：</p>
-
-<pre><code>make libem64t
-</code></pre>
-
-<p>当前目录下会产生一个库文件<code>libfftw3xf_intel.a</code>，这就是我们需要的接口库。为了和系统保持一致，首先要增加执行权限，然后把它移动到MKL库目录里：</p>
-
-<pre><code>chmod +x libfftw3xf_intel.a
-mv libfftw3xf_intel.a ../../lib/em64t/
-</code></pre>
-
-<p>这样，我们在第3步指定的<code>FFT_LIBS = -lfftw3xf_intel</code>就能正常工作了。</p>
-
-<p>其他库的安装都类似。Earth的<code>MKL根目录/lib/em64t</code>下已经有了<code>libmkl_lapack95_lp64.a</code>，这和我们到<code>lapack95</code>目录下自己编译是一样的，比如在<code>make help</code>后看到的说明是：</p>
-
-<pre><code>Usage: make {lib32|libem64t|lib64} INSTALL_DIR=&lt;path&gt;[interface=interface_name] [FC=compiler_name]
-
-Intel(R) Fortran Compiler as default
-
-INSTALL_DIR    - library and the .mod files will be built and installed
-                 in subdirectories of &lt;path&gt; the same way as if &lt;path&gt;
-                 were the Intel MKL installation directory.
-interface_name - can be lp64 or ilp64 for em64t and ia64. Default value is lp64.
-FC             - can be ifort, gfortran or pgf95. Default value is ifort.
-</code></pre>
-
-<p>然后我们照着说明做就行了。</p>
-
-<h2>5. 应用PLUMED补丁</h2>
-
-<p>现在一切准备就绪，对于5.0.1版，到QE的安装目录下，执行<code>make pw</code>编译pw.x，或者<code>make all</code>编译所有程序。但是不建议都编译，比如你只用cp.x，则只要<code>make cp</code>就行。生成的可执行文件和源码在一块，但是QE会在它的<code>bin</code>目录下生成符号链接，因此，直接从<code>bin</code>目录下调用就可以了。</p>
-
-<p>但是对于4.3.2版，我们希望加上PLUMED补丁，从而给QE增加Metadynamics的能力。首先需要导出一个环境变量，</p>
-
-<pre><code>export plumedir=/public/software/PLUMED/plumed-1.3/
-</code></pre>
-
-<p>这个变量指向你PLUMED的源码根目录。然后<em>到QE的根目录</em>下，执行：</p>
-
-<pre><code>$plumedir/patches/plumedpatch_qespresso_4.3.2.sh -patch
-</code></pre>
-
-<p>这样就修改了当前目录下的QE，从而编译时加入PLUMED的功能。然后和正常地
-make就可以了。</p>
-
-<p>其实PLUMED的<code>patches</code>目录下有针对各个软件版本的补丁脚本，所有安装的过程都差不多，只不过换个脚本而已。</p>
-
-<p>另外如果你使用MPI方式来并行运行，一定要定义<code>OMP_NUM_THREADS</code>这个环境变量，设为1。否则QE的随机数发生器可能会出现错误，我认为最可能的原因就是他们没处理好多线程并发的问题。</p>
-
-<blockquote><p>这个错误是会出现在第一次动力学开始之前，“randy”函数出错，消息是“j out of range”。我查看了源码，如果串行的话无论如何j也不能出界。后来我看了官方文档，要定义一个环境变量，我猜可能是那个问题，定义了以后果然没问题了。</p></blockquote>
-
-<h2>6. 维护和重新编译</h2>
-
-<p>如果你想重新编译QE，则先到QE安装目录下，首先<code>make clean</code>，这样把所有的可执行文件删除。如果安装了PLUMED，则需要这时把PLUMED插件删除，方法是执行（记着导出<code>plumedir</code>环境变量）：</p>
-
-<pre><code>$plumedir/patches/plumedpatch_qespresso_4.3.2.sh -revert
-</code></pre>
-
-<p>安装脚本使用<code>-revert</code>参数，删除补丁，还原QE的原来版本。</p>
-
-<p>如果配置不变，则不需要重新<code>configure</code>，直接运用新补丁，或者修改的代码，然后重新make即可。</p>
-
-<p>如果配置有改变，则需要执行<code>make distclean</code>，这样，所有后期生成的文件都会删除，现在源码包和刚解压时一样了，需要从头开始。</p>
-
-<p>一定要记住这个顺序，安装和卸载的顺序正好相反，错乱了就不好了。</p>
-
-<h1>结语</h1>
-
-<p>我在安装的过程中遇到了很多问题，希望这篇文章能对今后学习使用的人有所帮助。开源软件的文档和支持并不是很好，需要很多精力去探索，但是正是这种自由才使得开源软件如此有魅力。虽然我们组有VASP授权，但是开源的QE得到了更多其他软件的支持（比如PLUMED和CASINO），虽然在某些方面和VASP还有差距，但是我还是偏爱QE。大家模拟愉快！</p>
 ]]></content>
   </entry>
+  
   <entry>
     <title type="html"><![CDATA[C#反射教程]]></title>
-    <link href="http://dingmaotu.github.com/blog/2012/11/06/csharp-reflection-tutorial/"/>
+    <link href="http://dingmaotu.com/blog/2012/11/06/csharp-reflection-tutorial/"/>
     <updated>2012-11-06T17:14:00+08:00</updated>
-    <id>http://dingmaotu.github.com/blog/2012/11/06/csharp-reflection-tutorial</id>
+    <id>http://dingmaotu.com/blog/2012/11/06/csharp-reflection-tutorial</id>
     <content type="html"><![CDATA[<h2>什么是反射？</h2>
 
 <p>反射（reflection）在英语里有自我内省的意思，即是查看自己的内在。</p>
 
-<p>在编程语言中，反射是指程序可以动态获得自己本身信息。我说的程序本身的信息，是指诸如一个函数的字符串名字和参数、返回值类型，一个类的名字，类的方法、字段、属性、事件等等。这些在程序设计时都是容易知道的，但是程序在编译完成并执行时，这些信息都不同程度地丢失了。例如C语言，函数的编译通常只保留一个函数的名字在最后的binary的符号表中，想要获得这个函数除了名字以外的信息是很困难的（有时候甚至可以strip掉所有的符号信息，只保留函数的入口地址，这样什么都没有了）。</p>
+<p>在编程语言中，反射是指程序可以动态获得自己本身信息。我说的程序本身的信
+息，是指诸如一个函数的字符串名字和参数、返回值类型，一个类的名字，类的
+方法、字段、属性、事件等等。这些在程序设计时都是容易知道的，但是程序在
+编译完成并执行时，这些信息都不同程度地丢失了。例如C语言，函数的编译通常
+只保留一个函数的名字在最后的binary的符号表中，想要获得这个函数除了名字
+以外的信息是很困难的（有时候甚至可以strip掉所有的符号信息，只保留函数的
+入口地址，这样什么都没有了）。</p>
 
-<p>这些信息被称为Metadata（元数据），有些人称作数据的数据。听起来有些装B，其实就是编译型语言把源码中有关程序自身的信息存储到目标文件里，而不是抛弃掉，就叫做元数据了。</p>
+<p>这些信息被称为Metadata（元数据），有些人称作数据的数据。听起来有些装B，
+其实就是编译型语言把源码中有关程序自身的信息存储到目标文件里，而不是抛
+弃掉，就叫做元数据了。</p>
 
 <p>但是实际上，反射这种东西很早就存在了。例如：</p>
 
 <ul>
-<li><p>Windows编程中，GetProcAddress可以根据一个DLL中函数的名字来获得其实际地址，从而动态调用这个函数，而不用事先就在程序中显式调用。这提供了很大的灵活性，COM的一个重要基础就是能够动态加载DLL并通过这种方式调用函数。
+<li><p>Windows编程中，GetProcAddress可以根据一个DLL中函数的名字来获得其实际
+地址，从而动态调用这个函数，而不用事先就在程序中显式调用。这提供了很大
+的灵活性，COM的一个重要基础就是能够动态加载DLL并通过这种方式调用函数。
 Linux系统动态链接库也有类似的功能（dlopen，dlsym）。</p></li>
-<li><p>解释语言一般都有很强的反射能力，因为解释语言直接从源码执行，也不会丢失任何有关源码的信息。Lisp中，程序的代码和数据没有区别，因此本质上可以获得所有代码的信息，也可以动态执行任何一段在运行时构建的代码。
+<li><p>解释语言一般都有很强的反射能力，因为解释语言直接从源码执行，也不会丢
+失任何有关源码的信息。Lisp中，程序的代码和数据没有区别，因此本质上可以
+获得所有代码的信息，也可以动态执行任何一段在运行时构建的代码。
 JavaScript的对象即是关联数组，所有的Field都可以用字符串来存取，Python有
 getattr和setattr函数。</p></li>
-<li><p>一般使用反射对程序效率有较大的负面影响，解释型语言在机器的计算能力还不强的时候根本得不到流行，这是很大的一个原因。但是现在计算能力空前强大，所以即使有些影响，对于一般的应用都问题不大，但是反射的灵活性和对很多问题的优雅解决（使得程序的设计更加模块化，可以动态加载可执行代码等），促使这类技术逐渐流行起来。</p></li>
+<li><p>一般使用反射对程序效率有较大的负面影响，解释型语言在机器的计算能力还
+不强的时候根本得不到流行，这是很大的一个原因。但是现在计算能力空前强大，
+所以即使有些影响，对于一般的应用都问题不大，但是反射的灵活性和对很多问
+题的优雅解决（使得程序的设计更加模块化，可以动态加载可执行代码等），促
+使这类技术逐渐流行起来。</p></li>
 </ul>
 
 
-<!-- more -->
-
-
-<h2>Microsoft .Net的反射</h2>
-
-<p>既然这是入门教程，我就不展开.Net的实现细节了，CLR Via C# 等书有详细说明。我们的目的在于使用。总体来说，.Net的反射和Java一样，都是通过类来实现的，每个基本的程序结构都有对应的类。所有对象的根Object有相关的方法来获得一个对象的类型。然后我们就能通过这些实现反射的类来操作各种语言结构。
-Metadata在编译时都包含在目标文件之中，而不是像C语言一样被丢弃了。</p>
-
-<p>首先要导入相关的namespace：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">System.Reflection</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这个空间包含了反射相关的类。最重要的类是Type。这个类的实例可以通过<code>Object.GetType()</code>来获得。当然C#有个<code>typeof</code>操作符，接受一个类型，例如<code>typeof(int)</code>，但是不能直接作用于实例（<code>typeof(5)</code>出错）。Type的实例包含一个类型的所有信息，只要你想知道一个类型的相关信息，直接<code>GetType()</code>就行了，非常简单。</p>
-
-<p>.Net编程的一个好处是，如果你使用IDE，根据提示就能把一个类型的使用方法摸个八九不离十，那些方法和属性的名字是非常直观的。下面我大概给大家一个映像：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
-</span><span class='line'><span class="k">using</span> <span class="nn">System.Reflection</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">namespace</span> <span class="nn">CSRef</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">class</span> <span class="nc">MyClass</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>    <span class="kt">int</span> <span class="n">a</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">public</span> <span class="nf">MyClass</span><span class="p">(){}</span>
-</span><span class='line'>    <span class="k">public</span> <span class="kt">string</span> <span class="n">TestPro</span> <span class="p">{</span><span class="k">get</span><span class="p">;</span><span class="k">set</span><span class="p">;}</span>
-</span><span class='line'>    <span class="k">public</span> <span class="k">void</span> <span class="nf">ShowHello</span><span class="p">(</span><span class="kt">string</span> <span class="n">name</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>      <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, &quot;</span> <span class="p">+</span> <span class="n">name</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">class</span> <span class="nc">Program</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>      <span class="c1">// 获得类型</span>
-</span><span class='line'>      <span class="n">Type</span> <span class="n">myType</span> <span class="p">=</span> <span class="k">typeof</span><span class="p">(</span><span class="n">MyClass</span><span class="p">);</span>
-</span><span class='line'>      <span class="c1">// 该类型所在模块</span>
-</span><span class='line'>      <span class="n">Module</span> <span class="n">module</span> <span class="p">=</span> <span class="n">myType</span><span class="p">.</span><span class="n">Module</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Current Module: &quot;</span> <span class="p">+</span> <span class="n">module</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
-</span><span class='line'>      <span class="c1">// 该类型所在程序集</span>
-</span><span class='line'>      <span class="n">Assembly</span> <span class="n">assembly</span> <span class="p">=</span> <span class="n">myType</span><span class="p">.</span><span class="n">Assembly</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Current Assembly: &quot;</span> <span class="p">+</span> <span class="n">assembly</span><span class="p">.</span><span class="n">FullName</span><span class="p">);</span>
-</span><span class='line'>      <span class="c1">// 程序集含有什么模块？</span>
-</span><span class='line'>      <span class="c1">// 注意.Net的结构：程序集由模块组成，模块由类型组成</span>
-</span><span class='line'>      <span class="c1">// 程序集基本对应一个dll或者exe文件</span>
-</span><span class='line'>      <span class="n">Module</span><span class="p">[]</span> <span class="n">mods</span> <span class="p">=</span> <span class="n">assembly</span><span class="p">.</span><span class="n">GetModules</span><span class="p">();</span>
-</span><span class='line'>      <span class="c1">// 程序集有什么类型？</span>
-</span><span class='line'>      <span class="n">Type</span><span class="p">[]</span> <span class="n">type</span> <span class="p">=</span> <span class="n">assembly</span><span class="p">.</span><span class="n">GetTypes</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="c1">// 动态创建一个类型的实例</span>
-</span><span class='line'>      <span class="kt">object</span> <span class="n">myInst</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Activator</span><span class="p">.</span><span class="n">CreateInstance</span><span class="p">(</span><span class="n">myType</span><span class="p">);</span>
-</span><span class='line'>      <span class="c1">// 运行时创建一个方法</span>
-</span><span class='line'>      <span class="n">MethodInfo</span> <span class="n">helloMethod</span> <span class="p">=</span> <span class="n">myType</span><span class="p">.</span><span class="n">GetMethod</span><span class="p">(</span><span class="s">&quot;ShowHello&quot;</span><span class="p">);</span>
-</span><span class='line'>      <span class="c1">// 在myInst上调用这个方法，传递给参数数组</span>
-</span><span class='line'>      <span class="n">helloMethod</span><span class="p">.</span><span class="n">Invoke</span><span class="p">(</span><span class="n">myInst</span><span class="p">,</span> <span class="k">new</span> <span class="kt">object</span><span class="p">[]{</span><span class="s">&quot;Dingmaotu&quot;</span><span class="p">});</span>
-</span><span class='line'>      <span class="c1">// 属性</span>
-</span><span class='line'>      <span class="n">PropertyInfo</span><span class="p">[]</span> <span class="n">pi</span> <span class="p">=</span> <span class="n">myType</span><span class="p">.</span><span class="n">GetProperties</span><span class="p">();</span>
-</span><span class='line'>      <span class="k">foreach</span> <span class="p">(</span><span class="n">PropertyInfo</span> <span class="n">p</span> <span class="k">in</span> <span class="n">pi</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="c1">// 读取和设置属性，如果是static属性，那么myInst都可以不要，直接null就行了</span>
-</span><span class='line'>        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Property &quot;</span> <span class="p">+</span> <span class="n">p</span><span class="p">.</span><span class="n">Name</span> <span class="p">+</span> <span class="s">&quot; is &quot;</span> <span class="p">+</span> <span class="n">p</span><span class="p">.</span><span class="n">GetValue</span><span class="p">(</span><span class="n">myInst</span><span class="p">,</span> <span class="k">null</span><span class="p">));</span>
-</span><span class='line'>        <span class="n">p</span><span class="p">.</span><span class="n">SetValue</span><span class="p">(</span><span class="n">myInst</span><span class="p">,</span> <span class="p">(</span><span class="kt">object</span><span class="p">)</span><span class="s">&quot;Test&quot;</span><span class="p">,</span> <span class="k">null</span><span class="p">);</span>
-</span><span class='line'>        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Property &quot;</span> <span class="p">+</span> <span class="n">p</span><span class="p">.</span><span class="n">Name</span> <span class="p">+</span> <span class="s">&quot; is &quot;</span> <span class="p">+</span> <span class="n">p</span><span class="p">.</span><span class="n">GetValue</span><span class="p">(</span><span class="n">myInst</span><span class="p">,</span> <span class="k">null</span><span class="p">));</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;Press any key to continue . . . &quot;</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">Console</span><span class="p">.</span><span class="n">ReadKey</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>程序的运行结果如下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="n">Current</span> <span class="n">Module</span><span class="p">:</span> <span class="n">CSRef</span><span class="p">.</span><span class="n">exe</span>
-</span><span class='line'><span class="n">Current</span> <span class="n">Assembly</span><span class="p">:</span> <span class="n">CSRef</span><span class="p">,</span> <span class="n">Version</span><span class="p">=</span><span class="m">1.0</span><span class="p">.</span><span class="m">4430.31298</span><span class="p">,</span> <span class="n">Curlture</span><span class="p">=</span><span class="n">neutral</span><span class="p">,</span> <span class="n">PublicKeyToken</span><span class="p">=</span><span class="k">null</span>
-</span><span class='line'><span class="n">Hello</span><span class="p">,</span> <span class="n">Dingmaotu</span>
-</span><span class='line'><span class="n">Property</span> <span class="n">TestPro</span> <span class="k">is</span>
-</span><span class='line'><span class="n">Property</span> <span class="n">TestPro</span> <span class="k">is</span> <span class="n">Test</span>
-</span><span class='line'><span class="n">Press</span> <span class="n">any</span> <span class="n">key</span> <span class="n">to</span> <span class="k">continue</span><span class="p">...</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>可以看到，使用反射API十分直观。只要你理解了C#类型（或者.Net类型）的各种结构，使用API就是查参考或者Intelisense的事。</p>
-
-<p>C#的类型包含成员（MemberInfo），成员大致分为数据成员（指实际分配内存的对象，例如字段，常量，FieldInfo）和函数成员（方法、属性、构造函数、析构函数、事件等，相应有MethodInfo、PropertyInfo等）。Type也是MemberInfo的子类，因为Type也可能是一个Member。整个C#程序都是由类型构成的，类型形成模块（netmoudule），模块可以合成到程序集中（assembly，扩展名exe、dll），一个.Net的AppDomain对应于传统的进程，可以加载数个程序集（就像一个程序可以使用几个dll）。一个Win32进程可以host几个AppDomain，每个AppDomain有较好的隔离特性，必须通Marshaling来互相传递类型引用或值（传统的dll注入到另一个进程中就可以为所欲为了，AppDomain提供了很好的隔离和安全权限机制；这是QQ应该使用.Net的一个原因，免得被360劫持:)）。</p>
-
-<p>以上是你大致了解reflection的基本知识，只要你理解了这些结构，然后从Type
-出发，就畅通无阻了，绝对不用死记硬背这些内容。比较高级的主题是
-System.Reflection.Emit，可以让你在运行时动态创建类型（就是在程序中生成程序），一般.Net上的动态语言的解释器都会用到。有志于创建.Net平台语言的同学可以了解一下。</p>
-
-<h2>什么是属性（Attribute）</h2>
-
-<p>一般学反射的时候，都会遇到属性。其实属性非常简单，就是用户自定义的元数据。编译器自动创建代码本身的元数据，但是除了代码本身相关的，它不会创建额外的元数据。但是有时候我们需要一些额外的元数据，就会自己定义属性，附加在第二节提到的那些结构之上（例如method、property、assembly等），一般在那个附加属性的结构之前用中括号标示。例如我们调用Win32 API时要用<code>[DllImport]</code>，说明这个方法不是托管代码；注明assembly信息的时候使用<code>[assembly:AssemblyName(...)]</code>等，这是一种显式指定的语法，我们也可以对其他结构这样指定（<code>[method:DllImport]</code>）；想让自己的类型可以序列化时可以使用[type:Serializable]。这些都是FCL定义的属性，使用这些属性的，可以是其他类库中其他的类型，可以是编译器，可以是运行时，也可以是自己的程序。</p>
-
-<p>那么我们当然也可以定义自己的属性，只要继承<code>System.Attribute</code>就行了，然后在想要应用这个属性的结构前面用<code>[MyAttribute(构造参数)]</code>表示。在运行时大多数表示程序结构的类（MemberInfo、MethodInfo、Type等）都有一个<code>GetCustomAttributes</code>的方法，就能返回这个结构所使用的Attribute的数组。就这些了。</p>
-
-<h2>反射有哪些用处</h2>
-
-<p>以上所说的重在理解。只要你知道什么情况下可以使用反射来解决一些问题，到时候查参考就可以了。下面我说一下反射通常有那些应用。</p>
-
-<h3>实现插件式结构</h3>
-
-<p>有时候一个程序提供了很好的扩展性，可以让用户自己编写插件来扩展程序的功能。使用.Net的反射机制，非常容易实现。你只需要定义一个插件要使用的公共接口，插件编写者就可以用类型实现这个接口并把实现的assembly放到一个指定的位置。在程序开始时，可以用AppDomain的静态Load或Assembly类的静态Load或
-LoadFrom来加载那个assembly，然后获得它类型，判断是不是你的接口的子类型，然后用Activator创建实例，这样就可以使用了。而且使用AppDomain的设置，可以防止插件对宿主程序造成破坏。</p>
-
-<h3>IDE的智能提示和类型发现</h3>
-
-<p>因为可以动态查找类型结构，IDE就可以对类型成员进行实时查找，是一个非常方便的功能。另外Powershell也可以智能自动补全，多亏了.Net的反射机制。另外
-Powershell没有Import或者using，一开始只能使用System的核心类型。所以如果你要在脚本里使用Winform或者WPF，就可以使用<code>Assembly.Load</code>加载相关的程序集。Powershell也是学习.Net的不错选择啊：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="n">PS</span> <span class="n">C</span><span class="p">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">hp</span><span class="p">&gt;</span> <span class="p">[</span><span class="n">System</span><span class="p">.</span><span class="n">Reflection</span><span class="p">.</span><span class="n">Assembly</span><span class="p">]::</span><span class="n">Load</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">MemberType</span>          <span class="p">:</span> <span class="n">Method</span>
-</span><span class='line'><span class="n">OverloadDefinitions</span> <span class="p">:</span> <span class="p">{</span><span class="k">static</span> <span class="n">System</span><span class="p">.</span><span class="n">Reflection</span><span class="p">.</span><span class="n">Assembly</span> <span class="n">Load</span><span class="p">(</span><span class="kt">string</span> <span class="n">assemblyString</span><span class="p">),</span> <span class="k">static</span> <span class="n">System</span><span class="p">.</span><span class="n">Reflection</span><span class="p">.</span><span class="n">Assembly</span>
-</span><span class='line'>                      <span class="n">Load</span><span class="p">(</span><span class="kt">string</span> <span class="n">assemblyString</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Policy</span><span class="p">.</span><span class="n">Evidence</span> <span class="n">assemblySecurity</span><span class="p">),</span> <span class="k">static</span> <span class="n">System</span><span class="p">.</span><span class="n">Ref</span>
-</span><span class='line'>                      <span class="n">lection</span><span class="p">.</span><span class="n">Assembly</span> <span class="n">Load</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Reflection</span><span class="p">.</span><span class="n">AssemblyName</span> <span class="n">assemblyRef</span><span class="p">),</span> <span class="k">static</span> <span class="n">System</span><span class="p">.</span><span class="n">Reflection</span><span class="p">.</span><span class="n">Assem</span>
-</span><span class='line'>                      <span class="n">bly</span> <span class="nf">Load</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Reflection</span><span class="p">.</span><span class="n">AssemblyName</span> <span class="n">assemblyRef</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Policy</span><span class="p">.</span><span class="n">Evidence</span> <span class="n">assemblySecu</span>
-</span><span class='line'>                      <span class="n">rity</span><span class="p">)...}</span>
-</span><span class='line'><span class="n">TypeNameOfValue</span>     <span class="p">:</span> <span class="n">System</span><span class="p">.</span><span class="n">Management</span><span class="p">.</span><span class="n">Automation</span><span class="p">.</span><span class="n">PSMethod</span>
-</span><span class='line'><span class="n">Value</span>               <span class="p">:</span> <span class="k">static</span> <span class="n">System</span><span class="p">.</span><span class="n">Reflection</span><span class="p">.</span><span class="n">Assembly</span> <span class="n">Load</span><span class="p">(</span><span class="kt">string</span> <span class="n">assemblyString</span><span class="p">),</span> <span class="k">static</span> <span class="n">System</span><span class="p">.</span><span class="n">Reflection</span><span class="p">.</span><span class="n">Assembly</span>
-</span><span class='line'>                      <span class="n">Load</span><span class="p">(</span><span class="kt">string</span> <span class="n">assemblyString</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Policy</span><span class="p">.</span><span class="n">Evidence</span> <span class="n">assemblySecurity</span><span class="p">),</span> <span class="k">static</span> <span class="n">System</span><span class="p">.</span><span class="n">Refl</span>
-</span><span class='line'>                      <span class="n">ection</span><span class="p">.</span><span class="n">Assembly</span> <span class="n">Load</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Reflection</span><span class="p">.</span><span class="n">AssemblyName</span> <span class="n">assemblyRef</span><span class="p">),</span> <span class="k">static</span> <span class="n">System</span><span class="p">.</span><span class="n">Reflection</span><span class="p">.</span><span class="n">Assemb</span>
-</span><span class='line'>                      <span class="n">ly</span> <span class="nf">Load</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Reflection</span><span class="p">.</span><span class="n">AssemblyName</span> <span class="n">assemblyRef</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Policy</span><span class="p">.</span><span class="n">Evidence</span> <span class="n">assemblySecur</span>
-</span><span class='line'>                      <span class="n">ity</span><span class="p">),</span> <span class="k">static</span> <span class="n">System</span><span class="p">.</span><span class="n">Reflection</span><span class="p">.</span><span class="n">Assembly</span> <span class="n">Load</span><span class="p">(</span><span class="kt">byte</span><span class="p">[]</span> <span class="n">rawAssembly</span><span class="p">),</span> <span class="k">static</span> <span class="n">System</span><span class="p">.</span><span class="n">Reflection</span><span class="p">.</span><span class="n">Assemb</span>
-</span><span class='line'>                      <span class="n">ly</span> <span class="nf">Load</span><span class="p">(</span><span class="kt">byte</span><span class="p">[]</span> <span class="n">rawAssembly</span><span class="p">,</span> <span class="kt">byte</span><span class="p">[]</span> <span class="n">rawSymbolStore</span><span class="p">),</span> <span class="k">static</span> <span class="n">System</span><span class="p">.</span><span class="n">Reflection</span><span class="p">.</span><span class="n">Assembly</span> <span class="n">Load</span><span class="p">(</span><span class="kt">byte</span><span class="p">[]</span>
-</span><span class='line'>                      <span class="n">rawAssembly</span><span class="p">,</span> <span class="kt">byte</span><span class="p">[]</span> <span class="n">rawSymbolStore</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Policy</span><span class="p">.</span><span class="n">Evidence</span> <span class="n">securityEvidence</span><span class="p">)</span>
-</span><span class='line'><span class="n">Name</span>                <span class="p">:</span> <span class="n">Load</span>
-</span><span class='line'><span class="n">IsInstance</span>          <span class="p">:</span> <span class="n">True</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>简化代码</h3>
-
-<p>你肯定遇到或看到这种设计，在.Net类库或其他库中，往往一个类型会提供很多静态属性，直接创建一个该类型的实例（例如<code>Color.Red</code>），这是一个很好的设计，能够方便我们写代码。最近我写的一个国际象棋的棋盘控件，我提供了一个<code>Pieces</code>类，可以直接创建某个棋子（<code>PieceInfo</code>），例如<code>Pieces.WKnightL</code>（左边的白色骑士），但是在初始化棋盘的过程中，要调用
-32个不同的属性，然后逐个添加到棋盘中，非常麻烦。如果有个循环就好了。但是你能够循环某个类的所有公共属性吗？当然，这就是反射的用武之地了。只要<code>typeof(Pieces).GetProperties(BindingFlag.Public|BindingFlag.Static)</code>就解决了。</p>
-
-<h2>总结</h2>
-
-<p>C#的编译器可以生成程序的元数据并存储在目标文件之中，你也可以自定义元数据（Attribute）。.Net基础类库提供了<code>System.Reflection</code>来帮助我们获取这些元数据。我们可以获得任何一个语言结构的信息，可以动态加载并执行代码，也可以动态生成代码。这种无限的灵活性虽然有一定的性能损失，但是在某些情况下是解决问题的不二选择。各位学习C#愉快！</p>
 ]]></content>
   </entry>
+  
   <entry>
     <title type="html"><![CDATA[被误解的Tcl]]></title>
-    <link href="http://dingmaotu.github.com/blog/2012/11/06/tcl-the-misunderstood-chinese-version/"/>
+    <link href="http://dingmaotu.com/blog/2012/11/06/tcl-the-misunderstood-chinese-version/"/>
     <updated>2012-11-06T14:45:00+08:00</updated>
-    <id>http://dingmaotu.github.com/blog/2012/11/06/tcl-the-misunderstood-chinese-version</id>
-    <content type="html"><![CDATA[<blockquote><p>原文见<a href="http://oldblog.antirez.com/articoli/tclmisunderstood.html">http://oldblog.antirez.com/articoli/tclmisunderstood.html</a>，版权归原文作者所有；译文 &copy; 2012 Derek Li。本文原始翻译时间是
+    <id>http://dingmaotu.com/blog/2012/11/06/tcl-the-misunderstood-chinese-version</id>
+    <content type="html"><![CDATA[<blockquote><p>原文见<a href="http://oldblog.antirez.com/articoli/tclmisunderstood.html">http://oldblog.antirez.com/articoli/tclmisunderstood.html</a>，版
+权归原文作者所有；译文 &copy; 2012 Derek Li。本文原始翻译时间是
 2012-2-12日，后来我的空间到期，不打算更新，所以转到现在的博客上。</p></blockquote>
 
-<p>最近有一篇链接自reddit的题为<a href="http://www.cabochon.com/~stevey/blog-rants/tour-de-babel.html">Tour de Babel</a>的文章，如果你读的话就会发现这篇文章说（除了一堆其他的胡言乱语）：靠，
-Python在能想象到的各方面都比Tcl好得多了，但人们还用Tcl来当作嵌入式解释器。</p>
+<p>最近有一篇链接自reddit的题为
+<a href="http://www.cabochon.com/~stevey/blog-rants/tour-de-babel.html">Tour de Babel</a>
+的文章，如果你读的话就会发现这篇文章说（除了一堆其他的胡言乱语）：靠，
+Python在能想象到的各方面都比Tcl好得多了，但人们还用Tcl来当作嵌入式解释
+器。</p>
 
-<p>好吧，整篇文章是有点……不是那么回事。但是不幸的是，虽然很多错误观念很快被知情的读者发觉了，但是这个反对Tcl的观念却被认为是理所当然的。我希望这篇文章能说服人们，Tcl还没有那么不堪。</p>
+<p>好吧，整篇文章是有点……不是那么回事。但是不幸的是，虽然很多错误观念很
+快被知情的读者发觉了，但是这个反对Tcl的观念却被认为是理所当然的。我希望
+这篇文章能说服人们，Tcl还没有那么不堪。</p>
 
 <h2>开场白</h2>
 
-<p>在我的编程生涯里，我使用了很多语言去写不同的应用：用C语言写了很多免费/付费的程序，用Scheme写了一个Web CMS（内容管理系统），用Tcl写了几个网络
-/Web应用，用Python写了一个商店管理程序，等等。我也玩过不少其他的编程语言，例如Smalltalk，Self，FORTH，Ruby，Joy……然而，我从不怀疑，<em>没有哪门语言像Tcl一样被误解得如此之深</em>。</p>
+<p>在我的编程生涯里，我使用了很多语言去写不同的应用：用C语言写了很多免费/
+付费的程序，用Scheme写了一个Web CMS（内容管理系统），用Tcl写了几个网络
+/Web应用，用Python写了一个商店管理程序，等等。我也玩过不少其他的编程语
+言，例如Smalltalk，Self，FORTH，Ruby，Joy……然而，我从不怀疑，<em>没有哪
+门语言像Tcl一样被误解得如此之深</em>。</p>
+
+<p>Tcl不是完美无瑕，但大多数的不足并不是在语言设计本身，而是Tcl“之
+父”（John Ousterhout）几年前去世了，连同他那种可以做出强势决定的专一的
+领导力。只要做出正确的改变，克服Tcl的大多数不足并保留其强大功能是可以的。
+如果你不相信Tcl异常强大，请先<em>花点时间</em>来阅读这篇文章。可能你读完之后还
+是不喜欢它，但希望你尊敬它，同时你将有足够强大的论据来反对这种“Tcl是玩
+具语言”的误解。这种误解如此小气，比“Lisp括号太多”更甚。</p>
+
+<p>在我们开始之前，我先花点时间解释一下Tcl的工作原理。Tcl像世界上其他优秀
+的语言一样，拥有一些概念，这些概念组合起来，能够实现编程自由和充分的表
+达力。</p>
+
+<p>在这个简短的介绍之后，你会了解在Tcl中，怎样使用普通过程（procedure）实
+现像Lisp一样的宏（macro）（比Ruby的Block强大得多），怎样重定义语言本身
+的几乎所有方面，怎样在编程时忽略类型。Tcl社区开发了数个OOP系统，大规模
+的语言重定义，宏系统，和很多其他有趣的东西，仅仅使用Tcl本身。如果你喜欢
+可编程的编程语言，我打赌，你肯定至少饶有兴趣地看一眼Tcl。</p>
 
-<p>Tcl不是完美无瑕，但大多数的不足并不是在语言设计本身，而是Tcl“之父”（John Ousterhout）几年前去世了，连同他那种可以做出强势决定的专一的领导力。只要做出正确的改变，克服Tcl的大多数不足并保留其强大功能是可以的。如果你不相信Tcl异常强大，请先<em>花点时间</em>来阅读这篇文章。可能你读完之后还是不喜欢它，但希望你尊敬它，同时你将有足够强大的论据来反对这种“Tcl是玩具语言”的误解。这种误解如此小气，比“Lisp括号太多”更甚。</p>
-
-<p>在我们开始之前，我先花点时间解释一下Tcl的工作原理。Tcl像世界上其他优秀的语言一样，拥有一些概念，这些概念组合起来，能够实现编程自由和充分的表达力。</p>
-
-<p>在这个简短的介绍之后，你会了解在Tcl中，怎样使用普通过程（procedure）实现像Lisp一样的宏（macro）（比Ruby的Block强大得多），怎样重定义语言本身的几乎所有方面，怎样在编程时忽略类型。Tcl社区开发了数个OOP系统，大规模的语言重定义，宏系统，和很多其他有趣的东西，仅仅使用Tcl本身。如果你喜欢可编程的编程语言，我打赌，你肯定至少饶有兴趣地看一眼Tcl。</p>
-
-<!-- more -->
-
-
-<h2>五分钟学会Tcl</h2>
-
-<h3>概念1：程序由命令（Command）组成</h3>
-
-<p>Tcl语言的第一个观念是：命令。程序就是一系列命令。例如把变量a设成5，并输出其值：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">set</span> a <span class="mi">5</span>
-</span><span class='line'><span class="nb">puts</span> <span class="nv">$a</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>命令是空格分隔的单词。命令以换行或<code>;</code>结束。Tcl中一切皆是命令——正如你所见，没有赋值运算符。设置变量需要使用命令<code>set</code>，把命令的第一个参数设为第二个参数的值。几乎所有的Tcl命令都返回一个值。例如<code>set</code>返回所赋值的值，如果<code>set</code>只有一个参数（即变量名），就变量的当前值。</p>
-
-<h3>概念2：命令替换（Command substitution）</h3>
-
-<p>第二个观念是命令替换。一个命令中，有些参数出现在<code>[]</code>中。如果是这样，那个参数的值就是中括号中命令的返回值。例如：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">set</span> a <span class="mi">5</span>
-</span><span class='line'><span class="nb">puts</span> <span class="k">[set</span> a<span class="k">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>第二个命令的第一个参数<code>[set a]</code>，将会被替换为<code>set a</code>的返回值（也就是5）。在替换后，命令将由</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nb">puts</span> <span class="k">[set</span> a<span class="k">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>变成</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nb">puts</span> <span class="mi">5</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这时，命令才会被执行。</p>
-
-<h3>概念3：变量替换（Variable substitution）</h3>
-
-<p>总是使用set命令来替换变量太麻烦了，所以，即使不是绝对必要，变量替换在
-Tcl早期发展中被添加进来。如果一个变量名字之前有$号，就会被它的值所替换。例如可以不用写</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nb">puts</span> <span class="k">[set</span> a<span class="k">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>而是写成</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nb">puts</span> <span class="nv">$a</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>概念4：组合(Grouping)</h3>
-
-<p>如果命令是由空格分隔的单词，怎样处理包含空格的变量呢？例如</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nb">puts</span> Hello World
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>是不正确的，因为<code>Hello</code>和<code>World</code>是两个不用的参数。这个问题由组合来解决。在<code>""</code>中的文本被是单个参数，所以正确的写法是：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Hello World&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>命令和变量替换在这种组合中仍然有效，例如我可以这样写：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">set</span> a <span class="mi">5</span>
-</span><span class='line'><span class="k">set</span> b foobar
-</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Hello $a World [string length $b]&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>结果是<code>Hello 5 World 6</code>。另外，转义字符（例如<code>\t</code>，<code>\n</code>）也是有效的。但是有另外一种组合，每种特殊字符都被原样看待，没有替代过程。Tcl把任何在<code>{}</code>之间的东西看成是单一的参数，没有替换。所以：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">set</span> a <span class="mi">5</span>
-</span><span class='line'><span class="nb">puts</span> <span class="k">{</span><span class="nv">Hello</span> <span class="nv">$a</span> World<span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>将会输出<code>Hello $a World</code>。</p>
-
-<h3>概念1第二次：一切都是命令</h3>
-
-<p>概念1是：程序由一系列命令组成。实际上，这比你想象的还要正确。例如：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">set</span> a <span class="mi">5</span>
-</span><span class='line'><span class="k">if</span> <span class="nv">$a</span> <span class="k">{</span>
-</span><span class='line'>        <span class="nb">puts</span> Hello<span class="o">!</span>
-</span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>if</code>是个命令，有两个参数。第一个是变量<code>a</code>所替换的值，第二个是字符串<code>{... puts Hello! ...}</code>。<code>if</code>命令使用一种特殊的<code>Eval</code>命令（后面将会讲到），运行第二个参数，然后返回结果。当然，你也可以写自己的<code>if</code>命令版本，或者其他任何控制结构。你甚至可以重定义<code>if</code>，加入一些新功能！</p>
-
-<h3>概念5：一切都是字符串——没有类型</h3>
-
-<p>以下程序能正常运行，并且结果如你所想：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">set</span> a pu
-</span><span class='line'><span class="k">set</span> b ts
-</span><span class='line'><span class="nv">$a$b</span> <span class="s2">&quot;Hello World&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>是的，Tcl中一切发生在运行时，并且是动态的：Tcl是终极迟绑定（late
-binding）语言，没有类型。命令名不是特殊类型，只是一个字符串。数字也是字符串，正如Tcl代码（还记得我们传给<code>if</code>命令第二个参数一个字符串吗？）。
-Tcl中，字符串表示什么由处理它的命令所决定。字符串“5”将会在命令<code>string length 5</code>中被看成一个字符，而在<code>if $a</code>中看成一个布尔值。当然命令会检查它的参数值有正确的形式。如果我要把<code>foo</code>和<code>bar</code>加起来，
-Tcl会产生异常，因为无法讲<code>foo</code>和<code>bar</code>解析成数字。Tcl中这种检查非常严格，所以你不会遇到PHP那种荒谬的隐式类型转换。字符串可以被解释成命令想要的值时，类型转换才会发生。</p>
-
-<p>那么，Tcl如此动态，你猜怎么着？它或多或少和当前的Ruby实现一样快速。Tcl
-实现中有个技巧：对象（不是OOP中的对象，而是代表Tcl值的C结构）会缓存最后使用的某个字符串的本地值（译者注：例如<code>56</code>这个字符串代表一个int，会被缓存起来，下次就不用再分析一遍了）。如果一个Tcl值一直被当作数字来用，只要下一个命令继续把他当作数字，字符串的表示根本不会修改。实际的实现比上述复杂，但总体结果是：程序员不用管类型，程序仍然和其他显式类型的语言一样快。</p>
-
-<h3>概念6：Tcl列表（list）</h3>
-
-<p>Tcl使用的一种更有趣的类型（更准确点……字符串格式）是列表。列表是Tcl程序的中心数据结构：一个Tcl列表永远是一个有效的Tcl命令！（最后它们都是字符串）。最简单的列表就是命令：空格分隔的单词。例如字符串<code>a b foo bar</code>是一个有四个元素的列表。有各种操作列表的命令：取一个list中的元素，添加元素，等等。当然，列表可能有含空格的元素，所以为了创建格式良好的列表，就使用list命令。例如：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">set</span> l <span class="k">[</span><span class="nb">list</span> a b foo <span class="s2">&quot;hello world&quot;</span><span class="k">]</span>
-</span><span class='line'><span class="nb">puts</span> <span class="k">[</span><span class="nb">llength</span> <span class="nv">$l</span><span class="k">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-llength返回列表的长度，所以上述程序将输出4。lindex返回在某个位置的元素，所以<code>lindex $l 2</code>将返回<code>foo</code>。和Lisp一样，大多数Tcl程序员使用列表来模拟所有可能的概念。</p>
-
-<h3>概念7：Tcl数学运算</h3>
-
-<p>我打赌大多数Lisp黑客已经注意到Tcl是一个前缀(prefix)表达式语言，所以你可能认为像Lisp一样，Tcl数学运算就像使用命令，例如<code>puts [+ 1 2]</code>。然而，恰恰相反，为了使Tcl更加友好，有个命令接受中缀(infix)数学表达式，并计算其值。这个命令是<code>expr</code>，Tcl数学运算像这样：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">set</span> a <span class="mi">10</span>
-</span><span class='line'><span class="k">set</span> b <span class="mi">20</span>
-</span><span class='line'><span class="nb">puts</span> <span class="k">[expr</span> <span class="nv">$a</span><span class="o">+</span><span class="nv">$b</span><span class="k">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>if</code>和<code>while</code>等命令内部使用<code>expr</code>来计算表达式，例如：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">while</span> <span class="k">{</span><span class="nv">$a</span> <span class="o">&amp;</span><span class="nv">lt</span><span class="k">;</span> <span class="nv">$b</span><span class="k">}</span> <span class="k">{</span>
-</span><span class='line'>  <span class="nb">puts</span> Hello
-</span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>其中，<code>while</code>命令接受两个参数——第一个字符串求值，看看在每次循环时是否为真，第二个每次被分析执行。我认为数学命令不是内置是一个设计上的错误。在做复杂运算时，<code>expr</code>很酷，但是仅仅把两个数相加，还是<code>[+ $a $b]</code>更加方便一些。值得注意的是，这点已经被正式提出，作为对语言的修改。</p>
-
-<h3>概念8：过程（Procedures）</h3>
-
-<p>自然，没有什么能阻止Tcl程序员写一个过程（即用户定义命令），来把数学操作符当作命令。就像这样：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">proc</span> <span class="o">+</span> <span class="k">{</span><span class="nv">a</span> b<span class="k">}</span> <span class="k">{</span>
-</span><span class='line'>  <span class="k">expr</span> <span class="k">{</span><span class="nv">$a</span><span class="o">+</span><span class="nv">$b</span><span class="k">}</span>
-</span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-<code>proc</code>命令用来创建一个过程：第一个参数是过程名，第二个是参数列表，最后一个是过程的主体。注意第二个参数，参数列表，是一个Tcl列表。正如你所见，最后一个命令的返回值是过程的返回值（除非显式使用<code>return</code>）。但是等一下……Tcl中一切都是命令，是吧？所以我们可以用更简单的方式创建“+、-、
-*、……”的过程：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">set</span> operators <span class="k">[</span><span class="nb">list</span> <span class="o">+</span> <span class="o">-</span> <span class="o">*</span> <span class="o">/</span><span class="k">]</span>
-</span><span class='line'><span class="k">foreach</span> o <span class="nv">$operators</span> <span class="k">{</span>
-</span><span class='line'>    <span class="k">proc</span> <span class="nv">$o</span> <span class="k">{</span><span class="nv">a</span> b<span class="k">}</span> <span class="k">[</span><span class="nb">list</span> expr <span class="s2">&quot;\$a $o \$b&quot;</span><span class="k">]</span>
-</span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>定义这些之后，我们就可以用<code>[+ 1 2] [/ 10 2]</code>等表达式了。当然，把这些过程创建成类似Scheme过程一样的变长参数更好一些。Tcl过程可以使用内置命令的名字，所以你可以重定义Tcl本身。例如为了写了一个Tcl宏处理系统我重定义了<code>proc</code>。重定义<code>proc</code>通常对编写分析器（profiler）是很有用的（Tcl分析器是使用Tcl开发的）。在重定义内置命令之前，如果你把它重命名，那么在定义之后还是可以调用原来的命令的。</p>
-
-<h3>概念9：Eval和Uplevel</h3>
-
-<p>如果你读这篇文章，说明你已经知道Eval是什么了。命令<code>eval {puts hello}</code>当然会执行传递给eval的参数，在其他语言中也很常见。而Tcl还有另一个命令<code>uplevel</code>，可以在调用过程的上下文中执行语句（译者注：即在当前上下文的上一层上下文），或者说，在调用者的调用者的上下文中。这就是说，Lisp中的宏，在Tcl中就是简单的过程。例如：Tcl中没有内置的命令<code>repeat</code>：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nv">repeat</span> <span class="mi">5</span> <span class="k">{</span>
-</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;Hello five times&quot;</span>
-</span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-但是写一个实现非常容易：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">proc</span> repeat <span class="k">{</span><span class="nv">n</span> body<span class="k">}</span> <span class="k">{</span>
-</span><span class='line'>  <span class="k">set</span> res <span class="s2">&quot;&quot;</span>
-</span><span class='line'>  <span class="k">while</span> <span class="k">{</span><span class="nv">$n</span><span class="k">}</span> <span class="k">{</span>
-</span><span class='line'>      <span class="nb">incr</span> n <span class="o">-</span><span class="mi">1</span>
-</span><span class='line'>      <span class="k">set</span> res <span class="k">[uplevel</span> <span class="nv">$body</span><span class="k">]</span>
-</span><span class='line'>  <span class="k">}</span>
-</span><span class='line'>  <span class="k">return</span> <span class="nv">$res</span>
-</span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-注意，我们用心保存最后一次执行的结果，所以我们的<code>repeat</code>像其他命令一样，返回最后执行的值。一个例子：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">set</span> a <span class="mi">10</span>
-</span><span class='line'><span class="nv">repeat</span> <span class="mi">5</span> <span class="k">{</span><span class="nb">incr</span> a<span class="k">};</span> <span class="c"># Repeat will return 15</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>正如你猜测的，<code>incr</code>命令用来把整数变量加1（如果你忽略了第二个参数的话）。<code>incr a</code>在调用过程的上下文中执行（即前一个栈帧）。</p>
-
-<p>祝贺，您已经知道了90%以上的Tcl概念！</p>
-
-<h2>为什么Tcl如此强大？</h2>
-
-<p>我不会想你展示每一个Tcl特性，但是我将给你一个直观感受，看看Tcl怎样非常漂亮地解决高级编程任务的。我想强调我认为Tcl确实有一些错误，但是大多不在语言本身的主要概念之内。我认为，在Web编程，网络编程，GUI开发，DSL，脚本语言等方面，一个继承自Tcl的编程语言有和Ruby、Lisp和Python竞争的空间。</p>
-
-<h3>易扩展的简洁语法</h3>
-
-<p>Tcl语法如此简单，你可以用数行Tcl代码写一个Tcl分析器。正如我所说，我用
-Tcl语言写了一个Tcl宏处理系统，这个系统能够进行足够复杂的源码级的变换实现尾部调用优化（tail call optimization）。同时，Tcl语法能够变化成Algol
-一样，这取决于你的编程风格。</p>
-
-<h3>没有类型，但有严格的格式检查</h3>
-
-<p>没有类型，你不需要进行转换，但是，你不大可能引进bug，因为对字符串的格式检查非常严格。更好的是，你不需要序列化（Serialization）。你有一个巨大复杂的Tcl列表，想把它通过TCP套接字发送出去？这样就行了：<code>puts $socket
-$mylist</code>。另一头读取：<code>set mylist [read $socket]</code>。这样就行了。</p>
-
-<h3>强大的、事件驱动的I/O模型</h3>
-
-<p>Tcl有内置的事件驱动编程，和I/O库集成在一起。只使用核心语言所提供的功能来写复杂的网络程序如此简单，甚至是有趣。例如：以下程序是一个并行TCP服务器（内部基于select(2)），它把当前时间送给每个客户端。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nb">socket</span> <span class="o">-</span>server handler <span class="mi">9999</span>
-</span><span class='line'><span class="k">proc</span> handler <span class="k">{</span><span class="nv">fd</span> clientaddr clientport<span class="k">}</span> <span class="k">{</span>
-</span><span class='line'>  <span class="k">set</span> t <span class="k">[</span><span class="nb">clock</span> format <span class="k">[</span><span class="nb">clock</span> seconds<span class="k">]]</span>
-</span><span class='line'>  <span class="nb">puts</span> <span class="nv">$fd</span> <span class="s2">&quot;Hello $clientaddr:$clientport, current date is $t&quot;</span>
-</span><span class='line'>  <span class="nb">close</span> <span class="nv">$fd</span>
-</span><span class='line'><span class="k">}</span>
-</span><span class='line'><span class="k">vwait</span> forever
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>非阻塞I/O和事件处理得如此之好，你甚至可以向一个没有输出缓存的套接字写入，
-Tcl自动在用户态缓存，当再次有输出缓存时，在后台发送出去。</p>
-
-<p>Python用户看到某个理念时就会知道它是一个好主意——Python的Twisted框架使用了相同的select驱动的IO概念，而这个在Tcl本身中存在好多年了。（译者注：貌似Node.js的核心理念也是这个吧，看来Tcl超前了）</p>
-
-<h3>多种编程范式</h3>
-
-<p>使用Tcl你可以混合编写面向对象代码，函数式代码，和命令式代码，或多或少像
-Common Lisp那样。过去很多OOP系统和函数式编程原语都被实现出来。Tcl有所有的范式，从基于原型的OOP（译者注：Javascript那样的）到类似Smalltalk的那种，很多是以Tcl本身实现的（或者一开始作为概念论证原型）。而且，因为Tcl
-中代码是一级类型，很容易写出函数式语言原语，并和原语言结合很好。<code>lmap</code>的一个例子：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nv">lmap</span> i <span class="k">{</span><span class="nv">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="k">}</span> <span class="k">{</span>
-</span><span class='line'>    <span class="k">expr</span> <span class="nv">$i</span><span class="o">*</span><span class="nv">$i</span>
-</span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这将会返回平方列表<code>1 4 9 16 25</code>。你可以写类似<code>map</code>的函数，基于一个
-lambda版本（也是用Tcl实现的），但是Tcl已经有拥有比Lisp更自然的函数式编程特性（Lisp方式可能对它本身很好，但是对其他语言来说就不一定了）。注意当你向一个过于死板的语言中加入函数式编程的时候会发生什么：Python以及它函数式原语的无尽争论。</p>
-
-<h3>中心数据结构：列表</h3>
-
-<p>如果你是个Lisp程序员，你知道如果在程序中有列表随处可用是多么美妙，尤其是列表的直接形式在大多数情况下如同<code>foo bar 3 4 5 6</code>一样简单。</p>
-
-<h3>通过uplevel的可编程编程语言</h3>
-
-<p>通过Tcl的eval、uplevel、upvar，以及非常强大的内省能力，你可以重定义语言并发明解决问题的新方式。例如以下有趣的命令，如果把它放在函数的第一行调用，将自动使那个函数成为一个memoizing函数（译者注：一种把函数返回值缓存起来的方法，读者可以搜所Javascript的实现）：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">proc</span> memoize <span class="k">{}</span> <span class="k">{</span>
-</span><span class='line'>    <span class="k">set</span> cmd <span class="k">[</span><span class="nb">info</span> level <span class="o">-</span><span class="mi">1</span><span class="k">]</span>
-</span><span class='line'>  <span class="k">if</span> <span class="k">{[</span><span class="nb">info</span> level<span class="k">]</span> <span class="o">&gt;</span> <span class="nv">2</span> <span class="o">&amp;&amp;</span> <span class="k">[</span><span class="nb">lindex</span> <span class="k">[</span><span class="nb">info</span> level <span class="o">-</span><span class="mi">2</span><span class="k">]</span> <span class="mi">0</span><span class="k">]</span> <span class="ow">eq</span> <span class="s2">&quot;memoize&quot;</span><span class="k">}</span> return
-</span><span class='line'>  <span class="k">if</span> <span class="k">{</span><span class="o">!</span><span class="k">[</span><span class="nb">info</span> exists <span class="o">::</span>Memo<span class="k">(</span><span class="nv">$cmd</span><span class="k">)]}</span> <span class="k">{set</span> <span class="o">::</span>Memo<span class="k">(</span><span class="nv">$cmd</span><span class="k">)</span> <span class="k">[eval</span> <span class="nv">$cmd</span><span class="k">]}</span>
-</span><span class='line'>    <span class="k">return</span> <span class="o">-</span>code return <span class="nv">$::Memo</span><span class="k">(</span><span class="nv">$cmd</span><span class="k">)</span>
-</span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>     然后当你写一个过程的时候，这样就行了：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">proc</span> myMemoizingProcedure <span class="k">{</span> <span class="nv">...</span> <span class="k">}</span> <span class="k">{</span>
-</span><span class='line'>    <span class="nv">memoize</span>
-</span><span class='line'>    <span class="nv">...</span> the rest of the code ...
-</span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<h3>i18n自动支持</h3>
-
-<p>Tcl可能是拥有最好的国际化支持的语言了。每个字符串内部使用utf-8表示，所有的字符串是Unicode安全的，包括正则表达式引擎。基本上，在Tcl程序里，编码不是个问题，他们自动工作。</p>
-
-<h3>大规模语言修改=DSL</h3>
-
-<p>如果你定义了一个过程叫做<code>unknown</code>，这个过程将会在Tcl处理命令出错时，将会把命令的参数传递给它，并调用之。你可以在这个过程中做任何你想做的事，返回一个值，或者引发错误。如果你只是返回一个值，那么被调用的命令就像没出错一样，并用<code>unknown</code>的返回值作为它的返回值。把这一点加在uplevel和
-upvar之上，这门语言几乎没有语法规则了。你所得到的是一个令人印象深刻的领域特定语言的开发环境。Tcl基本没有语法，就像Lisp和FORTH，但是“没有语法”的<em>方式</em>不同。Tcl默认情况下就像一个配置文件：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nv">disable</span> ssl
-</span><span class='line'><span class="nv">validUsers</span> jim barbara carmelo
-</span><span class='line'><span class="nv">hostname</span> foobar <span class="k">{</span>
-</span><span class='line'>  <span class="nv">allow</span> from <span class="mi">2</span><span class="o">:</span><span class="mo">00</span> to <span class="mi">8</span><span class="o">:</span><span class="mo">00</span>
-</span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以上是合法的Tcl程序，只要你定义了所用的命令（disable、validUsers和
-hostname）。</p>
-
-<h3>更多</h3>
-
-<p>不幸的是，没有太多空间来展示很多有趣的特性：大多数Tcl命令只做一件事，并且名称容易记忆。字符串操作，内省和其他特性通过拥有子命令的命令实现。例如<code>string length</code>，<code>string range</code>等等。每个需要索引的地方都支持一种<code>end-数字</code>的记号，因此取一个列表除了第一和最后一个的所有元素，你这样写就行了：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nb">lrange</span> <span class="nv">$mylist</span> <span class="mi">1</span> end-1
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>并且，对常见代码都有很多很好的设计和优化。另外，Tcl源代码是你所能找到的最好的C程序之一，解释器的质量令人吃惊：不管哪方面说都是商业级别的。另一个关于实现的有趣事实是，它在不同的环境下有完全相同的工作表现，从
-Windows到Unix，再到Mac OS X。在不同平台上没有质量差别（是的，包括Tk，
-Tcl主要的GUI库）。</p>
-
-<h2>结论</h2>
-
-<p>我并没有声称每个人都该喜欢Tcl。我说的是Tcl是个强大的语言而不是一个玩具，而且可能创造一个新的类似Tcl的语言，没有Tcl的确定，而且拥有它所有的强大能力。我自己试过，结果是<a href="http://jim.berlios.de/">Jim interpreter</a>：代码就在那里，可以正常工作，能运行大多数Tcl程序，但是我没有时间去做自由语言开发，所以这个项目或多或少已经废弃了。另一个企图开发一个类Tcl语言的项目是<a href="http://www.hecl.org/">Hecl</a>，正在进行中。这个语言作为Java语言的脚本语言，它的作者（David Welton）意识到Tcl核心实现很小，基于命令的设计容易作为两个语言之间的联系（这在现代动态语言中少见，但这两个特性也试用与
-Scheme）。我将非常高兴，如果你读了这篇文章之后，不再认为Tcl是个玩具。谢谢。Salvatore。</p>
 ]]></content>
   </entry>
+  
   <entry>
-    <title type="html"><![CDATA[How to modify keyboard layouts easily in Ubuntu]]></title>
-    <link href="http://dingmaotu.github.com/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu/"/>
+    <title type="html"><![CDATA[How to Modify Keyboard Layouts Easily in Ubuntu]]></title>
+    <link href="http://dingmaotu.com/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu/"/>
     <updated>2012-10-26T23:20:00+08:00</updated>
-    <id>http://dingmaotu.github.com/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu</id>
+    <id>http://dingmaotu.com/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu</id>
     <content type="html"><![CDATA[<p>If you want to remap the CAPSLOCK key to the Control key or something else,
 you will find many tutorials on the internet (most of them are of course for
 Emacs learners). However, quite a few of them are outdated and unnecessarily
@@ -1047,96 +320,21 @@ easily in the system settings dialog. I believe Ubuntu learned this from Mac.</p
 
 <p>Here is how (12.04 LTS):</p>
 
-<!-- more -->
-
-
-<ol>
-<li><p>Locate <code>System Settings</code> in the upper right corner of your desktop, and
-select <code>Keyboard</code> in the popup dialog:</p>
-
-<p>  <img src="http://dingmaotu.github.com/images/2012-10-26/systemsettings.png"></p>
-
-<blockquote><p>Sorry for the Chinese &#8230; but you should be able to recognize where to click, > after all its a picture</p></blockquote></li>
-<li><p>Then go to the <code>Layout Settings</code> in the lower left corner:</p>
-
-<p> <img src="http://dingmaotu.github.com/images/2012-10-26/layout.png"></p></li>
-<li><p>You will see <code>Options</code> in the lower right corner:</p>
-
-<p> <img src="http://dingmaotu.github.com/images/2012-10-26/options.png"></p></li>
-<li><p>Here you will find various options concerning the behaviors of special keys:</p>
-
-<p> <img src="http://dingmaotu.github.com/images/2012-10-26/capslock.png"></p></li>
-<li><p>Now you should find your way of configuring what you want, I simply exchanged
-ESC and CAPSLOCK. It is really convenient to have this modification, since
-both Emacs and Vim are heavy ESC key users.</p>
-
-<p>  <img src="http://dingmaotu.github.com/images/2012-10-26/esc-exchg.png"></p></li>
-</ol>
-
-
-<p>Good luck using Emacs!</p>
 ]]></content>
   </entry>
+  
   <entry>
     <title type="html"><![CDATA[Octopress: A HARD Way to Blog]]></title>
-    <link href="http://dingmaotu.github.com/blog/2012/03/31/octopress-a-hard-way-to-blog/"/>
+    <link href="http://dingmaotu.com/blog/2012/03/31/octopress-a-hard-way-to-blog/"/>
     <updated>2012-03-31T19:33:00+08:00</updated>
-    <id>http://dingmaotu.github.com/blog/2012/03/31/octopress-a-hard-way-to-blog</id>
+    <id>http://dingmaotu.com/blog/2012/03/31/octopress-a-hard-way-to-blog</id>
     <content type="html"><![CDATA[<h2>From Ruby Installation to AN Octopress Blog</h2>
 
-<p>It needs quite a lot effort to setup an octopress blog. First of all, trying to use ruby under Windows is just painful, so I use CentOS to do all these (in a VMWare Player Virtual Machine). I downloaded RVM, following the RVM homepage guides, and did not succeed for several times. That was because I omitted the &#8220;requirement&#8221; step (I thought RVM will install requirements for me). However, I did build ruby successfully and was happy, until I had found that gem, heroku were not functional. I had to install zlib, openssl etc. with RVM. But in China you cannot even access zlib homepage (similarly ruby-installer, vimeo, facebook, you name it). I then remembered the &#8220;requirements&#8221; step, and just yum-ed them all.</p>
+<p>It needs quite a lot effort to setup an octopress blog. First of all, trying to use ruby under Windows is just painful, so I use CentOS to do all these (in a VMWare Player Virtual Machine). I downloaded RVM, following the RVM homepage guides, and did not succeed for several times. That was because I omitted the &ldquo;requirement&rdquo; step (I thought RVM will install requirements for me). However, I did build ruby successfully and was happy, until I had found that gem, heroku were not functional. I had to install zlib, openssl etc. with RVM. But in China you cannot even access zlib homepage (similarly ruby-installer, vimeo, facebook, you name it). I then remembered the &ldquo;requirements&rdquo; step, and just yum-ed them all.</p>
 
 <p>I have learned a bit Ruby, so octopress setup guide is relatively easy to understand. The setup is OK now, this blog being the first to test Octopress functionality, markdown syntax, and code rendering.</p>
 
-<!-- more -->
-
-
-<h2>Markdown</h2>
-
-<p>First is a link to my old <a href="dingmaotu.com">homepage</a>. And a line:</p>
-
-<hr />
-
-<p>The following is an unordered list:</p>
-
-<ul>
-<li>First</li>
-<li>Second</li>
-<li>Third</li>
-</ul>
-
-
-<p>And this is a piece of inline code <code>int main(void){}</code>.</p>
-
-<p>The following is a C code snippet:</p>
-
-<figure class='code'><figcaption><span>A Test For Code Snippet Support  </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-</span><span class='line'>    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello Octopress!&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="k">return</span> <span class="mi">0</span><span class="p">;}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>However, the above test did not work for the first time because of the
-&#8216;lib.so&#8217; error ( python-dev for apt-get or python-devel for yum must be
-installed to solve the problem ). Ah, how obscured!</p>
-
-<p>(Update in 2012-10-20: what is actually needed is a libpython2.7.so in
-/usr/lib. On 64bit machines, pygments find this shared library only in
-/usr/lib and not /usr/lib64. python-devel seems to provide that so, however,
-on 64bit machines, you have to manually create a symbol link of
-libpython2.7.so in /usr/lib.)</p>
-
-<p>Finnally let&#8217;s test some Chinese Characters: 嘿, 可以了.</p>
-
-<h2>Feelings</h2>
-
-<p>With Octopress, inserting (syntax-colored) code in your blog is super easy, which is extremely convenient for hackers alike. But writing plain blog is far from pleasant, so it is basically for programmers, not ordinary bloggers.</p>
-
-<p>This the end of my first octopress blog.</p>
 ]]></content>
   </entry>
+  
 </feed>

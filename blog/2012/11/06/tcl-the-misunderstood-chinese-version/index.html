@@ -6,11 +6,13 @@
 <head>
   <meta charset="utf-8">
   <title>被误解的Tcl - Dingmaotu Blog</title>
-  <meta name="author" content="Derek Li">
+  <meta name="author" content="Ding Li">
 
+  <!-- Causes trouble with per-article font implementations under /source/_includes/article.html
   
-  <meta name="description" content="原文见http://oldblog.antirez.com/articoli/tclmisunderstood.html，版权归原文作者所有；译文 &copy; 2012 Derek Li。本文原始翻译时间是
-2012-2-12日，后来我的空间到期，不打算更新，所以转到现在的博客上。 &hellip;">
+  <meta name="description" content="被误解的Tcl Nov 6th, 2012 2:45 pm | Comments 原文见http://oldblog.antirez.com/articoli/tclmisunderstood.html，版
+权归原文作者所有；译文 &copy; 2012 Derek Li。本文原始翻译时间是 &hellip;">
+  -->
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,17 +21,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dingmaotu.github.com/blog/2012/11/06/tcl-the-misunderstood-chinese-version">
+  <link rel="canonical" href="http://dingmaotu.com/blog/2012/11/06/tcl-the-misunderstood-chinese-version">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Dingmaotu Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href='http://fonts.googleapis.com/css?family=Montserrat+Alternates:700' rel='stylesheet' type='text/css'>
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Poller+One" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Germania+One" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Fontdiner+Swanky" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Lato&subset=latin-ext" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Cardo&subset=latin-ext" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Sorts+Mill+Goudy" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Della+Respira" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=UnifrakturMaguntia&subset=all" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Arimo|EB+Garamond|PT+Sans+Caption&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
   
   <script type="text/javascript">
@@ -39,39 +51,53 @@
 
     (function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
   </script>
 
 
 </head>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<logo>
 
-<body   >
+<img src="/logo.png" alt="Website Logo. Upload to /source/logo.png ; disable in /source/_includes/logo.html" height="32px" width="32px">
+</logo>
+
+
+
+<body >
   <header role="banner"><hgroup>
   <h1><a href="/">Dingmaotu Blog</a></h1>
   
-    <h2>Programming For Fun</h2>
+    <h2>Thoughts and Knowledge</h2>
   
 </hgroup>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
 </ul>
+
+<br>
   
-<form action="http://google.com/search" method="get">
+<form action="https://www.google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:dingmaotu.github.com" />
+    <input type="hidden" name="q" value="site:dingmaotu.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
   
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+<!--
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
 </ul>
+-->
 
 </nav>
   <div id="main">
@@ -81,7 +107,7 @@
   
   <header>
     
-      <h1 class="entry-title">被误解的Tcl</h1>
+      <h1 class="entry-title" style="font-family: ">被误解的Tcl</h1>
     
     
       <p class="meta">
@@ -90,40 +116,54 @@
 
 
 
-
-
-
-
-  
-
-
-<time datetime="2012-11-06T14:45:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
+<time class='entry-date' datetime='2012-11-06T14:45:00+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>2:45 pm</span></time>
         
-         | <a href="#disqus_thread">Comments</a>
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://dingmaotu.com">Comments</a>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><blockquote><p>原文见<a href="http://oldblog.antirez.com/articoli/tclmisunderstood.html">http://oldblog.antirez.com/articoli/tclmisunderstood.html</a>，版权归原文作者所有；译文 &copy; 2012 Derek Li。本文原始翻译时间是
+<div class="entry-content" style="font-family: ; font-size: "><blockquote><p>原文见<a href="http://oldblog.antirez.com/articoli/tclmisunderstood.html">http://oldblog.antirez.com/articoli/tclmisunderstood.html</a>，版
+权归原文作者所有；译文 &copy; 2012 Derek Li。本文原始翻译时间是
 2012-2-12日，后来我的空间到期，不打算更新，所以转到现在的博客上。</p></blockquote>
 
-<p>最近有一篇链接自reddit的题为<a href="http://www.cabochon.com/~stevey/blog-rants/tour-de-babel.html">Tour de Babel</a>的文章，如果你读的话就会发现这篇文章说（除了一堆其他的胡言乱语）：靠，
-Python在能想象到的各方面都比Tcl好得多了，但人们还用Tcl来当作嵌入式解释器。</p>
+<p>最近有一篇链接自reddit的题为
+<a href="http://www.cabochon.com/~stevey/blog-rants/tour-de-babel.html">Tour de Babel</a>
+的文章，如果你读的话就会发现这篇文章说（除了一堆其他的胡言乱语）：靠，
+Python在能想象到的各方面都比Tcl好得多了，但人们还用Tcl来当作嵌入式解释
+器。</p>
 
-<p>好吧，整篇文章是有点……不是那么回事。但是不幸的是，虽然很多错误观念很快被知情的读者发觉了，但是这个反对Tcl的观念却被认为是理所当然的。我希望这篇文章能说服人们，Tcl还没有那么不堪。</p>
+<p>好吧，整篇文章是有点……不是那么回事。但是不幸的是，虽然很多错误观念很
+快被知情的读者发觉了，但是这个反对Tcl的观念却被认为是理所当然的。我希望
+这篇文章能说服人们，Tcl还没有那么不堪。</p>
 
 <h2>开场白</h2>
 
-<p>在我的编程生涯里，我使用了很多语言去写不同的应用：用C语言写了很多免费/付费的程序，用Scheme写了一个Web CMS（内容管理系统），用Tcl写了几个网络
-/Web应用，用Python写了一个商店管理程序，等等。我也玩过不少其他的编程语言，例如Smalltalk，Self，FORTH，Ruby，Joy……然而，我从不怀疑，<em>没有哪门语言像Tcl一样被误解得如此之深</em>。</p>
+<p>在我的编程生涯里，我使用了很多语言去写不同的应用：用C语言写了很多免费/
+付费的程序，用Scheme写了一个Web CMS（内容管理系统），用Tcl写了几个网络
+/Web应用，用Python写了一个商店管理程序，等等。我也玩过不少其他的编程语
+言，例如Smalltalk，Self，FORTH，Ruby，Joy……然而，我从不怀疑，<em>没有哪
+门语言像Tcl一样被误解得如此之深</em>。</p>
 
-<p>Tcl不是完美无瑕，但大多数的不足并不是在语言设计本身，而是Tcl“之父”（John Ousterhout）几年前去世了，连同他那种可以做出强势决定的专一的领导力。只要做出正确的改变，克服Tcl的大多数不足并保留其强大功能是可以的。如果你不相信Tcl异常强大，请先<em>花点时间</em>来阅读这篇文章。可能你读完之后还是不喜欢它，但希望你尊敬它，同时你将有足够强大的论据来反对这种“Tcl是玩具语言”的误解。这种误解如此小气，比“Lisp括号太多”更甚。</p>
+<p>Tcl不是完美无瑕，但大多数的不足并不是在语言设计本身，而是Tcl“之
+父”（John Ousterhout）几年前去世了，连同他那种可以做出强势决定的专一的
+领导力。只要做出正确的改变，克服Tcl的大多数不足并保留其强大功能是可以的。
+如果你不相信Tcl异常强大，请先<em>花点时间</em>来阅读这篇文章。可能你读完之后还
+是不喜欢它，但希望你尊敬它，同时你将有足够强大的论据来反对这种“Tcl是玩
+具语言”的误解。这种误解如此小气，比“Lisp括号太多”更甚。</p>
 
-<p>在我们开始之前，我先花点时间解释一下Tcl的工作原理。Tcl像世界上其他优秀的语言一样，拥有一些概念，这些概念组合起来，能够实现编程自由和充分的表达力。</p>
+<p>在我们开始之前，我先花点时间解释一下Tcl的工作原理。Tcl像世界上其他优秀
+的语言一样，拥有一些概念，这些概念组合起来，能够实现编程自由和充分的表
+达力。</p>
 
-<p>在这个简短的介绍之后，你会了解在Tcl中，怎样使用普通过程（procedure）实现像Lisp一样的宏（macro）（比Ruby的Block强大得多），怎样重定义语言本身的几乎所有方面，怎样在编程时忽略类型。Tcl社区开发了数个OOP系统，大规模的语言重定义，宏系统，和很多其他有趣的东西，仅仅使用Tcl本身。如果你喜欢可编程的编程语言，我打赌，你肯定至少饶有兴趣地看一眼Tcl。</p>
+<p>在这个简短的介绍之后，你会了解在Tcl中，怎样使用普通过程（procedure）实
+现像Lisp一样的宏（macro）（比Ruby的Block强大得多），怎样重定义语言本身
+的几乎所有方面，怎样在编程时忽略类型。Tcl社区开发了数个OOP系统，大规模
+的语言重定义，宏系统，和很多其他有趣的东西，仅仅使用Tcl本身。如果你喜欢
+可编程的编程语言，我打赌，你肯定至少饶有兴趣地看一眼Tcl。</p>
 
 <!-- more -->
 
@@ -134,38 +174,43 @@ Python在能想象到的各方面都比Tcl好得多了，但人们还用Tcl来�
 
 <p>Tcl语言的第一个观念是：命令。程序就是一系列命令。例如把变量a设成5，并输出其值：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">set</span> a <span class="mi">5</span>
 </span><span class='line'><span class="nb">puts</span> <span class="nv">$a</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
-<p>命令是空格分隔的单词。命令以换行或<code>;</code>结束。Tcl中一切皆是命令——正如你所见，没有赋值运算符。设置变量需要使用命令<code>set</code>，把命令的第一个参数设为第二个参数的值。几乎所有的Tcl命令都返回一个值。例如<code>set</code>返回所赋值的值，如果<code>set</code>只有一个参数（即变量名），就变量的当前值。</p>
+<p>命令是空格分隔的单词。命令以换行或<code>;</code>结束。Tcl中一切皆是命令——正如你
+所见，没有赋值运算符。设置变量需要使用命令<code>set</code>，把命令的第一个参数设
+为第二个参数的值。几乎所有的Tcl命令都返回一个值。例如<code>set</code>返回所赋值
+的值，如果<code>set</code>只有一个参数（即变量名），就变量的当前值。</p>
 
 <h3>概念2：命令替换（Command substitution）</h3>
 
-<p>第二个观念是命令替换。一个命令中，有些参数出现在<code>[]</code>中。如果是这样，那个参数的值就是中括号中命令的返回值。例如：</p>
+<p>第二个观念是命令替换。一个命令中，有些参数出现在<code>[]</code>中。如果是这样，
+那个参数的值就是中括号中命令的返回值。例如：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">set</span> a <span class="mi">5</span>
 </span><span class='line'><span class="nb">puts</span> <span class="k">[set</span> a<span class="k">]</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
-<p>第二个命令的第一个参数<code>[set a]</code>，将会被替换为<code>set a</code>的返回值（也就是5）。在替换后，命令将由</p>
+<p>第二个命令的第一个参数<code>[set a]</code>，将会被替换为<code>set a</code>的返回值（也就是5）。
+在替换后，命令将由</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nb">puts</span> <span class="k">[set</span> a<span class="k">]</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>变成</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nb">puts</span> <span class="mi">5</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>这时，命令才会被执行。</p>
@@ -173,54 +218,58 @@ Python在能想象到的各方面都比Tcl好得多了，但人们还用Tcl来�
 <h3>概念3：变量替换（Variable substitution）</h3>
 
 <p>总是使用set命令来替换变量太麻烦了，所以，即使不是绝对必要，变量替换在
-Tcl早期发展中被添加进来。如果一个变量名字之前有$号，就会被它的值所替换。例如可以不用写</p>
+Tcl早期发展中被添加进来。如果一个变量名字之前有$号，就会被它的值所替换。
+例如可以不用写</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nb">puts</span> <span class="k">[set</span> a<span class="k">]</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>而是写成</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nb">puts</span> <span class="nv">$a</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>概念4：组合(Grouping)</h3>
 
 <p>如果命令是由空格分隔的单词，怎样处理包含空格的变量呢？例如</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nb">puts</span> Hello World
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
-<p>是不正确的，因为<code>Hello</code>和<code>World</code>是两个不用的参数。这个问题由组合来解决。在<code>""</code>中的文本被是单个参数，所以正确的写法是：</p>
+<p>是不正确的，因为<code>Hello</code>和<code>World</code>是两个不用的参数。这个问题由组合来解决。
+在<code>""</code>中的文本被是单个参数，所以正确的写法是：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Hello World&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>命令和变量替换在这种组合中仍然有效，例如我可以这样写：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">set</span> a <span class="mi">5</span>
 </span><span class='line'><span class="k">set</span> b foobar
 </span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Hello $a World [string length $b]&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
-<p>结果是<code>Hello 5 World 6</code>。另外，转义字符（例如<code>\t</code>，<code>\n</code>）也是有效的。但是有另外一种组合，每种特殊字符都被原样看待，没有替代过程。Tcl把任何在<code>{}</code>之间的东西看成是单一的参数，没有替换。所以：</p>
+<p>结果是<code>Hello 5 World 6</code>。另外，转义字符（例如<code>\t</code>，<code>\n</code>）也是有效的。但
+是有另外一种组合，每种特殊字符都被原样看待，没有替代过程。Tcl把任何在
+<code>{}</code>之间的东西看成是单一的参数，没有替换。所以：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">set</span> a <span class="mi">5</span>
 </span><span class='line'><span class="nb">puts</span> <span class="k">{</span><span class="nv">Hello</span> <span class="nv">$a</span> World<span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>将会输出<code>Hello $a World</code>。</p>
@@ -229,7 +278,7 @@ Tcl早期发展中被添加进来。如果一个变量名字之前有$号，就�
 
 <p>概念1是：程序由一系列命令组成。实际上，这比你想象的还要正确。例如：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -237,90 +286,117 @@ Tcl早期发展中被添加进来。如果一个变量名字之前有$号，就�
 </span><span class='line'><span class="k">if</span> <span class="nv">$a</span> <span class="k">{</span>
 </span><span class='line'>        <span class="nb">puts</span> Hello<span class="o">!</span>
 </span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
-<p><code>if</code>是个命令，有两个参数。第一个是变量<code>a</code>所替换的值，第二个是字符串<code>{... puts Hello! ...}</code>。<code>if</code>命令使用一种特殊的<code>Eval</code>命令（后面将会讲到），运行第二个参数，然后返回结果。当然，你也可以写自己的<code>if</code>命令版本，或者其他任何控制结构。你甚至可以重定义<code>if</code>，加入一些新功能！</p>
+<p><code>if</code>是个命令，有两个参数。第一个是变量<code>a</code>所替换的值，第二个是字符串
+<code>{... puts Hello! ...}</code>。<code>if</code>命令使用一种特殊的<code>Eval</code>命令（后面将会讲
+到），运行第二个参数，然后返回结果。当然，你也可以写自己的<code>if</code>命令版本，
+或者其他任何控制结构。你甚至可以重定义<code>if</code>，加入一些新功能！</p>
 
 <h3>概念5：一切都是字符串——没有类型</h3>
 
 <p>以下程序能正常运行，并且结果如你所想：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">set</span> a pu
 </span><span class='line'><span class="k">set</span> b ts
 </span><span class='line'><span class="nv">$a$b</span> <span class="s2">&quot;Hello World&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>是的，Tcl中一切发生在运行时，并且是动态的：Tcl是终极迟绑定（late
-binding）语言，没有类型。命令名不是特殊类型，只是一个字符串。数字也是字符串，正如Tcl代码（还记得我们传给<code>if</code>命令第二个参数一个字符串吗？）。
-Tcl中，字符串表示什么由处理它的命令所决定。字符串“5”将会在命令<code>string length 5</code>中被看成一个字符，而在<code>if $a</code>中看成一个布尔值。当然命令会检查它的参数值有正确的形式。如果我要把<code>foo</code>和<code>bar</code>加起来，
-Tcl会产生异常，因为无法讲<code>foo</code>和<code>bar</code>解析成数字。Tcl中这种检查非常严格，所以你不会遇到PHP那种荒谬的隐式类型转换。字符串可以被解释成命令想要的值时，类型转换才会发生。</p>
+binding）语言，没有类型。命令名不是特殊类型，只是一个字符串。数字也是字
+符串，正如Tcl代码（还记得我们传给<code>if</code>命令第二个参数一个字符串吗？）。
+Tcl中，字符串表示什么由处理它的命令所决定。字符串“5”将会在命令
+<code>string length 5</code>中被看成一个字符，而在<code>if $a</code>中看成一个布尔值。当
+然命令会检查它的参数值有正确的形式。如果我要把<code>foo</code>和<code>bar</code>加起来，
+Tcl会产生异常，因为无法讲<code>foo</code>和<code>bar</code>解析成数字。Tcl中这种检查非常
+严格，所以你不会遇到PHP那种荒谬的隐式类型转换。字符串可以被解释成命令想
+要的值时，类型转换才会发生。</p>
 
 <p>那么，Tcl如此动态，你猜怎么着？它或多或少和当前的Ruby实现一样快速。Tcl
-实现中有个技巧：对象（不是OOP中的对象，而是代表Tcl值的C结构）会缓存最后使用的某个字符串的本地值（译者注：例如<code>56</code>这个字符串代表一个int，会被缓存起来，下次就不用再分析一遍了）。如果一个Tcl值一直被当作数字来用，只要下一个命令继续把他当作数字，字符串的表示根本不会修改。实际的实现比上述复杂，但总体结果是：程序员不用管类型，程序仍然和其他显式类型的语言一样快。</p>
+实现中有个技巧：对象（不是OOP中的对象，而是代表Tcl值的C结构）会缓存最后
+使用的某个字符串的本地值（译者注：例如<code>56</code>这个字符串代表一个int，会被
+缓存起来，下次就不用再分析一遍了）。如果一个Tcl值一直被当作数字来用，只
+要下一个命令继续把他当作数字，字符串的表示根本不会修改。实际的实现比上
+述复杂，但总体结果是：程序员不用管类型，程序仍然和其他显式类型的语言一
+样快。</p>
 
 <h3>概念6：Tcl列表（list）</h3>
 
-<p>Tcl使用的一种更有趣的类型（更准确点……字符串格式）是列表。列表是Tcl程序的中心数据结构：一个Tcl列表永远是一个有效的Tcl命令！（最后它们都是字符串）。最简单的列表就是命令：空格分隔的单词。例如字符串<code>a b foo bar</code>是一个有四个元素的列表。有各种操作列表的命令：取一个list中的元素，添加元素，等等。当然，列表可能有含空格的元素，所以为了创建格式良好的列表，就使用list命令。例如：</p>
+<p>Tcl使用的一种更有趣的类型（更准确点……字符串格式）是列表。列表是Tcl程
+序的中心数据结构：一个Tcl列表永远是一个有效的Tcl命令！（最后它们都是字
+符串）。最简单的列表就是命令：空格分隔的单词。例如字符串<code>a b foo bar</code>
+是一个有四个元素的列表。有各种操作列表的命令：取一个list中的元素，添加
+元素，等等。当然，列表可能有含空格的元素，所以为了创建格式良好的列表，
+就使用list命令。例如：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">set</span> l <span class="k">[</span><span class="nb">list</span> a b foo <span class="s2">&quot;hello world&quot;</span><span class="k">]</span>
 </span><span class='line'><span class="nb">puts</span> <span class="k">[</span><span class="nb">llength</span> <span class="nv">$l</span><span class="k">]</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
-<p>
-llength返回列表的长度，所以上述程序将输出4。lindex返回在某个位置的元素，所以<code>lindex $l 2</code>将返回<code>foo</code>。和Lisp一样，大多数Tcl程序员使用列表来模拟所有可能的概念。</p>
+<p>llength返回列表的长度，所以上述程序将输出4。lindex返回在某个位置的元素，
+所以<code>lindex $l 2</code>将返回<code>foo</code>。和Lisp一样，大多数Tcl程序员使用列表来
+模拟所有可能的概念。</p>
 
 <h3>概念7：Tcl数学运算</h3>
 
-<p>我打赌大多数Lisp黑客已经注意到Tcl是一个前缀(prefix)表达式语言，所以你可能认为像Lisp一样，Tcl数学运算就像使用命令，例如<code>puts [+ 1 2]</code>。然而，恰恰相反，为了使Tcl更加友好，有个命令接受中缀(infix)数学表达式，并计算其值。这个命令是<code>expr</code>，Tcl数学运算像这样：</p>
+<p>我打赌大多数Lisp黑客已经注意到Tcl是一个前缀(prefix)表达式语言，所以你可
+能认为像Lisp一样，Tcl数学运算就像使用命令，例如<code>puts [+ 1 2]</code>。然而，
+恰恰相反，为了使Tcl更加友好，有个命令接受中缀(infix)数学表达式，并计算
+其值。这个命令是<code>expr</code>，Tcl数学运算像这样：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">set</span> a <span class="mi">10</span>
 </span><span class='line'><span class="k">set</span> b <span class="mi">20</span>
 </span><span class='line'><span class="nb">puts</span> <span class="k">[expr</span> <span class="nv">$a</span><span class="o">+</span><span class="nv">$b</span><span class="k">]</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p><code>if</code>和<code>while</code>等命令内部使用<code>expr</code>来计算表达式，例如：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">while</span> <span class="k">{</span><span class="nv">$a</span> <span class="o">&amp;</span><span class="nv">lt</span><span class="k">;</span> <span class="nv">$b</span><span class="k">}</span> <span class="k">{</span>
 </span><span class='line'>  <span class="nb">puts</span> Hello
 </span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
-<p>其中，<code>while</code>命令接受两个参数——第一个字符串求值，看看在每次循环时是否为真，第二个每次被分析执行。我认为数学命令不是内置是一个设计上的错误。在做复杂运算时，<code>expr</code>很酷，但是仅仅把两个数相加，还是<code>[+ $a $b]</code>更加方便一些。值得注意的是，这点已经被正式提出，作为对语言的修改。</p>
+<p>其中，<code>while</code>命令接受两个参数——第一个字符串求值，看看在每次循环时是否为
+真，第二个每次被分析执行。我认为数学命令不是内置是一个设计上的错误。在
+做复杂运算时，<code>expr</code>很酷，但是仅仅把两个数相加，还是<code>[+ $a $b]</code>更加
+方便一些。值得注意的是，这点已经被正式提出，作为对语言的修改。</p>
 
 <h3>概念8：过程（Procedures）</h3>
 
 <p>自然，没有什么能阻止Tcl程序员写一个过程（即用户定义命令），来把数学操作符当作命令。就像这样：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">proc</span> <span class="o">+</span> <span class="k">{</span><span class="nv">a</span> b<span class="k">}</span> <span class="k">{</span>
 </span><span class='line'>  <span class="k">expr</span> <span class="k">{</span><span class="nv">$a</span><span class="o">+</span><span class="nv">$b</span><span class="k">}</span>
 </span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
-<p>
-<code>proc</code>命令用来创建一个过程：第一个参数是过程名，第二个是参数列表，最后一个是过程的主体。注意第二个参数，参数列表，是一个Tcl列表。正如你所见，最后一个命令的返回值是过程的返回值（除非显式使用<code>return</code>）。但是等一下……Tcl中一切都是命令，是吧？所以我们可以用更简单的方式创建“+、-、
+<p><code>proc</code>命令用来创建一个过程：第一个参数是过程名，第二个是参数列表，最后
+一个是过程的主体。注意第二个参数，参数列表，是一个Tcl列表。正如你所见，
+最后一个命令的返回值是过程的返回值（除非显式使用<code>return</code>）。但是等一
+下……Tcl中一切都是命令，是吧？所以我们可以用更简单的方式创建“+、-、
 *、……”的过程：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -328,28 +404,36 @@ llength返回列表的长度，所以上述程序将输出4。lindex返回在某
 </span><span class='line'><span class="k">foreach</span> o <span class="nv">$operators</span> <span class="k">{</span>
 </span><span class='line'>    <span class="k">proc</span> <span class="nv">$o</span> <span class="k">{</span><span class="nv">a</span> b<span class="k">}</span> <span class="k">[</span><span class="nb">list</span> expr <span class="s2">&quot;\$a $o \$b&quot;</span><span class="k">]</span>
 </span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
-<p>定义这些之后，我们就可以用<code>[+ 1 2] [/ 10 2]</code>等表达式了。当然，把这些过程创建成类似Scheme过程一样的变长参数更好一些。Tcl过程可以使用内置命令的名字，所以你可以重定义Tcl本身。例如为了写了一个Tcl宏处理系统我重定义了<code>proc</code>。重定义<code>proc</code>通常对编写分析器（profiler）是很有用的（Tcl分析器是使用Tcl开发的）。在重定义内置命令之前，如果你把它重命名，那么在定义之后还是可以调用原来的命令的。</p>
+<p>定义这些之后，我们就可以用<code>[+ 1 2] [/ 10 2]</code>等表达式了。当然，把这些过
+程创建成类似Scheme过程一样的变长参数更好一些。Tcl过程可以使用内置命令的
+名字，所以你可以重定义Tcl本身。例如为了写了一个Tcl宏处理系统我重定义了
+<code>proc</code>。重定义<code>proc</code>通常对编写分析器（profiler）是很有用的（Tcl分析
+器是使用Tcl开发的）。在重定义内置命令之前，如果你把它重命名，那么在定义
+之后还是可以调用原来的命令的。</p>
 
 <h3>概念9：Eval和Uplevel</h3>
 
-<p>如果你读这篇文章，说明你已经知道Eval是什么了。命令<code>eval {puts hello}</code>当然会执行传递给eval的参数，在其他语言中也很常见。而Tcl还有另一个命令<code>uplevel</code>，可以在调用过程的上下文中执行语句（译者注：即在当前上下文的上一层上下文），或者说，在调用者的调用者的上下文中。这就是说，Lisp中的宏，在Tcl中就是简单的过程。例如：Tcl中没有内置的命令<code>repeat</code>：</p>
+<p>如果你读这篇文章，说明你已经知道Eval是什么了。命令<code>eval {puts hello}</code>当
+然会执行传递给eval的参数，在其他语言中也很常见。而Tcl还有另一个命令
+<code>uplevel</code>，可以在调用过程的上下文中执行语句（译者注：即在当前上下文的上
+一层上下文），或者说，在调用者的调用者的上下文中。这就是说，Lisp中的宏，
+在Tcl中就是简单的过程。例如：Tcl中没有内置的命令<code>repeat</code>：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nv">repeat</span> <span class="mi">5</span> <span class="k">{</span>
 </span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;Hello five times&quot;</span>
 </span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
-<p>
-但是写一个实现非常容易：</p>
+<p>但是写一个实现非常容易：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -365,43 +449,52 @@ llength返回列表的长度，所以上述程序将输出4。lindex返回在某
 </span><span class='line'>  <span class="k">}</span>
 </span><span class='line'>  <span class="k">return</span> <span class="nv">$res</span>
 </span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
-<p>
-注意，我们用心保存最后一次执行的结果，所以我们的<code>repeat</code>像其他命令一样，返回最后执行的值。一个例子：</p>
+<p>注意，我们用心保存最后一次执行的结果，所以我们的<code>repeat</code>像其他命令一
+样，返回最后执行的值。一个例子：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="k">set</span> a <span class="mi">10</span>
 </span><span class='line'><span class="nv">repeat</span> <span class="mi">5</span> <span class="k">{</span><span class="nb">incr</span> a<span class="k">};</span> <span class="c"># Repeat will return 15</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
-<p>正如你猜测的，<code>incr</code>命令用来把整数变量加1（如果你忽略了第二个参数的话）。<code>incr a</code>在调用过程的上下文中执行（即前一个栈帧）。</p>
+<p>正如你猜测的，<code>incr</code>命令用来把整数变量加1（如果你忽略了第二个参数的话）。
+<code>incr a</code>在调用过程的上下文中执行（即前一个栈帧）。</p>
 
 <p>祝贺，您已经知道了90%以上的Tcl概念！</p>
 
 <h2>为什么Tcl如此强大？</h2>
 
-<p>我不会想你展示每一个Tcl特性，但是我将给你一个直观感受，看看Tcl怎样非常漂亮地解决高级编程任务的。我想强调我认为Tcl确实有一些错误，但是大多不在语言本身的主要概念之内。我认为，在Web编程，网络编程，GUI开发，DSL，脚本语言等方面，一个继承自Tcl的编程语言有和Ruby、Lisp和Python竞争的空间。</p>
+<p>我不会想你展示每一个Tcl特性，但是我将给你一个直观感受，看看Tcl怎样非常
+漂亮地解决高级编程任务的。我想强调我认为Tcl确实有一些错误，但是大多不在
+语言本身的主要概念之内。我认为，在Web编程，网络编程，GUI开发，DSL，脚本
+语言等方面，一个继承自Tcl的编程语言有和Ruby、Lisp和Python竞争的空间。</p>
 
 <h3>易扩展的简洁语法</h3>
 
 <p>Tcl语法如此简单，你可以用数行Tcl代码写一个Tcl分析器。正如我所说，我用
-Tcl语言写了一个Tcl宏处理系统，这个系统能够进行足够复杂的源码级的变换实现尾部调用优化（tail call optimization）。同时，Tcl语法能够变化成Algol
+Tcl语言写了一个Tcl宏处理系统，这个系统能够进行足够复杂的源码级的变换实
+现尾部调用优化（tail call optimization）。同时，Tcl语法能够变化成Algol
 一样，这取决于你的编程风格。</p>
 
 <h3>没有类型，但有严格的格式检查</h3>
 
-<p>没有类型，你不需要进行转换，但是，你不大可能引进bug，因为对字符串的格式检查非常严格。更好的是，你不需要序列化（Serialization）。你有一个巨大复杂的Tcl列表，想把它通过TCP套接字发送出去？这样就行了：<code>puts $socket
+<p>没有类型，你不需要进行转换，但是，你不大可能引进bug，因为对字符串的格式
+检查非常严格。更好的是，你不需要序列化（Serialization）。你有一个巨大复
+杂的Tcl列表，想把它通过TCP套接字发送出去？这样就行了：<code>puts $socket
 $mylist</code>。另一头读取：<code>set mylist [read $socket]</code>。这样就行了。</p>
 
 <h3>强大的、事件驱动的I/O模型</h3>
 
-<p>Tcl有内置的事件驱动编程，和I/O库集成在一起。只使用核心语言所提供的功能来写复杂的网络程序如此简单，甚至是有趣。例如：以下程序是一个并行TCP服务器（内部基于select(2)），它把当前时间送给每个客户端。</p>
+<p>Tcl有内置的事件驱动编程，和I/O库集成在一起。只使用核心语言所提供的功能
+来写复杂的网络程序如此简单，甚至是有趣。例如：以下程序是一个并行TCP服务
+器（内部基于select(2)），它把当前时间送给每个客户端。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -415,41 +508,53 @@ $mylist</code>。另一头读取：<code>set mylist [read $socket]</code>。这�
 </span><span class='line'>  <span class="nb">close</span> <span class="nv">$fd</span>
 </span><span class='line'><span class="k">}</span>
 </span><span class='line'><span class="k">vwait</span> forever
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>非阻塞I/O和事件处理得如此之好，你甚至可以向一个没有输出缓存的套接字写入，
 Tcl自动在用户态缓存，当再次有输出缓存时，在后台发送出去。</p>
 
-<p>Python用户看到某个理念时就会知道它是一个好主意——Python的Twisted框架使用了相同的select驱动的IO概念，而这个在Tcl本身中存在好多年了。（译者注：貌似Node.js的核心理念也是这个吧，看来Tcl超前了）</p>
+<p>Python用户看到某个理念时就会知道它是一个好主意——Python的Twisted框架使用
+了相同的select驱动的IO概念，而这个在Tcl本身中存在好多年了。（译者注：貌
+似Node.js的核心理念也是这个吧，看来Tcl超前了）</p>
 
 <h3>多种编程范式</h3>
 
 <p>使用Tcl你可以混合编写面向对象代码，函数式代码，和命令式代码，或多或少像
-Common Lisp那样。过去很多OOP系统和函数式编程原语都被实现出来。Tcl有所有的范式，从基于原型的OOP（译者注：Javascript那样的）到类似Smalltalk的那种，很多是以Tcl本身实现的（或者一开始作为概念论证原型）。而且，因为Tcl
-中代码是一级类型，很容易写出函数式语言原语，并和原语言结合很好。<code>lmap</code>的一个例子：</p>
+Common Lisp那样。过去很多OOP系统和函数式编程原语都被实现出来。Tcl有所有
+的范式，从基于原型的OOP（译者注：Javascript那样的）到类似Smalltalk的那
+种，很多是以Tcl本身实现的（或者一开始作为概念论证原型）。而且，因为Tcl
+中代码是一级类型，很容易写出函数式语言原语，并和原语言结合很好。
+<code>lmap</code>的一个例子：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nv">lmap</span> i <span class="k">{</span><span class="nv">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="k">}</span> <span class="k">{</span>
 </span><span class='line'>    <span class="k">expr</span> <span class="nv">$i</span><span class="o">*</span><span class="nv">$i</span>
 </span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>这将会返回平方列表<code>1 4 9 16 25</code>。你可以写类似<code>map</code>的函数，基于一个
-lambda版本（也是用Tcl实现的），但是Tcl已经有拥有比Lisp更自然的函数式编程特性（Lisp方式可能对它本身很好，但是对其他语言来说就不一定了）。注意当你向一个过于死板的语言中加入函数式编程的时候会发生什么：Python以及它函数式原语的无尽争论。</p>
+lambda版本（也是用Tcl实现的），但是Tcl已经有拥有比Lisp更自然的函数式编
+程特性（Lisp方式可能对它本身很好，但是对其他语言来说就不一定了）。注意
+当你向一个过于死板的语言中加入函数式编程的时候会发生什么：Python以及它
+函数式原语的无尽争论。</p>
 
 <h3>中心数据结构：列表</h3>
 
-<p>如果你是个Lisp程序员，你知道如果在程序中有列表随处可用是多么美妙，尤其是列表的直接形式在大多数情况下如同<code>foo bar 3 4 5 6</code>一样简单。</p>
+<p>如果你是个Lisp程序员，你知道如果在程序中有列表随处可用是多么美妙，尤其
+是列表的直接形式在大多数情况下如同<code>foo bar 3 4 5 6</code>一样简单。</p>
 
 <h3>通过uplevel的可编程编程语言</h3>
 
-<p>通过Tcl的eval、uplevel、upvar，以及非常强大的内省能力，你可以重定义语言并发明解决问题的新方式。例如以下有趣的命令，如果把它放在函数的第一行调用，将自动使那个函数成为一个memoizing函数（译者注：一种把函数返回值缓存起来的方法，读者可以搜所Javascript的实现）：</p>
+<p>通过Tcl的eval、uplevel、upvar，以及非常强大的内省能力，你可以重定义语言
+并发明解决问题的新方式。例如以下有趣的命令，如果把它放在函数的第一行调
+用，将自动使那个函数成为一个memoizing函数（译者注：一种把函数返回值缓存
+起来的方法，读者可以搜所Javascript的实现）：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -461,12 +566,12 @@ lambda版本（也是用Tcl实现的），但是Tcl已经有拥有比Lisp更自�
 </span><span class='line'>  <span class="k">if</span> <span class="k">{</span><span class="o">!</span><span class="k">[</span><span class="nb">info</span> exists <span class="o">::</span>Memo<span class="k">(</span><span class="nv">$cmd</span><span class="k">)]}</span> <span class="k">{set</span> <span class="o">::</span>Memo<span class="k">(</span><span class="nv">$cmd</span><span class="k">)</span> <span class="k">[eval</span> <span class="nv">$cmd</span><span class="k">]}</span>
 </span><span class='line'>    <span class="k">return</span> <span class="o">-</span>code return <span class="nv">$::Memo</span><span class="k">(</span><span class="nv">$cmd</span><span class="k">)</span>
 </span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
-<p>     然后当你写一个过程的时候，这样就行了：</p>
+<p>然后当你写一个过程的时候，这样就行了：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -474,21 +579,26 @@ lambda版本（也是用Tcl实现的），但是Tcl已经有拥有比Lisp更自�
 </span><span class='line'>    <span class="nv">memoize</span>
 </span><span class='line'>    <span class="nv">...</span> the rest of the code ...
 </span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-
-<p></p>
 
 <h3>i18n自动支持</h3>
 
-<p>Tcl可能是拥有最好的国际化支持的语言了。每个字符串内部使用utf-8表示，所有的字符串是Unicode安全的，包括正则表达式引擎。基本上，在Tcl程序里，编码不是个问题，他们自动工作。</p>
+<p>Tcl可能是拥有最好的国际化支持的语言了。每个字符串内部使用utf-8表示，所
+有的字符串是Unicode安全的，包括正则表达式引擎。基本上，在Tcl程序里，编
+码不是个问题，他们自动工作。</p>
 
 <h3>大规模语言修改=DSL</h3>
 
-<p>如果你定义了一个过程叫做<code>unknown</code>，这个过程将会在Tcl处理命令出错时，将会把命令的参数传递给它，并调用之。你可以在这个过程中做任何你想做的事，返回一个值，或者引发错误。如果你只是返回一个值，那么被调用的命令就像没出错一样，并用<code>unknown</code>的返回值作为它的返回值。把这一点加在uplevel和
-upvar之上，这门语言几乎没有语法规则了。你所得到的是一个令人印象深刻的领域特定语言的开发环境。Tcl基本没有语法，就像Lisp和FORTH，但是“没有语法”的<em>方式</em>不同。Tcl默认情况下就像一个配置文件：</p>
+<p>如果你定义了一个过程叫做<code>unknown</code>，这个过程将会在Tcl处理命令出错时，将
+会把命令的参数传递给它，并调用之。你可以在这个过程中做任何你想做的事，
+返回一个值，或者引发错误。如果你只是返回一个值，那么被调用的命令就像没
+出错一样，并用<code>unknown</code>的返回值作为它的返回值。把这一点加在uplevel和
+upvar之上，这门语言几乎没有语法规则了。你所得到的是一个令人印象深刻的领
+域特定语言的开发环境。Tcl基本没有语法，就像Lisp和FORTH，但是“没有语
+法”的<em>方式</em>不同。Tcl默认情况下就像一个配置文件：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -498,7 +608,7 @@ upvar之上，这门语言几乎没有语法规则了。你所得到的是一个
 </span><span class='line'><span class="nv">hostname</span> foobar <span class="k">{</span>
 </span><span class='line'>  <span class="nv">allow</span> from <span class="mi">2</span><span class="o">:</span><span class="mo">00</span> to <span class="mi">8</span><span class="o">:</span><span class="mo">00</span>
 </span><span class='line'><span class="k">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>以上是合法的Tcl程序，只要你定义了所用的命令（disable、validUsers和
@@ -506,54 +616,39 @@ hostname）。</p>
 
 <h3>更多</h3>
 
-<p>不幸的是，没有太多空间来展示很多有趣的特性：大多数Tcl命令只做一件事，并且名称容易记忆。字符串操作，内省和其他特性通过拥有子命令的命令实现。例如<code>string length</code>，<code>string range</code>等等。每个需要索引的地方都支持一种<code>end-数字</code>的记号，因此取一个列表除了第一和最后一个的所有元素，你这样写就行了：</p>
+<p>不幸的是，没有太多空间来展示很多有趣的特性：大多数Tcl命令只做一件事，并
+且名称容易记忆。字符串操作，内省和其他特性通过拥有子命令的命令实现。例
+如<code>string length</code>，<code>string range</code>等等。每个需要索引的地方都支持一种
+<code>end-数字</code>的记号，因此取一个列表除了第一和最后一个的所有元素，你这样
+写就行了：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='tcl'><span class='line'><span class="nb">lrange</span> <span class="nv">$mylist</span> <span class="mi">1</span> end-1
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
-<p>并且，对常见代码都有很多很好的设计和优化。另外，Tcl源代码是你所能找到的最好的C程序之一，解释器的质量令人吃惊：不管哪方面说都是商业级别的。另一个关于实现的有趣事实是，它在不同的环境下有完全相同的工作表现，从
+<p>并且，对常见代码都有很多很好的设计和优化。另外，Tcl源代码是你所能找到的
+最好的C程序之一，解释器的质量令人吃惊：不管哪方面说都是商业级别的。另一
+个关于实现的有趣事实是，它在不同的环境下有完全相同的工作表现，从
 Windows到Unix，再到Mac OS X。在不同平台上没有质量差别（是的，包括Tk，
 Tcl主要的GUI库）。</p>
 
 <h2>结论</h2>
 
-<p>我并没有声称每个人都该喜欢Tcl。我说的是Tcl是个强大的语言而不是一个玩具，而且可能创造一个新的类似Tcl的语言，没有Tcl的确定，而且拥有它所有的强大能力。我自己试过，结果是<a href="http://jim.berlios.de/">Jim interpreter</a>：代码就在那里，可以正常工作，能运行大多数Tcl程序，但是我没有时间去做自由语言开发，所以这个项目或多或少已经废弃了。另一个企图开发一个类Tcl语言的项目是<a href="http://www.hecl.org/">Hecl</a>，正在进行中。这个语言作为Java语言的脚本语言，它的作者（David Welton）意识到Tcl核心实现很小，基于命令的设计容易作为两个语言之间的联系（这在现代动态语言中少见，但这两个特性也试用与
-Scheme）。我将非常高兴，如果你读了这篇文章之后，不再认为Tcl是个玩具。谢谢。Salvatore。</p>
+<p>我并没有声称每个人都该喜欢Tcl。我说的是Tcl是个强大的语言而不是一个玩具，
+而且可能创造一个新的类似Tcl的语言，没有Tcl的确定，而且拥有它所有的强大
+能力。我自己试过，结果是<a href="http://jim.berlios.de/">Jim interpreter</a>：代码
+就在那里，可以正常工作，能运行大多数Tcl程序，但是我没有时间去做自由语言
+开发，所以这个项目或多或少已经废弃了。另一个企图开发一个类Tcl语言的项目
+是<a href="http://www.hecl.org/">Hecl</a>，正在进行中。这个语言作为Java语言的脚本
+语言，它的作者（David Welton）意识到Tcl核心实现很小，基于命令的设计容易
+作为两个语言之间的联系（这在现代动态语言中少见，但这两个特性也试用与
+Scheme）。我将非常高兴，如果你读了这篇文章之后，不再认为Tcl是个玩具。谢
+谢。Salvatore。</p>
 </div>
 
 
   <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Derek Li</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-06T14:45:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/tcl/'>Tcl</a>
-  
-</span>
-
-
-    </p>
     
       <div class="sharing">
   
@@ -564,10 +659,29 @@ Scheme）。我将非常高兴，如果你读了这篇文章之后，不再认�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu/" title="Previous Post: How to modify keyboard layouts easily in Ubuntu">&laquo; How to modify keyboard layouts easily in Ubuntu</a>
+  
+
+<span class="byline author vcard">Text authored by <span class="fn">Ding Li</span></span>
+
+
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tcl/'>tcl</a>
+  
+</span>
+
+
+    </p>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/10/26/how-to-modify-keyboard-layout-in-ubuntu/" 
+           title="Previous Post: How to Modify Keyboard Layouts Easily in Ubuntu">&laquo; How to Modify Keyboard Layouts Easily in Ubuntu</a>
       
       
-        <a class="basic-alignment right" href="/blog/2012/11/06/csharp-reflection-tutorial/" title="Next Post: C#反射教程">C#反射教程 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2012/11/06/csharp-reflection-tutorial/" 
+           title="Next Post: C#反射教程">C#反射教程 &raquo;</a>
       
     </p>
   </footer>
@@ -581,74 +695,11 @@ Scheme）。我将非常高兴，如果你读了这篇文章之后，不再认�
 
 </div>
 
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows/">Compiling Emacs 24.3 on Windows</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/12/07/a-funny-bug-in-quantum-espresso/">A funny bug in Quantum Espresso</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/">Quantum Espresso及PLUMED安装指南</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/06/csharp-reflection-tutorial/">C#反射教程</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/06/tcl-the-misunderstood-chinese-version/">被误解的Tcl</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/dingmaotu">@dingmaotu</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'dingmaotu',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-  
-</aside>
-
-
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Derek Li -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  Website copyright &copy; 2014 - Ding Li |
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/TheChymera/Koenigspress">Königspress</a></span>.
 </p>
 
 </footer>
@@ -659,13 +710,13 @@ Scheme）。我将非常高兴，如果你读了这篇文章之后，不再认�
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://dingmaotu.github.com/blog/2012/11/06/tcl-the-misunderstood-chinese-version/';
-        var disqus_url = 'http://dingmaotu.github.com/blog/2012/11/06/tcl-the-misunderstood-chinese-version/';
+        var disqus_identifier = 'http://dingmaotu.com/blog/2012/11/06/tcl-the-misunderstood-chinese-version/';
+        var disqus_url = 'http://dingmaotu.com/blog/2012/11/06/tcl-the-misunderstood-chinese-version/';
         var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>

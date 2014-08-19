@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: PLUMED | Dingmaotu Blog]]></title>
-  <link href="http://dingmaotu.github.com/blog/categories/plumed/atom.xml" rel="self"/>
-  <link href="http://dingmaotu.github.com/"/>
-  <updated>2013-03-12T15:33:58+08:00</updated>
-  <id>http://dingmaotu.github.com/</id>
+  <title><![CDATA[Category: Plumed | Dingmaotu Blog]]></title>
+  <link href="http://dingmaotu.com/blog/categories/plumed/atom.xml" rel="self"/>
+  <link href="http://dingmaotu.com/"/>
+  <updated>2014-08-19T17:42:39+08:00</updated>
+  <id>http://dingmaotu.com/</id>
   <author>
-    <name><![CDATA[Derek Li]]></name>
+    <name><![CDATA[Ding Li]]></name>
     <email><![CDATA[iamliding@gmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Quantum Espresso及PLUMED安装指南]]></title>
-    <link href="http://dingmaotu.github.com/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/"/>
+    <link href="http://dingmaotu.com/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/"/>
     <updated>2012-11-08T21:23:00+08:00</updated>
-    <id>http://dingmaotu.github.com/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial</id>
+    <id>http://dingmaotu.com/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial</id>
     <content type="html"><![CDATA[<p>Quantum Espresso（以下简称QE）和PLUMED结合，能做很多有用的模拟，尤其是
 Metadynamics这种高级动力学。但是Quantum Espresso的安装程序有一些问题，
 在我们模拟实验室的Earth和Venus上安装，不能正确识别LAPACK、ScaLAPACK和

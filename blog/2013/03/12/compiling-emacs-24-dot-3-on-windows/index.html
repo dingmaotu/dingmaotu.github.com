@@ -6,11 +6,13 @@
 <head>
   <meta charset="utf-8">
   <title>Compiling Emacs 24.3 on Windows - Dingmaotu Blog</title>
-  <meta name="author" content="Derek Li">
+  <meta name="author" content="Ding Li">
 
+  <!-- Causes trouble with per-article font implementations under /source/_includes/article.html
   
-  <meta name="description" content="Emacs 24.3, a new release, has come out! The official win32 build however has
-not. So we are gonna do it by ourselves. Building Emacs on windows is &hellip;">
+  <meta name="description" content="Compiling Emacs 24.3 on Windows Mar 12th, 2013 11:42 am | Comments Emacs 24.3, a new release, has come out! The official win32 build however has
+not &hellip;">
+  -->
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,17 +21,27 @@ not. So we are gonna do it by ourselves. Building Emacs on windows is &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dingmaotu.github.com/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows">
+  <link rel="canonical" href="http://dingmaotu.com/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Dingmaotu Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href='http://fonts.googleapis.com/css?family=Montserrat+Alternates:700' rel='stylesheet' type='text/css'>
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Poller+One" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Germania+One" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Fontdiner+Swanky" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Lato&subset=latin-ext" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Cardo&subset=latin-ext" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Sorts+Mill+Goudy" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Della+Respira" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=UnifrakturMaguntia&subset=all" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Arimo|EB+Garamond|PT+Sans+Caption&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
   
   <script type="text/javascript">
@@ -39,39 +51,53 @@ not. So we are gonna do it by ourselves. Building Emacs on windows is &hellip;">
 
     (function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
   </script>
 
 
 </head>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<logo>
 
-<body   >
+<img src="/logo.png" alt="Website Logo. Upload to /source/logo.png ; disable in /source/_includes/logo.html" height="32px" width="32px">
+</logo>
+
+
+
+<body >
   <header role="banner"><hgroup>
   <h1><a href="/">Dingmaotu Blog</a></h1>
   
-    <h2>Programming For Fun</h2>
+    <h2>Thoughts and Knowledge</h2>
   
 </hgroup>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
 </ul>
+
+<br>
   
-<form action="http://google.com/search" method="get">
+<form action="https://www.google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:dingmaotu.github.com" />
+    <input type="hidden" name="q" value="site:dingmaotu.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
   
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+<!--
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
 </ul>
+-->
 
 </nav>
   <div id="main">
@@ -81,7 +107,7 @@ not. So we are gonna do it by ourselves. Building Emacs on windows is &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Compiling Emacs 24.3 on Windows</h1>
+      <h1 class="entry-title" style="font-family: ">Compiling Emacs 24.3 on Windows</h1>
     
     
       <p class="meta">
@@ -90,23 +116,17 @@ not. So we are gonna do it by ourselves. Building Emacs on windows is &hellip;">
 
 
 
-
-
-
-
-  
-
-
-<time datetime="2013-03-12T11:42:00+08:00" pubdate data-updated="true">Mar 12<span>th</span>, 2013</time>
+<time class='entry-date' datetime='2013-03-12T11:42:00+08:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>11:42 am</span></time>
         
-         | <a href="#disqus_thread">Comments</a>
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://dingmaotu.com">Comments</a>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Emacs 24.3, a new release, has come out! The official win32 build however has
+<div class="entry-content" style="font-family: ; font-size: "><p>Emacs 24.3, a new release, has come out! The official win32 build however has
 not. So we are gonna do it by ourselves. Building Emacs on windows is not that
 hard, but you must be careful about choosing the correct tools, or your
 building experience will be full of bumps.</p>
@@ -181,7 +201,7 @@ options to <code>configure</code></li>
 <li><code>make</code></li>
 <li><code>make info</code> if you want info manuals</li>
 <li><code>make install</code> if you want related programs to be grouped together, and add
-Emacs to <code>Start Menu</code> and registry (typically I don&#8217;t want this)</li>
+Emacs to <code>Start Menu</code> and registry (typically I don&rsquo;t want this)</li>
 </ol>
 
 
@@ -195,35 +215,6 @@ locations of Emacs intallation, which is not needed. So I usually do not run
 
 
   <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Derek Li</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-12T11:42:00+08:00" pubdate data-updated="true">Mar 12<span>th</span>, 2013</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/emacs/'>Emacs</a>
-  
-</span>
-
-
-    </p>
     
       <div class="sharing">
   
@@ -234,7 +225,25 @@ locations of Emacs intallation, which is not needed. So I usually do not run
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/12/07/a-funny-bug-in-quantum-espresso/" title="Previous Post: A funny bug in Quantum Espresso">&laquo; A funny bug in Quantum Espresso</a>
+  
+
+<span class="byline author vcard">Text authored by <span class="fn">Ding Li</span></span>
+
+
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/emacs/'>emacs</a>
+  
+</span>
+
+
+    </p>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/12/07/a-funny-bug-in-quantum-espresso/" 
+           title="Previous Post: A Funny Bug in Quantum Espresso">&laquo; A Funny Bug in Quantum Espresso</a>
       
       
     </p>
@@ -249,74 +258,11 @@ locations of Emacs intallation, which is not needed. So I usually do not run
 
 </div>
 
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows/">Compiling Emacs 24.3 on Windows</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/12/07/a-funny-bug-in-quantum-espresso/">A funny bug in Quantum Espresso</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/">Quantum Espresso及PLUMED安装指南</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/06/csharp-reflection-tutorial/">C#反射教程</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/06/tcl-the-misunderstood-chinese-version/">被误解的Tcl</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/dingmaotu">@dingmaotu</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'dingmaotu',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-  
-</aside>
-
-
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Derek Li -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  Website copyright &copy; 2014 - Ding Li |
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/TheChymera/Koenigspress">Königspress</a></span>.
 </p>
 
 </footer>
@@ -327,13 +273,13 @@ locations of Emacs intallation, which is not needed. So I usually do not run
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://dingmaotu.github.com/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows/';
-        var disqus_url = 'http://dingmaotu.github.com/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows/';
+        var disqus_identifier = 'http://dingmaotu.com/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows/';
+        var disqus_url = 'http://dingmaotu.com/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows/';
         var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>

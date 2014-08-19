@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: QE | Dingmaotu Blog]]></title>
-  <link href="http://dingmaotu.github.com/blog/categories/qe/atom.xml" rel="self"/>
-  <link href="http://dingmaotu.github.com/"/>
-  <updated>2013-03-12T15:33:58+08:00</updated>
-  <id>http://dingmaotu.github.com/</id>
+  <title><![CDATA[Category: Qe | Dingmaotu Blog]]></title>
+  <link href="http://dingmaotu.com/blog/categories/qe/atom.xml" rel="self"/>
+  <link href="http://dingmaotu.com/"/>
+  <updated>2014-08-19T17:42:39+08:00</updated>
+  <id>http://dingmaotu.com/</id>
   <author>
-    <name><![CDATA[Derek Li]]></name>
+    <name><![CDATA[Ding Li]]></name>
     <email><![CDATA[iamliding@gmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
-    <title type="html"><![CDATA[A funny bug in Quantum Espresso]]></title>
-    <link href="http://dingmaotu.github.com/blog/2012/12/07/a-funny-bug-in-quantum-espresso/"/>
+    <title type="html"><![CDATA[A Funny Bug in Quantum Espresso]]></title>
+    <link href="http://dingmaotu.com/blog/2012/12/07/a-funny-bug-in-quantum-espresso/"/>
     <updated>2012-12-07T22:11:00+08:00</updated>
-    <id>http://dingmaotu.github.com/blog/2012/12/07/a-funny-bug-in-quantum-espresso</id>
+    <id>http://dingmaotu.com/blog/2012/12/07/a-funny-bug-in-quantum-espresso</id>
     <content type="html"><![CDATA[<p>Recently I am running metadynamics simulations on MgSiO3 Perovkite with
 Quantum Espresso + PLUMED. However, the MD part of the PWscf code in QE is
 rather unstable (compared to some non-free alternatives, such as VASP). I
@@ -48,9 +48,8 @@ happened.</p>
 
 <p>In function <code>randy</code>, it first processes the seed as <code>idum</code> using:</p>
 
-<p><code>fortran random_numbers.f90 line 53
-idum = MOD( ic - idum, m )
-</code></p>
+<pre><code class="fortran random_numbers.f90 line 53">idum = MOD( ic - idum, m )
+</code></pre>
 
 <p>The maintainer does not remember who wrote this code, and the reason why. It
 indeed causes problems if the seed is larger than ic (which is a fixed
@@ -62,11 +61,10 @@ seed must be too large. Where is the seed generated?</p>
 <p>I found that <code>set_random_seed</code> uses current time components to generate a
 seed:</p>
 
-<p><code>fortran random_numbers.f90 lines 83-85
-! itime contains: year, month, day, time difference in minutes, hours,
+<pre><code class="fortran random_numbers.f90 lines 83-85">! itime contains: year, month, day, time difference in minutes, hours,
 !                 minutes, seconds and milliseconds.
 iseed = ( itime(8) + itime(6) ) * ( itime(7) + itime(4) )
-</code></p>
+</code></pre>
 
 <p>Here in China we have <code>itime(4)</code> as 480 (timezone UTC+8), which is a constant
 for any particular region, whereas in Europe <code>itime(4)</code> is much smaller. And
@@ -89,9 +87,9 @@ the time and knowledge to dig into it.</p>
   
   <entry>
     <title type="html"><![CDATA[Quantum Espresso及PLUMED安装指南]]></title>
-    <link href="http://dingmaotu.github.com/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/"/>
+    <link href="http://dingmaotu.com/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/"/>
     <updated>2012-11-08T21:23:00+08:00</updated>
-    <id>http://dingmaotu.github.com/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial</id>
+    <id>http://dingmaotu.com/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial</id>
     <content type="html"><![CDATA[<p>Quantum Espresso（以下简称QE）和PLUMED结合，能做很多有用的模拟，尤其是
 Metadynamics这种高级动力学。但是Quantum Espresso的安装程序有一些问题，
 在我们模拟实验室的Earth和Venus上安装，不能正确识别LAPACK、ScaLAPACK和

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: C# | Dingmaotu Blog]]></title>
+  <link href="http://dingmaotu.com/blog/categories/c-number/atom.xml" rel="self"/>
+  <link href="http://dingmaotu.com/"/>
+  <updated>2014-08-19T17:42:39+08:00</updated>
+  <id>http://dingmaotu.com/</id>
+  <author>
+    <name><![CDATA[Ding Li]]></name>
+    <email><![CDATA[iamliding@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[C#反射教程]]></title>
+    <link href="http://dingmaotu.com/blog/2012/11/06/csharp-reflection-tutorial/"/>
+    <updated>2012-11-06T17:14:00+08:00</updated>
+    <id>http://dingmaotu.com/blog/2012/11/06/csharp-reflection-tutorial</id>
+    <content type="html"><![CDATA[<h2>什么是反射？</h2>
+
+<p>反射（reflection）在英语里有自我内省的意思，即是查看自己的内在。</p>
+
+<p>在编程语言中，反射是指程序可以动态获得自己本身信息。我说的程序本身的信
+息，是指诸如一个函数的字符串名字和参数、返回值类型，一个类的名字，类的
+方法、字段、属性、事件等等。这些在程序设计时都是容易知道的，但是程序在
+编译完成并执行时，这些信息都不同程度地丢失了。例如C语言，函数的编译通常
+只保留一个函数的名字在最后的binary的符号表中，想要获得这个函数除了名字
+以外的信息是很困难的（有时候甚至可以strip掉所有的符号信息，只保留函数的
+入口地址，这样什么都没有了）。</p>
+
+<p>这些信息被称为Metadata（元数据），有些人称作数据的数据。听起来有些装B，
+其实就是编译型语言把源码中有关程序自身的信息存储到目标文件里，而不是抛
+弃掉，就叫做元数据了。</p>
+
+<p>但是实际上，反射这种东西很早就存在了。例如：</p>
+
+<ul>
+<li><p>Windows编程中，GetProcAddress可以根据一个DLL中函数的名字来获得其实际
+地址，从而动态调用这个函数，而不用事先就在程序中显式调用。这提供了很大
+的灵活性，COM的一个重要基础就是能够动态加载DLL并通过这种方式调用函数。
+Linux系统动态链接库也有类似的功能（dlopen，dlsym）。</p></li>
+<li><p>解释语言一般都有很强的反射能力，因为解释语言直接从源码执行，也不会丢
+失任何有关源码的信息。Lisp中，程序的代码和数据没有区别，因此本质上可以
+获得所有代码的信息，也可以动态执行任何一段在运行时构建的代码。
+JavaScript的对象即是关联数组，所有的Field都可以用字符串来存取，Python有
+getattr和setattr函数。</p></li>
+<li><p>一般使用反射对程序效率有较大的负面影响，解释型语言在机器的计算能力还
+不强的时候根本得不到流行，这是很大的一个原因。但是现在计算能力空前强大，
+所以即使有些影响，对于一般的应用都问题不大，但是反射的灵活性和对很多问
+题的优雅解决（使得程序的设计更加模块化，可以动态加载可执行代码等），促
+使这类技术逐渐流行起来。</p></li>
+</ul>
+
+
+<!-- more -->
+
+
+<h2>Microsoft .Net的反射</h2>
+
+<p>既然这是入门教程，我就不展开.Net的实现细节了，CLR Via C# 等书有详细说明。
+我们的目的在于使用。总体来说，.Net的反射和Java一样，都是通过类来实现的，
+每个基本的程序结构都有对应的类。所有对象的根Object有相关的方法来获得一
+个对象的类型。然后我们就能通过这些实现反射的类来操作各种语言结构。
+Metadata在编译时都包含在目标文件之中，而不是像C语言一样被丢弃了。</p>
+
+<p>首先要导入相关的namespace：</p>
+
+<pre><code class="csharp">using System.Reflection;
+</code></pre>
+
+<p>这个空间包含了反射相关的类。最重要的类是Type。这个类的实例可以通过
+<code>Object.GetType()</code>来获得。当然C#有个<code>typeof</code>操作符，接受一个类型，例如
+<code>typeof(int)</code>，但是不能直接作用于实例（<code>typeof(5)</code>出错）。Type的实例包
+含一个类型的所有信息，只要你想知道一个类型的相关信息，直接<code>GetType()</code>就
+行了，非常简单。</p>
+
+<p>.Net编程的一个好处是，如果你使用IDE，根据提示就能把一个类型的使用方法摸
+个八九不离十，那些方法和属性的名字是非常直观的。下面我大概给大家一个映
+像：</p>
+
+<pre><code class="csharp">using System;
+using System.Reflection;
+
+namespace CSRef
+{
+  class MyClass
+  {
+    int a = 0;
+    public MyClass(){}
+    public string TestPro {get;set;}
+    public void ShowHello(string name)
+    {
+      Console.WriteLine("Hello, " + name);
+    }
+  }
+  class Program
+  {
+    public static void Main(string[] args)
+    {
+      // 获得类型
+      Type myType = typeof(MyClass);
+      // 该类型所在模块
+      Module module = myType.Module;
+      Console.WriteLine("Current Module: " + module.Name);
+      // 该类型所在程序集
+      Assembly assembly = myType.Assembly;
+      Console.WriteLine("Current Assembly: " + assembly.FullName);
+      // 程序集含有什么模块？
+      // 注意.Net的结构：程序集由模块组成，模块由类型组成
+      // 程序集基本对应一个dll或者exe文件
+      Module[] mods = assembly.GetModules();
+      // 程序集有什么类型？
+      Type[] type = assembly.GetTypes();
+
+      // 动态创建一个类型的实例
+      object myInst = System.Activator.CreateInstance(myType);
+      // 运行时创建一个方法
+      MethodInfo helloMethod = myType.GetMethod("ShowHello");
+      // 在myInst上调用这个方法，传递给参数数组
+      helloMethod.Invoke(myInst, new object[]{"Dingmaotu"});
+      // 属性
+      PropertyInfo[] pi = myType.GetProperties();
+      foreach (PropertyInfo p in pi) {
+        // 读取和设置属性，如果是static属性，那么myInst都可以不要，直接null就行了
+        Console.WriteLine("Property " + p.Name + " is " + p.GetValue(myInst, null));
+        p.SetValue(myInst, (object)"Test", null);
+        Console.WriteLine("Property " + p.Name + " is " + p.GetValue(myInst, null));
+      }
+
+      Console.Write("Press any key to continue . . . ");
+      Console.ReadKey(true);
+    }
+  }
+}
+</code></pre>
+
+<p>程序的运行结果如下：</p>
+
+<pre><code>Current Module: CSRef.exe
+Current Assembly: CSRef, Version=1.0.4430.31298, Curlture=neutral, PublicKeyToken=null
+Hello, Dingmaotu
+Property TestPro is
+Property TestPro is Test
+Press any key to continue...
+</code></pre>
+
+<p>可以看到，使用反射API十分直观。只要你理解了C#类型（或者.Net类型）的各种
+结构，使用API就是查参考或者Intelisense的事。</p>
+
+<p>C#的类型包含成员（MemberInfo），成员大致分为数据成员（指实际分配内存的
+对象，例如字段，常量，FieldInfo）和函数成员（方法、属性、构造函数、析构
+函数、事件等，相应有MethodInfo、PropertyInfo等）。Type也是MemberInfo的
+子类，因为Type也可能是一个Member。整个C#程序都是由类型构成的，类型形成
+模块（netmoudule），模块可以合成到程序集中（assembly，扩展名exe、dll），
+一个.Net的AppDomain对应于传统的进程，可以加载数个程序集（就像一个程序可
+以使用几个dll）。一个Win32进程可以host几个AppDomain，每个AppDomain有较
+好的隔离特性，必须通Marshaling来互相传递类型引用或值（传统的dll注入到另
+一个进程中就可以为所欲为了，AppDomain提供了很好的隔离和安全权限机制；这
+是QQ应该使用.Net的一个原因，免得被360劫持:)）。</p>
+
+<p>以上是你大致了解reflection的基本知识，只要你理解了这些结构，然后从Type
+出发，就畅通无阻了，绝对不用死记硬背这些内容。比较高级的主题是
+System.Reflection.Emit，可以让你在运行时动态创建类型（就是在程序中生成
+程序），一般.Net上的动态语言的解释器都会用到。有志于创建.Net平台语言的
+同学可以了解一下。</p>
+
+<h2>什么是属性（Attribute）</h2>
+
+<p>一般学反射的时候，都会遇到属性。其实属性非常简单，就是用户自定义的元数
+据。编译器自动创建代码本身的元数据，但是除了代码本身相关的，它不会创建
+额外的元数据。但是有时候我们需要一些额外的元数据，就会自己定义属性，附
+加在第二节提到的那些结构之上（例如method、property、assembly等），一般
+在那个附加属性的结构之前用中括号标示。例如我们调用Win32 API时要用
+<code>[DllImport]</code>，说明这个方法不是托管代码；注明assembly信息的时候使用
+<code>[assembly:AssemblyName(...)]</code>等，这是一种显式指定的语法，我们也可以对其
+他结构这样指定（<code>[method:DllImport]</code>）；想让自己的类型可以序列化时可以使
+用[type:Serializable]。这些都是FCL定义的属性，使用这些属性的，可以是其
+他类库中其他的类型，可以是编译器，可以是运行时，也可以是自己的程序。</p>
+
+<p>那么我们当然也可以定义自己的属性，只要继承<code>System.Attribute</code>就行了，然后
+在想要应用这个属性的结构前面用<code>[MyAttribute(构造参数)]</code>表示。在运行时大多
+数表示程序结构的类（MemberInfo、MethodInfo、Type等）都有一个
+<code>GetCustomAttributes</code>的方法，就能返回这个结构所使用的Attribute的数组。就
+这些了。</p>
+
+<h2>反射有哪些用处</h2>
+
+<p>以上所说的重在理解。只要你知道什么情况下可以使用反射来解决一些问题，到
+时候查参考就可以了。下面我说一下反射通常有那些应用。</p>
+
+<h3>实现插件式结构</h3>
+
+<p>有时候一个程序提供了很好的扩展性，可以让用户自己编写插件来扩展程序的功
+能。使用.Net的反射机制，非常容易实现。你只需要定义一个插件要使用的公共
+接口，插件编写者就可以用类型实现这个接口并把实现的assembly放到一个指定
+的位置。在程序开始时，可以用AppDomain的静态Load或Assembly类的静态Load或
+LoadFrom来加载那个assembly，然后获得它类型，判断是不是你的接口的子类型，
+然后用Activator创建实例，这样就可以使用了。而且使用AppDomain的设置，可
+以防止插件对宿主程序造成破坏。</p>
+
+<h3>IDE的智能提示和类型发现</h3>
+
+<p>因为可以动态查找类型结构，IDE就可以对类型成员进行实时查找，是一个非常方
+便的功能。另外Powershell也可以智能自动补全，多亏了.Net的反射机制。另外
+Powershell没有Import或者using，一开始只能使用System的核心类型。所以如果
+你要在脚本里使用Winform或者WPF，就可以使用<code>Assembly.Load</code>加载相关的程序
+集。Powershell也是学习.Net的不错选择啊：</p>
+
+<pre><code>PS C:\Users\hp&gt; [System.Reflection.Assembly]::Load
+
+MemberType          : Method
+OverloadDefinitions : {static System.Reflection.Assembly Load(string assemblyString), static System.Reflection.Assembly
+                      Load(string assemblyString, System.Security.Policy.Evidence assemblySecurity), static System.Ref
+                      lection.Assembly Load(System.Reflection.AssemblyName assemblyRef), static System.Reflection.Assem
+                      bly Load(System.Reflection.AssemblyName assemblyRef, System.Security.Policy.Evidence assemblySecu
+                      rity)...}
+TypeNameOfValue     : System.Management.Automation.PSMethod
+Value               : static System.Reflection.Assembly Load(string assemblyString), static System.Reflection.Assembly
+                      Load(string assemblyString, System.Security.Policy.Evidence assemblySecurity), static System.Refl
+                      ection.Assembly Load(System.Reflection.AssemblyName assemblyRef), static System.Reflection.Assemb
+                      ly Load(System.Reflection.AssemblyName assemblyRef, System.Security.Policy.Evidence assemblySecur
+                      ity), static System.Reflection.Assembly Load(byte[] rawAssembly), static System.Reflection.Assemb
+                      ly Load(byte[] rawAssembly, byte[] rawSymbolStore), static System.Reflection.Assembly Load(byte[]
+                      rawAssembly, byte[] rawSymbolStore, System.Security.Policy.Evidence securityEvidence)
+Name                : Load
+IsInstance          : True
+</code></pre>
+
+<h3>简化代码</h3>
+
+<p>你肯定遇到或看到这种设计，在.Net类库或其他库中，往往一个类型会提供很多
+静态属性，直接创建一个该类型的实例（例如<code>Color.Red</code>），这是一个很好的设
+计，能够方便我们写代码。最近我写的一个国际象棋的棋盘控件，我提供了一个
+<code>Pieces</code>类，可以直接创建某个棋子（<code>PieceInfo</code>），例如
+<code>Pieces.WKnightL</code>（左边的白色骑士），但是在初始化棋盘的过程中，要调用
+32个不同的属性，然后逐个添加到棋盘中，非常麻烦。如果有个循环就好了。但
+是你能够循环某个类的所有公共属性吗？当然，这就是反射的用武之地了。只要
+<code>typeof(Pieces).GetProperties(BindingFlag.Public|BindingFlag.Static)</code>就
+解决了。</p>
+
+<h2>总结</h2>
+
+<p>C#的编译器可以生成程序的元数据并存储在目标文件之中，你也可以自定义元数
+据（Attribute）。.Net基础类库提供了<code>System.Reflection</code>来帮助我们获取这
+些元数据。我们可以获得任何一个语言结构的信息，可以动态加载并执行代码，
+也可以动态生成代码。这种无限的灵活性虽然有一定的性能损失，但是在某些情
+况下是解决问题的不二选择。各位学习C#愉快！</p>
+]]></content>
+  </entry>
+  
+</feed>

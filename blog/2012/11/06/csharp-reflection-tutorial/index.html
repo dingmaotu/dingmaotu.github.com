@@ -6,10 +6,13 @@
 <head>
   <meta charset="utf-8">
   <title>C#反射教程 - Dingmaotu Blog</title>
-  <meta name="author" content="Derek Li">
+  <meta name="author" content="Ding Li">
 
+  <!-- Causes trouble with per-article font implementations under /source/_includes/article.html
   
-  <meta name="description" content="什么是反射？ 反射（reflection）在英语里有自我内省的意思，即是查看自己的内在。 在编程语言中，反射是指程序可以动态获得自己本身信息。我说的程序本身的信息，是指诸如一个函数的字符串名字和参数、返回值类型，一个类的名字，类的方法、字段、属性、事件等等。这些在程序设计时都是容易知道的， &hellip;">
+  <meta name="description" content="C#反射教程 Nov 6th, 2012 5:14 pm | Comments 什么是反射？ 反射（reflection）在英语里有自我内省的意思，即是查看自己的内在。 在编程语言中，反射是指程序可以动态获得自己本身信息。我说的程序本身的信
+息，是指诸如一个函数的字符串名字和参数、返回值类型， &hellip;">
+  -->
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,17 +21,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://dingmaotu.github.com/blog/2012/11/06/csharp-reflection-tutorial">
+  <link rel="canonical" href="http://dingmaotu.com/blog/2012/11/06/csharp-reflection-tutorial">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Dingmaotu Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href='http://fonts.googleapis.com/css?family=Montserrat+Alternates:700' rel='stylesheet' type='text/css'>
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Poller+One" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Germania+One" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Fontdiner+Swanky" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Lato&subset=latin-ext" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Cardo&subset=latin-ext" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Sorts+Mill+Goudy" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Della+Respira" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=UnifrakturMaguntia&subset=all" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Arimo|EB+Garamond|PT+Sans+Caption&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
   
   <script type="text/javascript">
@@ -38,39 +51,53 @@
 
     (function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
   </script>
 
 
 </head>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<logo>
 
-<body   >
+<img src="/logo.png" alt="Website Logo. Upload to /source/logo.png ; disable in /source/_includes/logo.html" height="32px" width="32px">
+</logo>
+
+
+
+<body >
   <header role="banner"><hgroup>
   <h1><a href="/">Dingmaotu Blog</a></h1>
   
-    <h2>Programming For Fun</h2>
+    <h2>Thoughts and Knowledge</h2>
   
 </hgroup>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
 </ul>
+
+<br>
   
-<form action="http://google.com/search" method="get">
+<form action="https://www.google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:dingmaotu.github.com" />
+    <input type="hidden" name="q" value="site:dingmaotu.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
   
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+<!--
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
 </ul>
+-->
 
 </nav>
   <div id="main">
@@ -80,7 +107,7 @@
   
   <header>
     
-      <h1 class="entry-title">C#反射教程</h1>
+      <h1 class="entry-title" style="font-family: ">C#反射教程</h1>
     
     
       <p class="meta">
@@ -89,39 +116,49 @@
 
 
 
-
-
-
-
-  
-
-
-<time datetime="2012-11-06T17:14:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
+<time class='entry-date' datetime='2012-11-06T17:14:00+08:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>5:14 pm</span></time>
         
-         | <a href="#disqus_thread">Comments</a>
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://dingmaotu.com">Comments</a>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>什么是反射？</h2>
+<div class="entry-content" style="font-family: ; font-size: "><h2>什么是反射？</h2>
 
 <p>反射（reflection）在英语里有自我内省的意思，即是查看自己的内在。</p>
 
-<p>在编程语言中，反射是指程序可以动态获得自己本身信息。我说的程序本身的信息，是指诸如一个函数的字符串名字和参数、返回值类型，一个类的名字，类的方法、字段、属性、事件等等。这些在程序设计时都是容易知道的，但是程序在编译完成并执行时，这些信息都不同程度地丢失了。例如C语言，函数的编译通常只保留一个函数的名字在最后的binary的符号表中，想要获得这个函数除了名字以外的信息是很困难的（有时候甚至可以strip掉所有的符号信息，只保留函数的入口地址，这样什么都没有了）。</p>
+<p>在编程语言中，反射是指程序可以动态获得自己本身信息。我说的程序本身的信
+息，是指诸如一个函数的字符串名字和参数、返回值类型，一个类的名字，类的
+方法、字段、属性、事件等等。这些在程序设计时都是容易知道的，但是程序在
+编译完成并执行时，这些信息都不同程度地丢失了。例如C语言，函数的编译通常
+只保留一个函数的名字在最后的binary的符号表中，想要获得这个函数除了名字
+以外的信息是很困难的（有时候甚至可以strip掉所有的符号信息，只保留函数的
+入口地址，这样什么都没有了）。</p>
 
-<p>这些信息被称为Metadata（元数据），有些人称作数据的数据。听起来有些装B，其实就是编译型语言把源码中有关程序自身的信息存储到目标文件里，而不是抛弃掉，就叫做元数据了。</p>
+<p>这些信息被称为Metadata（元数据），有些人称作数据的数据。听起来有些装B，
+其实就是编译型语言把源码中有关程序自身的信息存储到目标文件里，而不是抛
+弃掉，就叫做元数据了。</p>
 
 <p>但是实际上，反射这种东西很早就存在了。例如：</p>
 
 <ul>
-<li><p>Windows编程中，GetProcAddress可以根据一个DLL中函数的名字来获得其实际地址，从而动态调用这个函数，而不用事先就在程序中显式调用。这提供了很大的灵活性，COM的一个重要基础就是能够动态加载DLL并通过这种方式调用函数。
+<li><p>Windows编程中，GetProcAddress可以根据一个DLL中函数的名字来获得其实际
+地址，从而动态调用这个函数，而不用事先就在程序中显式调用。这提供了很大
+的灵活性，COM的一个重要基础就是能够动态加载DLL并通过这种方式调用函数。
 Linux系统动态链接库也有类似的功能（dlopen，dlsym）。</p></li>
-<li><p>解释语言一般都有很强的反射能力，因为解释语言直接从源码执行，也不会丢失任何有关源码的信息。Lisp中，程序的代码和数据没有区别，因此本质上可以获得所有代码的信息，也可以动态执行任何一段在运行时构建的代码。
+<li><p>解释语言一般都有很强的反射能力，因为解释语言直接从源码执行，也不会丢
+失任何有关源码的信息。Lisp中，程序的代码和数据没有区别，因此本质上可以
+获得所有代码的信息，也可以动态执行任何一段在运行时构建的代码。
 JavaScript的对象即是关联数组，所有的Field都可以用字符串来存取，Python有
 getattr和setattr函数。</p></li>
-<li><p>一般使用反射对程序效率有较大的负面影响，解释型语言在机器的计算能力还不强的时候根本得不到流行，这是很大的一个原因。但是现在计算能力空前强大，所以即使有些影响，对于一般的应用都问题不大，但是反射的灵活性和对很多问题的优雅解决（使得程序的设计更加模块化，可以动态加载可执行代码等），促使这类技术逐渐流行起来。</p></li>
+<li><p>一般使用反射对程序效率有较大的负面影响，解释型语言在机器的计算能力还
+不强的时候根本得不到流行，这是很大的一个原因。但是现在计算能力空前强大，
+所以即使有些影响，对于一般的应用都问题不大，但是反射的灵活性和对很多问
+题的优雅解决（使得程序的设计更加模块化，可以动态加载可执行代码等），促
+使这类技术逐渐流行起来。</p></li>
 </ul>
 
 
@@ -130,21 +167,30 @@ getattr和setattr函数。</p></li>
 
 <h2>Microsoft .Net的反射</h2>
 
-<p>既然这是入门教程，我就不展开.Net的实现细节了，CLR Via C# 等书有详细说明。我们的目的在于使用。总体来说，.Net的反射和Java一样，都是通过类来实现的，每个基本的程序结构都有对应的类。所有对象的根Object有相关的方法来获得一个对象的类型。然后我们就能通过这些实现反射的类来操作各种语言结构。
+<p>既然这是入门教程，我就不展开.Net的实现细节了，CLR Via C# 等书有详细说明。
+我们的目的在于使用。总体来说，.Net的反射和Java一样，都是通过类来实现的，
+每个基本的程序结构都有对应的类。所有对象的根Object有相关的方法来获得一
+个对象的类型。然后我们就能通过这些实现反射的类来操作各种语言结构。
 Metadata在编译时都包含在目标文件之中，而不是像C语言一样被丢弃了。</p>
 
 <p>首先要导入相关的namespace：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">System.Reflection</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
-<p>这个空间包含了反射相关的类。最重要的类是Type。这个类的实例可以通过<code>Object.GetType()</code>来获得。当然C#有个<code>typeof</code>操作符，接受一个类型，例如<code>typeof(int)</code>，但是不能直接作用于实例（<code>typeof(5)</code>出错）。Type的实例包含一个类型的所有信息，只要你想知道一个类型的相关信息，直接<code>GetType()</code>就行了，非常简单。</p>
+<p>这个空间包含了反射相关的类。最重要的类是Type。这个类的实例可以通过
+<code>Object.GetType()</code>来获得。当然C#有个<code>typeof</code>操作符，接受一个类型，例如
+<code>typeof(int)</code>，但是不能直接作用于实例（<code>typeof(5)</code>出错）。Type的实例包
+含一个类型的所有信息，只要你想知道一个类型的相关信息，直接<code>GetType()</code>就
+行了，非常简单。</p>
 
-<p>.Net编程的一个好处是，如果你使用IDE，根据提示就能把一个类型的使用方法摸个八九不离十，那些方法和属性的名字是非常直观的。下面我大概给大家一个映像：</p>
+<p>.Net编程的一个好处是，如果你使用IDE，根据提示就能把一个类型的使用方法摸
+个八九不离十，那些方法和属性的名字是非常直观的。下面我大概给大家一个映
+像：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -252,12 +298,12 @@ Metadata在编译时都包含在目标文件之中，而不是像C语言一样�
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'>  <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>程序的运行结果如下：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -269,38 +315,72 @@ Metadata在编译时都包含在目标文件之中，而不是像C语言一样�
 </span><span class='line'><span class="n">Property</span> <span class="n">TestPro</span> <span class="k">is</span>
 </span><span class='line'><span class="n">Property</span> <span class="n">TestPro</span> <span class="k">is</span> <span class="n">Test</span>
 </span><span class='line'><span class="n">Press</span> <span class="n">any</span> <span class="n">key</span> <span class="n">to</span> <span class="k">continue</span><span class="p">...</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
-<p>可以看到，使用反射API十分直观。只要你理解了C#类型（或者.Net类型）的各种结构，使用API就是查参考或者Intelisense的事。</p>
+<p>可以看到，使用反射API十分直观。只要你理解了C#类型（或者.Net类型）的各种
+结构，使用API就是查参考或者Intelisense的事。</p>
 
-<p>C#的类型包含成员（MemberInfo），成员大致分为数据成员（指实际分配内存的对象，例如字段，常量，FieldInfo）和函数成员（方法、属性、构造函数、析构函数、事件等，相应有MethodInfo、PropertyInfo等）。Type也是MemberInfo的子类，因为Type也可能是一个Member。整个C#程序都是由类型构成的，类型形成模块（netmoudule），模块可以合成到程序集中（assembly，扩展名exe、dll），一个.Net的AppDomain对应于传统的进程，可以加载数个程序集（就像一个程序可以使用几个dll）。一个Win32进程可以host几个AppDomain，每个AppDomain有较好的隔离特性，必须通Marshaling来互相传递类型引用或值（传统的dll注入到另一个进程中就可以为所欲为了，AppDomain提供了很好的隔离和安全权限机制；这是QQ应该使用.Net的一个原因，免得被360劫持:)）。</p>
+<p>C#的类型包含成员（MemberInfo），成员大致分为数据成员（指实际分配内存的
+对象，例如字段，常量，FieldInfo）和函数成员（方法、属性、构造函数、析构
+函数、事件等，相应有MethodInfo、PropertyInfo等）。Type也是MemberInfo的
+子类，因为Type也可能是一个Member。整个C#程序都是由类型构成的，类型形成
+模块（netmoudule），模块可以合成到程序集中（assembly，扩展名exe、dll），
+一个.Net的AppDomain对应于传统的进程，可以加载数个程序集（就像一个程序可
+以使用几个dll）。一个Win32进程可以host几个AppDomain，每个AppDomain有较
+好的隔离特性，必须通Marshaling来互相传递类型引用或值（传统的dll注入到另
+一个进程中就可以为所欲为了，AppDomain提供了很好的隔离和安全权限机制；这
+是QQ应该使用.Net的一个原因，免得被360劫持:)）。</p>
 
 <p>以上是你大致了解reflection的基本知识，只要你理解了这些结构，然后从Type
 出发，就畅通无阻了，绝对不用死记硬背这些内容。比较高级的主题是
-System.Reflection.Emit，可以让你在运行时动态创建类型（就是在程序中生成程序），一般.Net上的动态语言的解释器都会用到。有志于创建.Net平台语言的同学可以了解一下。</p>
+System.Reflection.Emit，可以让你在运行时动态创建类型（就是在程序中生成
+程序），一般.Net上的动态语言的解释器都会用到。有志于创建.Net平台语言的
+同学可以了解一下。</p>
 
 <h2>什么是属性（Attribute）</h2>
 
-<p>一般学反射的时候，都会遇到属性。其实属性非常简单，就是用户自定义的元数据。编译器自动创建代码本身的元数据，但是除了代码本身相关的，它不会创建额外的元数据。但是有时候我们需要一些额外的元数据，就会自己定义属性，附加在第二节提到的那些结构之上（例如method、property、assembly等），一般在那个附加属性的结构之前用中括号标示。例如我们调用Win32 API时要用<code>[DllImport]</code>，说明这个方法不是托管代码；注明assembly信息的时候使用<code>[assembly:AssemblyName(...)]</code>等，这是一种显式指定的语法，我们也可以对其他结构这样指定（<code>[method:DllImport]</code>）；想让自己的类型可以序列化时可以使用[type:Serializable]。这些都是FCL定义的属性，使用这些属性的，可以是其他类库中其他的类型，可以是编译器，可以是运行时，也可以是自己的程序。</p>
+<p>一般学反射的时候，都会遇到属性。其实属性非常简单，就是用户自定义的元数
+据。编译器自动创建代码本身的元数据，但是除了代码本身相关的，它不会创建
+额外的元数据。但是有时候我们需要一些额外的元数据，就会自己定义属性，附
+加在第二节提到的那些结构之上（例如method、property、assembly等），一般
+在那个附加属性的结构之前用中括号标示。例如我们调用Win32 API时要用
+<code>[DllImport]</code>，说明这个方法不是托管代码；注明assembly信息的时候使用
+<code>[assembly:AssemblyName(...)]</code>等，这是一种显式指定的语法，我们也可以对其
+他结构这样指定（<code>[method:DllImport]</code>）；想让自己的类型可以序列化时可以使
+用[type:Serializable]。这些都是FCL定义的属性，使用这些属性的，可以是其
+他类库中其他的类型，可以是编译器，可以是运行时，也可以是自己的程序。</p>
 
-<p>那么我们当然也可以定义自己的属性，只要继承<code>System.Attribute</code>就行了，然后在想要应用这个属性的结构前面用<code>[MyAttribute(构造参数)]</code>表示。在运行时大多数表示程序结构的类（MemberInfo、MethodInfo、Type等）都有一个<code>GetCustomAttributes</code>的方法，就能返回这个结构所使用的Attribute的数组。就这些了。</p>
+<p>那么我们当然也可以定义自己的属性，只要继承<code>System.Attribute</code>就行了，然后
+在想要应用这个属性的结构前面用<code>[MyAttribute(构造参数)]</code>表示。在运行时大多
+数表示程序结构的类（MemberInfo、MethodInfo、Type等）都有一个
+<code>GetCustomAttributes</code>的方法，就能返回这个结构所使用的Attribute的数组。就
+这些了。</p>
 
 <h2>反射有哪些用处</h2>
 
-<p>以上所说的重在理解。只要你知道什么情况下可以使用反射来解决一些问题，到时候查参考就可以了。下面我说一下反射通常有那些应用。</p>
+<p>以上所说的重在理解。只要你知道什么情况下可以使用反射来解决一些问题，到
+时候查参考就可以了。下面我说一下反射通常有那些应用。</p>
 
 <h3>实现插件式结构</h3>
 
-<p>有时候一个程序提供了很好的扩展性，可以让用户自己编写插件来扩展程序的功能。使用.Net的反射机制，非常容易实现。你只需要定义一个插件要使用的公共接口，插件编写者就可以用类型实现这个接口并把实现的assembly放到一个指定的位置。在程序开始时，可以用AppDomain的静态Load或Assembly类的静态Load或
-LoadFrom来加载那个assembly，然后获得它类型，判断是不是你的接口的子类型，然后用Activator创建实例，这样就可以使用了。而且使用AppDomain的设置，可以防止插件对宿主程序造成破坏。</p>
+<p>有时候一个程序提供了很好的扩展性，可以让用户自己编写插件来扩展程序的功
+能。使用.Net的反射机制，非常容易实现。你只需要定义一个插件要使用的公共
+接口，插件编写者就可以用类型实现这个接口并把实现的assembly放到一个指定
+的位置。在程序开始时，可以用AppDomain的静态Load或Assembly类的静态Load或
+LoadFrom来加载那个assembly，然后获得它类型，判断是不是你的接口的子类型，
+然后用Activator创建实例，这样就可以使用了。而且使用AppDomain的设置，可
+以防止插件对宿主程序造成破坏。</p>
 
 <h3>IDE的智能提示和类型发现</h3>
 
-<p>因为可以动态查找类型结构，IDE就可以对类型成员进行实时查找，是一个非常方便的功能。另外Powershell也可以智能自动补全，多亏了.Net的反射机制。另外
-Powershell没有Import或者using，一开始只能使用System的核心类型。所以如果你要在脚本里使用Winform或者WPF，就可以使用<code>Assembly.Load</code>加载相关的程序集。Powershell也是学习.Net的不错选择啊：</p>
+<p>因为可以动态查找类型结构，IDE就可以对类型成员进行实时查找，是一个非常方
+便的功能。另外Powershell也可以智能自动补全，多亏了.Net的反射机制。另外
+Powershell没有Import或者using，一开始只能使用System的核心类型。所以如果
+你要在脚本里使用Winform或者WPF，就可以使用<code>Assembly.Load</code>加载相关的程序
+集。Powershell也是学习.Net的不错选择啊：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -336,50 +416,32 @@ Powershell没有Import或者using，一开始只能使用System的核心类型�
 </span><span class='line'>                      <span class="n">rawAssembly</span><span class="p">,</span> <span class="kt">byte</span><span class="p">[]</span> <span class="n">rawSymbolStore</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">Security</span><span class="p">.</span><span class="n">Policy</span><span class="p">.</span><span class="n">Evidence</span> <span class="n">securityEvidence</span><span class="p">)</span>
 </span><span class='line'><span class="n">Name</span>                <span class="p">:</span> <span class="n">Load</span>
 </span><span class='line'><span class="n">IsInstance</span>          <span class="p">:</span> <span class="n">True</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>简化代码</h3>
 
-<p>你肯定遇到或看到这种设计，在.Net类库或其他库中，往往一个类型会提供很多静态属性，直接创建一个该类型的实例（例如<code>Color.Red</code>），这是一个很好的设计，能够方便我们写代码。最近我写的一个国际象棋的棋盘控件，我提供了一个<code>Pieces</code>类，可以直接创建某个棋子（<code>PieceInfo</code>），例如<code>Pieces.WKnightL</code>（左边的白色骑士），但是在初始化棋盘的过程中，要调用
-32个不同的属性，然后逐个添加到棋盘中，非常麻烦。如果有个循环就好了。但是你能够循环某个类的所有公共属性吗？当然，这就是反射的用武之地了。只要<code>typeof(Pieces).GetProperties(BindingFlag.Public|BindingFlag.Static)</code>就解决了。</p>
+<p>你肯定遇到或看到这种设计，在.Net类库或其他库中，往往一个类型会提供很多
+静态属性，直接创建一个该类型的实例（例如<code>Color.Red</code>），这是一个很好的设
+计，能够方便我们写代码。最近我写的一个国际象棋的棋盘控件，我提供了一个
+<code>Pieces</code>类，可以直接创建某个棋子（<code>PieceInfo</code>），例如
+<code>Pieces.WKnightL</code>（左边的白色骑士），但是在初始化棋盘的过程中，要调用
+32个不同的属性，然后逐个添加到棋盘中，非常麻烦。如果有个循环就好了。但
+是你能够循环某个类的所有公共属性吗？当然，这就是反射的用武之地了。只要
+<code>typeof(Pieces).GetProperties(BindingFlag.Public|BindingFlag.Static)</code>就
+解决了。</p>
 
 <h2>总结</h2>
 
-<p>C#的编译器可以生成程序的元数据并存储在目标文件之中，你也可以自定义元数据（Attribute）。.Net基础类库提供了<code>System.Reflection</code>来帮助我们获取这些元数据。我们可以获得任何一个语言结构的信息，可以动态加载并执行代码，也可以动态生成代码。这种无限的灵活性虽然有一定的性能损失，但是在某些情况下是解决问题的不二选择。各位学习C#愉快！</p>
+<p>C#的编译器可以生成程序的元数据并存储在目标文件之中，你也可以自定义元数
+据（Attribute）。.Net基础类库提供了<code>System.Reflection</code>来帮助我们获取这
+些元数据。我们可以获得任何一个语言结构的信息，可以动态加载并执行代码，
+也可以动态生成代码。这种无限的灵活性虽然有一定的性能损失，但是在某些情
+况下是解决问题的不二选择。各位学习C#愉快！</p>
 </div>
 
 
   <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Derek Li</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-06T17:14:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/-net/'>.Net</a>, <a class='category' href='/blog/categories/c-/'>C#</a>
-  
-</span>
-
-
-    </p>
     
       <div class="sharing">
   
@@ -390,10 +452,29 @@ Powershell没有Import或者using，一开始只能使用System的核心类型�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/11/06/tcl-the-misunderstood-chinese-version/" title="Previous Post: 被误解的Tcl">&laquo; 被误解的Tcl</a>
+  
+
+<span class="byline author vcard">Text authored by <span class="fn">Ding Li</span></span>
+
+
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/dot-net/'>.net</a>, <a class='category' href='/blog/categories/c-number/'>c#</a>
+  
+</span>
+
+
+    </p>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/11/06/tcl-the-misunderstood-chinese-version/" 
+           title="Previous Post: 被误解的Tcl">&laquo; 被误解的Tcl</a>
       
       
-        <a class="basic-alignment right" href="/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/" title="Next Post: Quantum Espresso及PLUMED安装指南">Quantum Espresso及PLUMED安装指南 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/" 
+           title="Next Post: Quantum Espresso及PLUMED安装指南">Quantum Espresso及PLUMED安装指南 &raquo;</a>
       
     </p>
   </footer>
@@ -407,74 +488,11 @@ Powershell没有Import或者using，一开始只能使用System的核心类型�
 
 </div>
 
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows/">Compiling Emacs 24.3 on Windows</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/12/07/a-funny-bug-in-quantum-espresso/">A funny bug in Quantum Espresso</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/08/quantum-espresso-and-plumed-installation-tutorial/">Quantum Espresso及PLUMED安装指南</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/06/csharp-reflection-tutorial/">C#反射教程</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/11/06/tcl-the-misunderstood-chinese-version/">被误解的Tcl</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/dingmaotu">@dingmaotu</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'dingmaotu',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-  
-</aside>
-
-
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Derek Li -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  Website copyright &copy; 2014 - Ding Li |
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/TheChymera/Koenigspress">Königspress</a></span>.
 </p>
 
 </footer>
@@ -485,13 +503,13 @@ Powershell没有Import或者using，一开始只能使用System的核心类型�
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://dingmaotu.github.com/blog/2012/11/06/csharp-reflection-tutorial/';
-        var disqus_url = 'http://dingmaotu.github.com/blog/2012/11/06/csharp-reflection-tutorial/';
+        var disqus_identifier = 'http://dingmaotu.com/blog/2012/11/06/csharp-reflection-tutorial/';
+        var disqus_url = 'http://dingmaotu.com/blog/2012/11/06/csharp-reflection-tutorial/';
         var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>

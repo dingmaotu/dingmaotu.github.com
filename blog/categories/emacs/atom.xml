@@ -2,12 +2,12 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Emacs | Dingmaotu Blog]]></title>
-  <link href="http://dingmaotu.github.com/blog/categories/emacs/atom.xml" rel="self"/>
-  <link href="http://dingmaotu.github.com/"/>
-  <updated>2013-03-12T15:33:58+08:00</updated>
-  <id>http://dingmaotu.github.com/</id>
+  <link href="http://dingmaotu.com/blog/categories/emacs/atom.xml" rel="self"/>
+  <link href="http://dingmaotu.com/"/>
+  <updated>2014-08-19T17:42:39+08:00</updated>
+  <id>http://dingmaotu.com/</id>
   <author>
-    <name><![CDATA[Derek Li]]></name>
+    <name><![CDATA[Ding Li]]></name>
     <email><![CDATA[iamliding@gmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Compiling Emacs 24.3 on Windows]]></title>
-    <link href="http://dingmaotu.github.com/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows/"/>
+    <link href="http://dingmaotu.com/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows/"/>
     <updated>2013-03-12T11:42:00+08:00</updated>
-    <id>http://dingmaotu.github.com/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows</id>
+    <id>http://dingmaotu.com/blog/2013/03/12/compiling-emacs-24-dot-3-on-windows</id>
     <content type="html"><![CDATA[<p>Emacs 24.3, a new release, has come out! The official win32 build however has
 not. So we are gonna do it by ourselves. Building Emacs on windows is not that
 hard, but you must be careful about choosing the correct tools, or your
@@ -93,7 +93,7 @@ options to <code>configure</code></li>
 <li><code>make</code></li>
 <li><code>make info</code> if you want info manuals</li>
 <li><code>make install</code> if you want related programs to be grouped together, and add
-Emacs to <code>Start Menu</code> and registry (typically I don't want this)</li>
+Emacs to <code>Start Menu</code> and registry (typically I don&rsquo;t want this)</li>
 </ol>
 
 
